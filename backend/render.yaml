@@ -3,7 +3,7 @@ services:
     name: likshora-api
     runtime: python
     region: singapore  # closest to India — low latency
-    plan: starter      # $7/mo — no cold starts, always-on (RECOMMENDED for production)
+    plan: free      # $7/mo — no cold starts, always-on (RECOMMENDED for production)
     # plan: free       # Free tier — has cold starts (~30s first request after idle)
     rootDir: backend
     buildCommand: pip install -r requirements.txt && flask db upgrade
