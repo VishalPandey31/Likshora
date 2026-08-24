@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Kurtis for Women</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Frontend CSS Architecture -->
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+<!-- ============ ANNOUNCEMENT BAR ============ -->
+<div class="announce-bar">
+  <p>Complimentary shipping on prepaid orders, across India</p>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <div class="header-left">
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="logo-corner" id="logoCorner">
+        <img src="assets/images/website/logo-icon.png" alt="Likshora Logo Icon" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(52,11,16,0.25);">
+      </div>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#home">Home</a>
+        <a href="pages/customer/categories.html">Categories</a>
+        <a href="#shop">Shop</a>
+        <a href="#contact">Contact</a>
+        <button type="button" class="nav-link-btn" id="navAboutBtn">About</button>
+      </nav>
+    </div>
+
+    <!-- LOGO — EXACT CENTRE OF THE HEADER -->
+    <a href="#home" class="logo" id="logoSlot" title="LIKSHORA">
+      <img src="assets/images/website/logo-title.png" alt="LIKSHORA — Where Identity Meets Aura" style="height: 54px; max-width: 340px; width: auto; object-fit: contain;">
+    </a>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+
+      <!-- Account button: shows icon when logged out, shows initials avatar when logged in -->
+      <button class="icon-btn account-toggle-btn" id="accountToggle" aria-label="Account">
+        <svg class="account-icon" viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.6"></circle><path d="M4.5 20.2c1.4-3.6 4.3-5.5 7.5-5.5s6.1 1.9 7.5 5.5"></path></svg>
+        <span class="user-avatar hidden" id="userAvatar" aria-hidden="true"></span>
+      </button>
+
+      <button class="icon-btn" id="wishToggle" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.2C.4 8.1 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.5C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4.1 3.6 7.8C19.5 16.4 12 21 12 21z"></path></svg>
+      </button>
+      <button class="icon-btn cart-btn" id="cartToggle" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="search-panel" id="searchPanel">
+    <input type="text" placeholder="Search" id="searchInput">
+    <button class="icon-btn" id="searchClose">&times;</button>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO SLIDER ============ -->
+  <section class="hero-slider" id="home">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide active">
+        <img src="assets/images/products/model-photo-1.jpg" alt="LIKSHORA model wearing kurta with embroidered stole">
+      </div>
+      <div class="hero-slide">
+        <img src="assets/images/products/model-photo-2.jpg" alt="LIKSHORA model in courtyard wearing kurta with embroidered stole">
+      </div>
+      <div class="hero-slide">
+        <img src="assets/images/products/model-photo-4.jpg" alt="LIKSHORA model leaning against pillar wearing kurta with stole">
+      </div>
+      <div class="hero-slide">
+        <img src="assets/images/products/model-photo-7.jpg" alt="LIKSHORA model wearing white kurta outdoors">
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <p class="eyebrow">New Season Edit</p>
+      <h1>Kurtas cut for<br>colour, comfort<br>and everyday.</h1>
+      <p class="hero-sub">Handpicked kurtas and kurta sets in fabrics chosen for how they feel against skin, not just how they photograph.</p>
+      <a href="#shop" class="btn btn-primary">Shop the edit</a>
+    </div>
+
+    <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide">&#8249;</button>
+    <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide">&#8250;</button>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <div class="stitch-divider" aria-hidden="true"></div>
+
+  <!-- ============ CATEGORIES SECTION ============ -->
+  <section class="categories-section" id="categories">
+    <div class="section-head">
+      <p class="eyebrow">Explore Collections</p>
+      <h2>Curated Categories</h2>
+    </div>
+    <div class="category-grid" id="categoryGrid">
+      <a href="pages/customer/products.html?category=kurtis" class="category-card" data-category="kurtis">
+        <img src="assets/images/products/product-kurti-1.jpg" alt="Printed Kurtis">
+        <div class="category-overlay">
+          <h3 class="category-title">Printed Kurtis</h3>
+          <p class="category-count">12 Designs</p>
+        </div>
+      </a>
+      <a href="pages/customer/products.html?category=sets" class="category-card" data-category="sets">
+        <img src="assets/images/products/product-kurti-2.jpg" alt="Kurta Sets">
+        <div class="category-overlay">
+          <h3 class="category-title">Kurta Sets</h3>
+          <p class="category-count">8 Designs</p>
+        </div>
+      </a>
+      <a href="pages/customer/products.html?category=coords" class="category-card" data-category="coords">
+        <img src="assets/images/products/product-kurti-3.jpg" alt="Co-ord Sets">
+        <div class="category-overlay">
+          <h3 class="category-title">Co-ord Sets</h3>
+          <p class="category-count">6 Designs</p>
+        </div>
+      </a>
+      <a href="pages/customer/products.html?category=festive" class="category-card" data-category="festive">
+        <img src="assets/images/products/product-kurti-5.jpg" alt="Festive Edit">
+        <div class="category-overlay">
+          <h3 class="category-title">Festive Edit</h3>
+          <p class="category-count">10 Designs</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="stitch-divider" aria-hidden="true"></div>
+
+  <!-- ============ OUR BEST COLLECTION SECTION ============ -->
+  <section class="best-collection-section" id="bestCollection">
+    <div class="section-head">
+      <p class="eyebrow">Handpicked Selection</p>
+      <h2>OUR BEST COLLECTION</h2>
+    </div>
+    <div class="carousel-wrapper">
+      <button class="carousel-nav prev" id="bestColPrev" aria-label="Previous products">&#8249;</button>
+      <div class="carousel-track-container" id="bestCollectionTrack">
+        <div class="carousel-track" id="bestCollectionGrid">
+          <!-- JS injects product cards here -->
+        </div>
+      </div>
+      <button class="carousel-nav next" id="bestColNext" aria-label="Next products">&#8250;</button>
+    </div>
+  </section>
+
+  <div class="stitch-divider" aria-hidden="true"></div>
+
+  <!-- ============ MODEL MARQUEE (INFINITE LOOP SECTION) ============ -->
+  <section class="marquee-section" id="modelMarquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-1.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-2.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-3.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-4.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-6.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-7.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-9.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-10.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-1.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-2.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-4.jpg" alt="LIKSHORA model"></div>
+      <div class="marquee-slot"><img src="assets/images/products/model-photo-7.jpg" alt="LIKSHORA model"></div>
+    </div>
+  </section>
+
+  <div class="stitch-divider" aria-hidden="true"></div>
+
+  <!-- ============ PHOTOSHOOT VIDEO BANNER ============ -->
+  <section class="photoshoot-video-section" id="photoshootVideo">
+    <div class="video-banner-wrapper">
+      <video class="photoshoot-video" autoplay muted loop playsinline poster="assets/images/products/model-photo-1.jpg">
+        <source src="WhatsApp%20Video%202026-08-22%20at%209.22.57%20PM.mp4" type="video/mp4">
+        <source src="WhatsApp Video 2026-08-22 at 9.22.57 PM.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-banner-overlay">
+        <p class="eyebrow">Behind The Scenes</p>
+        <h2 class="video-banner-title">The Craft &amp; Silhouette Edit</h2>
+      </div>
+    </div>
+  </section>
+
+  <div class="stitch-divider" aria-hidden="true"></div>
+
+  <!-- ============ NEW ARRIVALS / PRODUCTS BELOW INFINITE LOOP ============ -->
+  <section class="products-section" id="shop">
+    <div class="section-head">
+      <p class="eyebrow">New Arrivals</p>
+      <h2>This week's kurta edit</h2>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-nav prev" id="shopColPrev" aria-label="Previous products">&#8249;</button>
+      <div class="carousel-track-container" id="shopCollectionTrack">
+        <div class="carousel-track" id="productGrid">
+          <!-- JS injects product cards here -->
+        </div>
+      </div>
+      <button class="carousel-nav next" id="shopColNext" aria-label="Next products">&#8250;</button>
+    </div>
+    <div id="paginationContainer"></div>
+    <div style="text-align: center; margin-top: 2.5em;">
+      <a href="pages/customer/products.html" class="btn btn-outline" style="min-width: 220px; text-decoration: none;">Browse All Products &rarr;</a>
+    </div>
+  </section>
+
+  <div class="stitch-divider" aria-hidden="true"></div>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="features" id="shipping-returns">
+    <div class="feature">
+      <span class="feature-icon"></span>
+      <h3>Free shipping</h3>
+      <p>No minimums, on every prepaid order across India.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon"></span>
+      <h3>Easy returns</h3>
+      <p>Exchange or return within a few clicks, no questions.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon"></span>
+      <h3>Handpicked fabrics</h3>
+      <p>Natural fibres and finishings chosen for the long run.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#top" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-word"></span>
+      </a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#shop">New Arrivals</a>
+      <button type="button" class="footer-link-btn" id="navPrivacyBtnFooter">Privacy policy</button>
+      <button type="button" class="footer-link-btn" id="navTermsBtnFooter">Terms of service</button>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <button type="button" class="footer-link-btn" id="navAboutBtnFooter">About Us</button>
+      <button type="button" class="footer-link-btn" id="navStoryBtnFooter">Our Story</button>
+      <button type="button" class="footer-link-btn" id="navSustainabilityBtnFooter">Sustainability</button>
+      <button type="button" class="footer-link-btn" id="navCareersBtnFooter">Careers</button>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#shipping-returns">Shipping &amp; returns</a>
+      <a href="#size-guide" class="size-guide-trigger">Size guide</a>
+      <a href="pages/customer/contact.html">Contact us</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Follow</h4>
+      <a href="https://www.instagram.com/likshora?igsi=MXdmY21hYXExOWZncg==" target="_blank" rel="noopener noreferrer" title="Follow Likshora on Instagram for the latest product launches, updates, offers, and exclusive content">Instagram</a>
+      <a href="javascript:void(0);" title="Facebook Page (Add Facebook URL here)">Facebook</a>
+      <a href="https://wa.me/918446664361" target="_blank" rel="noopener noreferrer" title="Contact us on WhatsApp (+91 8446664361) for product inquiries, order assistance, and customer support">WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="trust-strip">
+    <p>Designed by Likshora | &copy; Likshora 2026</p>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> Likshora. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <h3>Your bag</h3>
+    <button class="icon-btn" id="cartClose">&times;</button>
+  </div>
+  <div class="drawer-items" id="drawerItems">
+    <p class="drawer-empty" id="drawerEmpty">Your bag is empty — the edit is waiting.</p>
+  </div>
+  <div class="drawer-footer">
+    <div class="drawer-total">
+      <span>Subtotal</span>
+      <span id="drawerTotal">₹0</span>
+    </div>
+    <button class="btn btn-primary btn-block" id="checkoutBtn">Checkout</button>
+  </div>
+</aside>
+
+
+<!-- ============ ABOUT MODAL ============ -->
+<div class="modal-overlay" id="aboutOverlay">
+  <div class="modal modal-about">
+    <button class="icon-btn modal-close" id="aboutClose">&times;</button>
+    <p class="eyebrow">ABOUT</p>
+    <h3>About LIKSHORA</h3>
+    <div class="about-editable" id="aboutContent">
+      <p class="about-lead">It started with a simple thought.</p>
+
+      <p>Honestly, Likshora is not just a clothing brand.<br>
+      It’s an idea.</p>
+
+      <p>An idea to bring the beauty of Indian tradition into the world of modern fashion — without losing what makes it special.</p>
+
+      <p>I have always believed that Indian clothing carries something beyond fabric and design. It carries stories, emotions, culture, and a sense of identity. But as lifestyles changed and fashion became more fast-paced, I felt there was a gap between traditional elegance and modern everyday fashion.</p>
+
+      <p>That gap became the reason Likshora was born.</p>
+
+      <p>I wanted to create something that feels traditional at heart, but modern in the way it looks, feels and fits into everyday life.</p>
+
+      <p>Something you could wear to a family gathering, a festive occasion, a day at work, or simply when you want to feel a little more connected to your roots.</p>
+
+      <p>And that's where our journey began.</p>
+
+      <h4 class="about-subtitle">More than just clothes.</h4>
+
+      <p>At Likshora, we don't look at a Kurti as just another piece of clothing.</p>
+
+      <p>For us, it is a way of expressing who you are.</p>
+
+      <p>Every design begins with an intention — to keep the essence of Indian aesthetics alive while giving it a fresh, contemporary identity.</p>
+
+      <p>We pay attention to the little things:<br>
+      the silhouette, the fabric, the colours, the detailing, the comfort and the overall feel.</p>
+
+      <p>Because we believe that when something is made with thought, you can feel it when you wear it.</p>
+
+      <h4 class="about-subtitle">Tradition, but with a new perspective.</h4>
+
+      <p>We don't believe tradition belongs only to the past.</p>
+
+      <p>Tradition can evolve.<br>
+      It can change with generations.<br>
+      It can take new forms without losing its soul.</p>
+
+      <p>That's what Likshora stands for.</p>
+
+      <p>We take inspiration from the colours, craftsmanship, silhouettes and emotions that have been a part of Indian fashion for generations — and reinterpret them for the woman of today.</p>
+
+      <p>A woman who loves her roots, but also has her own identity.</p>
+
+      <p>A woman who doesn't dress to follow a trend, but dresses to express herself.</p>
+
+      <h4 class="about-subtitle">Built with a vision.</h4>
+
+      <p>Likshora started with a small idea and a big belief — that Indian fashion deserves to feel just as effortless, contemporary and exciting as anything else in the fashion world.</p>
+
+      <p>There is still so much beauty in our culture waiting to be reimagined.</p>
+
+      <p>And we want to be a part of that journey.</p>
+
+      <p>From the first sketch to the final stitch, we are building Likshora with patience, curiosity and a constant desire to do better.</p>
+
+      <p>We may be starting small, but our vision is much bigger.</p>
+
+      <p>We want Likshora to become a brand that people don't just recognize for its clothes, but remember for how those clothes make them feel.</p>
+
+      <h4 class="about-subtitle">This is just the beginning.</h4>
+
+      <p>Likshora is still at the beginning of its journey.</p>
+
+      <p>But every design, every order and every person who chooses to wear us becomes a part of our story.</p>
+
+      <p>And if there is one thing we want to create through Likshora, it is this feeling:</p>
+
+      <p class="about-quote">You don't have to choose between tradition and modernity.<br>
+      You can carry both.</p>
+
+      <p>Because tradition doesn't need to be left behind.</p>
+
+      <p>It just needs a new way to be worn.</p>
+
+      <div class="about-footer-brand">
+        <strong>LIKSHORA</strong>
+        <span>Where Tradition Meets Tomorrow.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ OUR STORY MODAL ============ -->
+<div class="modal-overlay" id="storyOverlay">
+  <div class="modal modal-story">
+    <button class="icon-btn modal-close" id="storyClose">&times;</button>
+    <p class="eyebrow">OUR STORY</p>
+    <h3>Our Story</h3>
+    <div class="about-editable" id="storyContent">
+      <p class="about-lead">It started with a simple thought.</p>
+
+      <p>Honestly, Likshora is not just a clothing brand.<br>
+      It’s an idea.</p>
+
+      <p>An idea to bring the beauty of Indian tradition into the world of modern fashion — without losing what makes it special.</p>
+
+      <p>I have always believed that Indian clothing carries something beyond fabric and design. It carries stories, emotions, culture, and a sense of identity. But as lifestyles changed and fashion became more fast-paced, I felt there was a gap between traditional elegance and modern everyday fashion.</p>
+
+      <p>That gap became the reason Likshora was born.</p>
+
+      <p>I wanted to create something that feels traditional at heart, but modern in the way it looks, feels and fits into everyday life.</p>
+
+      <p>Something you could wear to a family gathering, a festive occasion, a day at work, or simply when you want to feel a little more connected to your roots.</p>
+
+      <p>And that's where our journey began.</p>
+
+      <h4 class="about-subtitle">More than just clothes.</h4>
+
+      <p>At Likshora, we don't look at a Kurti as just another piece of clothing.</p>
+
+      <p>For us, it is a way of expressing who you are.</p>
+
+      <p>Every design begins with an intention — to keep the essence of Indian aesthetics alive while giving it a fresh, contemporary identity.</p>
+
+      <p>We pay attention to the little things:<br>
+      the silhouette, the fabric, the colours, the detailing, the comfort and the overall feel.</p>
+
+      <p>Because we believe that when something is made with thought, you can feel it when you wear it.</p>
+
+      <h4 class="about-subtitle">Tradition, but with a new perspective.</h4>
+
+      <p>We don't believe tradition belongs only to the past.</p>
+
+      <p>Tradition can evolve.<br>
+      It can change with generations.<br>
+      It can take new forms without losing its soul.</p>
+
+      <p>That's what Likshora stands for.</p>
+
+      <p>We take inspiration from the colours, craftsmanship, silhouettes and emotions that have been a part of Indian fashion for generations — and reinterpret them for the woman of today.</p>
+
+      <p>A woman who loves her roots, but also has her own identity.</p>
+
+      <p>A woman who doesn't dress to follow a trend, but dresses to express herself.</p>
+
+      <h4 class="about-subtitle">Built with a vision.</h4>
+
+      <p>Likshora started with a small idea and a big belief — that Indian fashion deserves to feel just as effortless, contemporary and exciting as anything else in the fashion world.</p>
+
+      <p>There is still so much beauty in our culture waiting to be reimagined.</p>
+
+      <p>And we want to be a part of that journey.</p>
+
+      <p>From the first sketch to the final stitch, we are building Likshora with patience, curiosity and a constant desire to do better.</p>
+
+      <p>We may be starting small, but our vision is much bigger.</p>
+
+      <p>We want Likshora to become a brand that people don't just recognize for its clothes, but remember for how those clothes make them feel.</p>
+
+      <h4 class="about-subtitle">This is just the beginning.</h4>
+
+      <p>Likshora is still at the beginning of its journey.</p>
+
+      <p>But every design, every order and every person who chooses to wear us becomes a part of our story.</p>
+
+      <p>And if there is one thing we want to create through Likshora, it is this feeling:</p>
+
+      <p class="about-quote">You don't have to choose between tradition and modernity.<br>
+      You can carry both.</p>
+
+      <p>Because tradition doesn't need to be left behind.</p>
+
+      <p>It just needs a new way to be worn.</p>
+
+      <div class="about-footer-brand">
+        <strong>LIKSHORA</strong>
+        <span>Where Tradition Meets Tomorrow.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SUSTAINABILITY MODAL ============ -->
+<div class="modal-overlay" id="sustainabilityOverlay">
+  <div class="modal modal-sustainability">
+    <button class="icon-btn modal-close" id="sustainabilityClose">&times;</button>
+    <p class="eyebrow">SUSTAINABILITY</p>
+    <h3>Sustainability</h3>
+    <div class="about-editable" id="sustainabilityContent">
+      <p class="about-lead">At Likshora, we believe that creating beautiful clothing should also mean being thoughtful about how it is created.</p>
+
+      <p>Our approach to sustainability begins with making conscious choices at every stage of our journey — from the fabrics we explore to the way our products are made, packaged and delivered.</p>
+
+      <h4 class="about-subtitle">Thoughtful Production</h4>
+
+      <p>We believe in creating with purpose rather than simply creating more.</p>
+
+      <p>Our collections are developed thoughtfully, with attention to design, quality and usability. We aim to avoid unnecessary production and focus on pieces that can remain a part of your wardrobe beyond a single season.</p>
+
+      <h4 class="about-subtitle">Quality Over Quantity</h4>
+
+      <p>For us, sustainability also means creating products that are made to be worn, loved and cared for.</p>
+
+      <p>We focus on comfortable fabrics, thoughtful designs and quality finishing so that our pieces can become long-term favourites rather than short-lived trends.</p>
+
+      <h4 class="about-subtitle">Conscious Packaging</h4>
+
+      <p>We are continuously exploring ways to make our packaging more thoughtful and responsible.</p>
+
+      <p>Wherever possible, we aim to reduce unnecessary packaging and choose materials that can be reused or recycled.</p>
+
+      <h4 class="about-subtitle">A Journey, Not a Claim</h4>
+
+      <p>We know that sustainability is not something a brand can achieve overnight.</p>
+
+      <p>We are still learning, improving and finding better ways to reduce our impact.</p>
+
+      <p>Every small improvement matters.</p>
+
+      <p>As Likshora grows, our commitment is to grow responsibly with it.</p>
+
+      <p class="about-quote">Because fashion should not only look good.<br>
+      It should feel good to make better choices.</p>
+
+      <div class="about-footer-brand">
+        <strong>LIKSHORA</strong>
+        <span>Where Tradition Meets Tomorrow.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CAREERS MODAL ============ -->
+<div class="modal-overlay" id="careersOverlay">
+  <div class="modal modal-careers">
+    <button class="icon-btn modal-close" id="careersClose">&times;</button>
+    <p class="eyebrow">CAREERS</p>
+    <h3>Careers</h3>
+    <div class="about-editable" id="careersContent">
+      <p class="about-lead">Build something meaningful with us.</p>
+
+      <p>Likshora is a young brand with a big vision.</p>
+
+      <p>We are building a modern Indian fashion brand that brings together tradition, creativity and contemporary design — and we are looking for people who want to be a part of that journey.</p>
+
+      <p>At Likshora, we believe great ideas can come from anywhere.</p>
+
+      <p>Whether you are passionate about fashion, design, photography, content, marketing, social media, operations or customer experience, there may be a place for you here.</p>
+
+      <h4 class="about-subtitle">What we value</h4>
+
+      <p><strong>Creativity</strong><br>
+      We love people who think differently and aren't afraid to bring new ideas.</p>
+
+      <p><strong>Ownership</strong><br>
+      We believe in taking responsibility and seeing things through.</p>
+
+      <p><strong>Curiosity</strong><br>
+      We are constantly learning, experimenting and improving.</p>
+
+      <p><strong>Attention to Detail</strong><br>
+      Small details can make a big difference — especially in fashion.</p>
+
+      <p><strong>Respect</strong><br>
+      We believe in building a workplace where everyone is heard and valued.</p>
+
+      <h4 class="about-subtitle">Grow with Likshora</h4>
+
+      <p>We are at the beginning of our journey, which means there is a lot to build.</p>
+
+      <p>If you want to work in an environment where your ideas can actually make an impact, we'd love to hear from you.</p>
+
+      <h4 class="about-subtitle">Think you belong at Likshora?</h4>
+
+      <p>Send us your profile, portfolio or simply tell us what you could bring to the brand.</p>
+
+      <p class="about-quote">Email: <a href="mailto:support@likshora.com" style="color:inherit; text-decoration:underline;">support@likshora.com</a><br>
+      Subject: Career Opportunity — Likshora</p>
+
+      <div class="about-footer-brand">
+        <strong>LIKSHORA</strong>
+        <span>Where Tradition Meets Tomorrow.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PRIVACY POLICY MODAL ============ -->
+<div class="modal-overlay" id="privacyOverlay">
+  <div class="modal modal-privacy">
+    <button class="icon-btn modal-close" id="privacyClose">&times;</button>
+    <p class="eyebrow">LEGAL</p>
+    <h3>Privacy Policy</h3>
+    <div class="about-editable" id="privacyContent">
+      <p class="about-lead">Effective Date: 22 August 2026</p>
+
+      <p>At Likshora, we respect your privacy and are committed to protecting the personal information you share with us.</p>
+
+      <p>This Privacy Policy explains what information we collect, how we use it and how we protect it when you use our website or purchase our products.</p>
+
+      <h4 class="about-subtitle">1. Information We Collect</h4>
+      <p>When you visit or use our website, place an order, create an account or contact us, we may collect information such as:<br>
+      • Name<br>
+      • Email address<br>
+      • Mobile number<br>
+      • Billing and shipping address<br>
+      • Order and transaction details<br>
+      • Account login information<br>
+      • Information you provide when contacting customer support</p>
+
+      <p>We may also collect certain technical information such as your IP address, browser type, device information and website usage information.</p>
+
+      <h4 class="about-subtitle">2. How We Use Your Information</h4>
+      <p>We may use your information to:<br>
+      • Process and deliver your orders<br>
+      • Provide order confirmations and tracking updates<br>
+      • Communicate with you regarding your purchases<br>
+      • Provide customer support<br>
+      • Improve our website, products and services<br>
+      • Prevent fraud, misuse or unauthorized activity<br>
+      • Comply with applicable legal requirements<br>
+      • Send promotional communication where permitted and where you have provided appropriate consent</p>
+
+      <h4 class="about-subtitle">3. Payment Information</h4>
+      <p>Payments may be processed through third-party payment service providers.</p>
+      <p>Likshora does not intentionally store complete credit or debit card information on its own servers. Payment information is handled by the relevant payment service provider according to its security and privacy practices.</p>
+
+      <h4 class="about-subtitle">4. Cookies</h4>
+      <p>Our website may use cookies and similar technologies to improve your browsing experience, understand website usage and remember certain preferences.</p>
+      <p>You may be able to control cookies through your browser settings.</p>
+
+      <h4 class="about-subtitle">5. Sharing of Information</h4>
+      <p>We do not sell your personal information.</p>
+      <p>We may share necessary information with trusted service providers who help us operate our business, such as:<br>
+      • Payment providers<br>
+      • Courier and logistics partners<br>
+      • Website and technology service providers<br>
+      • Customer support providers</p>
+      <p>Such information is shared only when reasonably necessary to provide our services or comply with legal obligations.</p>
+
+      <h4 class="about-subtitle">6. Data Security</h4>
+      <p>We take reasonable technical and organizational measures to protect your information from unauthorized access, misuse, alteration or disclosure.</p>
+      <p>However, no method of transmission or electronic storage can be guaranteed to be completely secure.</p>
+
+      <h4 class="about-subtitle">7. Your Rights</h4>
+      <p>Depending on applicable law, you may have rights regarding your personal information, including requesting access, correction or deletion of certain information.</p>
+      <p>To make a privacy-related request, contact us using the details below.</p>
+
+      <h4 class="about-subtitle">8. Children's Privacy</h4>
+      <p>Our website is not intended for individuals who are not legally permitted to use online shopping services under applicable law.</p>
+      <p>We do not knowingly collect personal information from children without appropriate authorization.</p>
+
+      <h4 class="about-subtitle">9. Changes to This Policy</h4>
+      <p>We may update this Privacy Policy from time to time.</p>
+      <p>Any changes will be published on this page with an updated effective date.</p>
+
+      <h4 class="about-subtitle">10. Contact Us</h4>
+      <p>For questions or requests relating to this Privacy Policy:</p>
+      <p class="about-quote">Email: <a href="mailto:support@likshora.com" style="color:inherit; text-decoration:underline;">support@likshora.com</a><br>
+      Support Hours: Monday to Saturday, 10:00 AM – 6:00 PM (IST)<br>
+      Address: Flat No. 401/402, Building No. 7B, Sector 2, Roop Rajat, Maan, Boisar East, Maharashtra, India.</p>
+
+      <div class="about-footer-brand">
+        <strong>LIKSHORA</strong>
+        <span>Where Tradition Meets Tomorrow.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TERMS OF SERVICE MODAL ============ -->
+<div class="modal-overlay" id="termsOverlay">
+  <div class="modal modal-terms">
+    <button class="icon-btn modal-close" id="termsClose">&times;</button>
+    <p class="eyebrow">LEGAL</p>
+    <h3>Terms of Service</h3>
+    <div class="about-editable" id="termsContent">
+      <p class="about-lead">Effective Date: 22 August 2026</p>
+
+      <p>Welcome to Likshora.<br>
+      By accessing or using our website, you agree to these Terms of Service. Please read them carefully before using our website or placing an order.</p>
+
+      <h4 class="about-subtitle">1. About Likshora</h4>
+      <p>Likshora is a fashion brand offering clothing and related products through its online platform.</p>
+      <p>These Terms govern your use of our website and your purchase of products from us.</p>
+
+      <h4 class="about-subtitle">2. Your Account</h4>
+      <p>If you create an account, you are responsible for maintaining the confidentiality of your login information and for activities conducted through your account.</p>
+      <p>Please notify us if you believe your account has been accessed without authorization.</p>
+      <p>We reserve the right to suspend or terminate accounts involved in misuse, fraudulent activity or violations of these Terms.</p>
+
+      <h4 class="about-subtitle">3. Product Information</h4>
+      <p>We make reasonable efforts to display accurate product descriptions, images, colours, measurements and availability.</p>
+      <p>However, slight variations in colour, texture, print, stitching or appearance may occur due to photography, lighting, screen settings and manufacturing processes.</p>
+      <p>Product availability is subject to change without prior notice.</p>
+
+      <h4 class="about-subtitle">4. Pricing &amp; Payments</h4>
+      <p>All prices displayed on our website are in Indian Rupees (INR).</p>
+      <p>We may offer payment methods including UPI, credit/debit cards, net banking, wallets and other payment options made available through our payment partners.</p>
+      <p>We reserve the right to change prices, product details or offers at any time.</p>
+      <p>If a pricing or listing error occurs, we reserve the right to cancel the affected order and will communicate with the customer where appropriate.</p>
+
+      <h4 class="about-subtitle">5. Orders</h4>
+      <p>Placing an order constitutes a request to purchase the selected products.</p>
+      <p>We reserve the right to accept, reject or cancel an order in certain circumstances, including product unavailability, pricing errors, suspected fraudulent activity or technical issues.</p>
+      <p>If an order is cancelled after payment has been received, the applicable amount will be refunded through the appropriate payment method, subject to the circumstances of the cancellation.</p>
+
+      <h4 class="about-subtitle">6. Shipping &amp; Delivery</h4>
+      <p>Orders are generally processed and dispatched within 1–2 business days, unless otherwise stated on the product or during checkout.</p>
+      <p>Delivery timelines may vary depending on the destination, courier partner, weather, holidays and other circumstances beyond our reasonable control.</p>
+      <p>Once an order has been dispatched, tracking information may be shared through email, SMS or WhatsApp.</p>
+
+      <h4 class="about-subtitle">7. Returns &amp; Exchanges</h4>
+      <p>Eligible products may be returned or exchanged within 7 days of delivery, subject to our Return &amp; Exchange Policy.</p>
+      <p>Products must be unused, unwashed, undamaged and returned with their original packaging, tags and accessories.</p>
+      <p>Products that have been worn, washed, damaged or altered may not be eligible for return or exchange.</p>
+      <p>Customized products and products specifically identified as final sale may not be eligible for return or exchange.</p>
+      <p>Additional conditions may apply under our Return &amp; Exchange Policy.</p>
+
+      <h4 class="about-subtitle">8. Intellectual Property</h4>
+      <p>All content available on the Likshora website, including brand names, logos, designs, photographs, graphics, text, product descriptions, videos and other materials, belongs to or is licensed to Likshora unless otherwise stated.</p>
+      <p>You may not copy, reproduce, modify, distribute, publish or commercially use our content without prior written permission.</p>
+
+      <h4 class="about-subtitle">9. Website Use</h4>
+      <p>You agree not to misuse our website or attempt to:<br>
+      • Access unauthorized areas of the website<br>
+      • Interfere with website functionality<br>
+      • Introduce malicious software<br>
+      • Use the website for fraudulent purposes<br>
+      • Copy or misuse our content<br>
+      • Conduct activities that may harm Likshora or its customers</p>
+
+      <h4 class="about-subtitle">10. Third-Party Services</h4>
+      <p>Our website may use third-party services such as payment gateways, logistics providers, analytics services and other technology providers.</p>
+      <p>Their services may be subject to their own terms and privacy policies.</p>
+      <p>Likshora is not responsible for interruptions or failures caused solely by third-party services.</p>
+
+      <h4 class="about-subtitle">11. Limitation of Liability</h4>
+      <p>To the extent permitted by applicable law, Likshora will not be responsible for indirect or consequential losses arising from the use of our website or products.</p>
+      <p>We are also not responsible for delays or failures caused by circumstances outside our reasonable control, including courier delays, natural events, technical failures or third-party service interruptions.</p>
+      <p>Nothing in these Terms is intended to exclude any liability that cannot legally be excluded under applicable law.</p>
+
+      <h4 class="about-subtitle">12. Changes to These Terms</h4>
+      <p>We may update these Terms of Service from time to time.</p>
+      <p>Changes will be published on this page. Your continued use of the website after changes are published constitutes acceptance of the updated Terms, to the extent permitted by applicable law.</p>
+
+      <h4 class="about-subtitle">13. Governing Law</h4>
+      <p>These Terms shall be governed by the applicable laws of India.</p>
+      <p>Any disputes arising in connection with these Terms or your use of the website shall be subject to the applicable courts having jurisdiction.</p>
+
+      <h4 class="about-subtitle">14. Contact Us</h4>
+      <p>If you have any questions, concerns or complaints regarding these Terms:</p>
+      <p class="about-quote">Email: <a href="mailto:support@likshora.com" style="color:inherit; text-decoration:underline;">support@likshora.com</a><br>
+      Support Hours: Monday to Saturday, 10:00 AM – 6:00 PM (IST)<br>
+      Address: Flat No. 401/402, Building No. 7B, Sector 2, Roop Rajat, Maan, Boisar East, Maharashtra, India.</p>
+
+      <div class="about-footer-brand">
+        <strong>LIKSHORA</strong>
+        <span>Where Tradition Meets Tomorrow.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ AUTH GATE MODAL ============ -->
+<div class="modal-overlay" id="authGateOverlay">
+  <div class="modal auth-gate-modal">
+    <button class="icon-btn modal-close" id="authGateClose">&times;</button>
+    <div class="auth-gate-icon"></div>
+    <h3>Sign in to continue</h3>
+    <p class="auth-gate-sub">Create a free account or log in to place your order, track it, and save your wishlist.</p>
+    <div class="auth-gate-actions">
+      <button class="btn btn-primary btn-block" id="authGateSignup">Create account</button>
+      <button class="btn btn-outline btn-block" id="authGateLogin">Already have an account? Log in</button>
+    </div>
+    <p class="auth-gate-skip">
+      <button type="button" class="link-btn" id="authGateContinueGuest">Continue as guest</button>
+    </p>
+  </div>
+</div>
+
+<!-- ============ LOGIN OVERLAY ============ -->
+<div class="modal-overlay login-overlay" id="accountOverlay">
+  <div class="login-shell">
+    <button class="icon-btn modal-close login-close" id="accountClose">&times;</button>
+
+    <div class="login-visual">
+      <img src="assets/images/website/custom-login-bg.jpg" alt="Login Visual" class="login-model-img">
+      <div class="login-visual-copy">
+        <p class="eyebrow">LIKSHORA</p>
+        <h2>Where everyday<br>gets dressed up.</h2>
+        <p>Sign in to track orders, save your wishlist and check out faster next time.</p>
+      </div>
+    </div>
+
+    <div class="login-panel">
+      <div id="authForms">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tabLogin" data-tab="login">Log in</button>
+          <button class="auth-tab" id="tabSignup" data-tab="signup">Create account</button>
+        </div>
+
+        <!-- LOGIN — email & password -->
+        <form id="loginForm" class="auth-form">
+          <label>Email address
+            <input type="email" id="loginEmail" required placeholder="you@example.com">
+          </label>
+          <label>Password
+            <input type="password" id="loginPassword" required placeholder="Your password">
+          </label>
+          <div class="auth-row">
+            <a href="pages/auth/forgot-password.html" class="link-btn">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Log in</button>
+
+          <p class="auth-note">Don't have an account? <a href="#" data-tab="signup">Create Account</a></p>
+        </form>
+
+        <!-- SIGNUP -->
+        <form id="signupForm" class="auth-form hidden" novalidate>
+          <label>Full name
+            <input type="text" required placeholder="Your full name" id="signupName">
+          </label>
+          <label>Email address
+            <input type="email" required placeholder="you@example.com" id="signupEmail">
+          </label>
+          <label>Mobile number
+            <div class="phone-input">
+              <span class="phone-prefix">+91</span>
+              <input type="tel" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required placeholder="10-digit number" id="signupPhone">
+            </div>
+          </label>
+          <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+          <p class="auth-note">Already have an account? <a href="#" data-tab="login">Login</a></p>
+        </form>
+      </div>
+
+      <div id="accountPanel" class="hidden">
+        <div class="account-panel-avatar" id="accountPanelAvatar"></div>
+        <h3>Hi, <span id="accountName">there</span></h3>
+        <p class="account-panel-email" id="accountEmail"></p>
+        <div class="account-links">
+          <a href="pages/profile/profile.html">Account Overview</a>
+          <a href="pages/profile/orders.html">My orders</a>
+          <a href="pages/profile/wishlist.html">My wishlist</a>
+          <a href="pages/profile/addresses.html">Saved addresses</a>
+          <button class="account-signout" id="signOutBtn">Sign out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modular JavaScript Infrastructure -->
+<script src="js/config.js"></script>
+<script src="js/utils/storage.js"></script>
+<script src="js/utils/formatters.js"></script>
+<script src="js/utils/validation.js"></script>
+<script src="js/utils/helpers.js"></script>
+<script src="js/components/toast.js"></script>
+<script src="js/components/modal.js"></script>
+<script src="js/components/loader.js"></script>
+<script src="js/components/pagination.js"></script>
+<script src="js/components/navbar.js"></script>
+<script src="js/components/footer.js"></script>
+<script src="js/auth/login.js"></script>
+<script src="js/auth/signup.js"></script>
+
+<!-- App Application Script -->
+<script>
+(function() {
+  const PRODUCTS = window.StorageUtils.readJSON(window.RV_CONFIG.STORAGE_KEYS.PRODUCTS, window.RV_CONFIG.DEFAULT_PRODUCTS);
+  let cart = window.StorageUtils ? window.StorageUtils.readJSON("rv_cart", []) : [];
+  let checkoutContext = null;
+  let currentUser = window.StorageUtils.readJSON(window.RV_CONFIG.STORAGE_KEYS.USER, null);
+
+  function createProductCardHTML(p) {
+    const priceHTML = p.was
+      ? '<span class="was">' + window.Formatters.formatINR(p.was) + '</span>' + window.Formatters.formatINR(p.price)
+      : window.Formatters.formatINR(p.price);
+
+    let rawImg = p.image || (p.images && p.images.length > 0 ? (typeof p.images[0] === 'string' ? p.images[0] : p.images[0].url) : "");
+    let imgPath = window.Formatters && window.Formatters.formatProductImage ? window.Formatters.formatProductImage(rawImg, false) : rawImg;
+
+    const mediaHTML = imgPath
+      ? '<img src="' + imgPath + '" alt="' + window.Formatters.escapeHTML(p.name) + '">'
+      : '<div class="media-slot" data-placeholder="Add product image"></div>';
+
+    return `
+      <article class="product-card" data-id="${p.id}">
+        <div class="product-media" onclick="window.location.href='pages/customer/product-details.html?id=${p.id}'" style="cursor:pointer;">
+          ${mediaHTML}
+        </div>
+        <h3 class="product-name" onclick="window.location.href='pages/customer/product-details.html?id=${p.id}'" style="cursor:pointer;">${window.Formatters.escapeHTML(p.name)}</h3>
+        <p class="product-price">${priceHTML}</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:.5em; margin-top:.8em;">
+          <button type="button" class="btn btn-outline product-btn" data-add="${p.id}" style="padding:.5em .3em; font-size:.76rem;">Add to Bag</button>
+          <button type="button" class="btn btn-primary product-btn" data-buy="${p.id}" style="padding:.5em .3em; font-size:.76rem;">Buy Now</button>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderProducts() {
+    const grid = document.getElementById("productGrid");
+    if (grid) {
+      const shopProducts = PRODUCTS.slice(0, 10);
+      grid.innerHTML = shopProducts.map(createProductCardHTML).join("");
+    }
+
+    const bestGrid = document.getElementById("bestCollectionGrid");
+    if (bestGrid) {
+      const bestProducts = PRODUCTS.slice(0, 10);
+      bestGrid.innerHTML = bestProducts.map(createProductCardHTML).join("");
+    }
+  }
+
+  const cardQuantities = {};
+
+  function findProductById(id) {
+    if (!id) return null;
+    const strId = String(id).trim();
+    if (Array.isArray(PRODUCTS)) {
+      const found = PRODUCTS.find(function(p) { return String(p.id).trim() === strId; });
+      if (found) return found;
+    }
+    if (window.StorageUtils) {
+      const stored = window.StorageUtils.readJSON("rv_products", []);
+      if (Array.isArray(stored)) {
+        const found = stored.find(function(p) { return String(p.id).trim() === strId; });
+        if (found) return found;
+      }
+    }
+    if (window.RV_CONFIG && Array.isArray(window.RV_CONFIG.DEFAULT_PRODUCTS)) {
+      const found = window.RV_CONFIG.DEFAULT_PRODUCTS.find(function(p) { return String(p.id).trim() === strId; });
+      if (found) return found;
+    }
+    return null;
+  }
+
+  function addToCart(id, size, addQty) {
+    const product = findProductById(id);
+    if (!product) return;
+    const qty = typeof addQty === 'number' && addQty > 0 ? addQty : 1;
+    const selectedSize = size || 'M';
+    const itemToAdd = Object.assign({}, product, { qty: qty, size: selectedSize });
+
+    const isLoggedIn = window.NavbarComponent && window.NavbarComponent.isLoggedIn
+      ? window.NavbarComponent.isLoggedIn()
+      : Boolean(window.StorageUtils && (window.StorageUtils.readJSON("rv_current_user", null) || window.StorageUtils.readJSON("rv_user", null)));
+
+    if (!isLoggedIn) {
+      if (window.StorageUtils) {
+        window.StorageUtils.writeJSON("rv_pending_add_to_bag", { item: itemToAdd, returnUrl: window.location.href });
+      }
+      const loginPath = window.NavbarComponent && window.NavbarComponent.getLoginRedirectPath ? window.NavbarComponent.getLoginRedirectPath() : "pages/auth/login.html";
+      window.location.href = loginPath;
+      return;
+    }
+
+    let localCart = window.StorageUtils ? window.StorageUtils.readJSON("rv_cart", []) : cart;
+    const existing = localCart.find(function(item) { return String(item.id).trim() === String(product.id).trim() && (item.size || 'M') === selectedSize; });
+    if (existing) {
+      existing.qty = (existing.qty || 1) + qty;
+    } else {
+      localCart.push(itemToAdd);
+    }
+    cart = localCart;
+    if (window.StorageUtils) {
+      window.StorageUtils.writeJSON("rv_cart", cart);
+      const user = window.StorageUtils.readJSON("rv_current_user", null) || window.StorageUtils.readJSON("rv_user", null);
+      if (user && user.email) {
+        window.StorageUtils.writeJSON("rv_cart_" + user.email, cart);
+      }
+    }
+    if (typeof window.renderCart === "function") window.renderCart();
+    renderCart();
+    openDrawer();
+    if (window.Toast) window.Toast.show(product.name + " added to bag");
+  }
+
+  function buyNow(id) {
+    const product = PRODUCTS.find(function(p) { return p.id === id; });
+    if (!product) return;
+    const qty = 1;
+    const checkoutContext = Object.assign({}, product, { qty: 1, size: 'M' });
+    const checkoutInfo = {
+      contact: { name: "Customer", email: "customer@example.com", phone: "9876543210" },
+      address: { recipient: "Valued Customer", street: "Flat 402, Lotus Apartments, MG Road", city: "Bengaluru", state: "Karnataka", pincode: "560001" },
+      shippingFee: 0,
+      subtotal: product.price,
+      grandTotal: product.price,
+      items: [checkoutContext]
+    };
+    if (window.StorageUtils) {
+      window.StorageUtils.writeJSON("rv_buy_now_item", checkoutContext);
+      window.StorageUtils.writeJSON("rv_checkout_info", checkoutInfo);
+    }
+    window.location.href = `pages/customer/checkout.html?buy_now=true&id=${product.id}&qty=1`;
+  }
+
+  function renderCart() {
+    cart = window.StorageUtils ? window.StorageUtils.readJSON("rv_cart", []) : cart;
+    const itemsWrap = document.getElementById("drawerItems");
+    const totalEl = document.getElementById("drawerTotal");
+
+    if (!itemsWrap || !totalEl) return;
+
+    if (cart.length === 0) {
+      itemsWrap.innerHTML = '<p class="drawer-empty" id="drawerEmpty">Your bag is empty — the edit is waiting.</p>';
+    } else {
+      itemsWrap.innerHTML = cart.map(function(item) {
+        let rawImg = item.image || (item.images && item.images.length > 0 ? (typeof item.images[0] === 'string' ? item.images[0] : item.images[0].url) : "");
+        let imgPath = window.Formatters && window.Formatters.formatProductImage ? window.Formatters.formatProductImage(rawImg, false) : rawImg;
+        let itemTotal = item.price * (item.qty || 1);
+
+        return `
+          <div class="drawer-item" data-id="${item.id}" data-size="${item.size || 'M'}">
+            <div class="media-slot" data-placeholder="Product">${imgPath ? '<img src="' + imgPath + '" alt="' + window.Formatters.escapeHTML(item.name) + '">' : ''}</div>
+            <div class="drawer-item-info" style="display:flex; flex-direction:column; gap:.2em;">
+              <p class="drawer-item-name" style="font-family:var(--font-display); font-size:.92rem; margin:0;">${window.Formatters.escapeHTML(item.name)}</p>
+              ${item.size ? `<p class="drawer-item-size" style="font-size:.78rem; color:var(--ink-soft); margin:0;">Size: <strong>${item.size}</strong></p>` : ''}
+              <p class="drawer-item-price" style="font-size:.8rem; color:var(--ink-soft); margin:0;">Price: ${window.Formatters.formatINR(item.price)}</p>
+              <div class="drawer-item-qty" style="display:flex; align-items:center; gap:.4em; margin-top:.3em;">
+                <button type="button" class="qty-btn" data-qty-down="${item.id}" data-size="${item.size || 'M'}">-</button>
+                <span style="font-size:.82rem; font-weight:500;">Qty: ${item.qty || 1}</span>
+                <button type="button" class="qty-btn" data-qty-up="${item.id}" data-size="${item.size || 'M'}">+</button>
+              </div>
+              <p class="drawer-item-total" style="font-size:.82rem; font-weight:600; color:var(--ink); margin-top:.2em;">Total: ${window.Formatters.formatINR(itemTotal)}</p>
+            </div>
+            <button class="drawer-item-remove" data-remove="${item.id}" data-size="${item.size || 'M'}">Remove</button>
+          </div>
+        `;
+      }).join("");
+    }
+
+    const total = cart.reduce(function(sum, item) { return sum + item.price * (item.qty || 1); }, 0);
+    const count = cart.reduce(function(sum, item) { return sum + (item.qty || 1); }, 0);
+
+    totalEl.textContent = window.Formatters.formatINR(total);
+    if (window.NavbarComponent) window.NavbarComponent.updateCartBadge(count);
+    if (!checkoutContext) updateModalTotal();
+  }
+
+  function updateModalTotal() {
+    const modalTotalEl = document.getElementById("modalTotal");
+    if (!modalTotalEl) return;
+    const total = checkoutContext ? checkoutContext.price * checkoutContext.qty : cart.reduce(function(sum, item) { return sum + item.price * item.qty; }, 0);
+    modalTotalEl.textContent = window.Formatters.formatINR(total);
+  }
+
+  function openDrawer() {
+    renderCart();
+    window.Modal.open("cartDrawer");
+    document.getElementById("drawerOverlay").classList.add("open");
+  }
+
+  function closeDrawer() {
+    window.Modal.close("cartDrawer");
+    document.getElementById("drawerOverlay").classList.remove("open");
+  }
+
+  function initHeroSlider() {
+    const slides = Array.from(document.querySelectorAll(".hero-slide"));
+    const dotsWrap = document.getElementById("heroDots");
+    if (!slides.length || !dotsWrap) return;
+
+    let index = 0;
+    dotsWrap.innerHTML = "";
+    slides.forEach(function(_, i) {
+      const dot = document.createElement("button");
+      dot.className = "hero-dot" + (i === 0 ? " active" : "");
+      dot.addEventListener("click", function() { goTo(i); });
+      dotsWrap.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsWrap.children);
+    function goTo(i) {
+      slides[index].classList.remove("active");
+      dots[index].classList.remove("active");
+      index = (i + slides.length) % slides.length;
+      slides[index].classList.add("active");
+      dots[index].classList.add("active");
+    }
+
+    const prevBtn = document.getElementById("heroPrev");
+    const nextBtn = document.getElementById("heroNext");
+    if (prevBtn) prevBtn.addEventListener("click", function() { goTo(index - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function() { goTo(index + 1); });
+
+    setInterval(function() { goTo(index + 1); }, 4500);
+  }
+
+  function initCarousels() {
+    function setupCarousel(trackId, prevBtnId, nextBtnId) {
+      const trackContainer = document.getElementById(trackId);
+      const prevBtn = document.getElementById(prevBtnId);
+      const nextBtn = document.getElementById(nextBtnId);
+
+      if (!trackContainer || !prevBtn || !nextBtn) return;
+
+      prevBtn.addEventListener("click", function() {
+        const card = trackContainer.querySelector(".product-card");
+        const cardWidth = card ? card.offsetWidth + 24 : 300;
+        trackContainer.scrollBy({ left: -cardWidth * 2, behavior: "smooth" });
+      });
+
+      nextBtn.addEventListener("click", function() {
+        const card = trackContainer.querySelector(".product-card");
+        const cardWidth = card ? card.offsetWidth + 24 : 300;
+        trackContainer.scrollBy({ left: cardWidth * 2, behavior: "smooth" });
+      });
+    }
+
+    setupCarousel("bestCollectionTrack", "bestColPrev", "bestColNext");
+    setupCarousel("shopCollectionTrack", "shopColPrev", "shopColNext");
+  }
+
+  window.renderSearchResults = function(query) {
+    const resultsWrap = document.getElementById("searchResults");
+    if (!resultsWrap) return;
+    const q = (query || "").trim().toLowerCase();
+    if (!q) {
+      resultsWrap.classList.remove("open");
+      resultsWrap.innerHTML = "";
+      return;
+    }
+
+    const matches = PRODUCTS.filter(function(p) { return p.name.toLowerCase().includes(q); });
+    if (matches.length === 0) {
+      resultsWrap.innerHTML = '<p class="search-no-results">No results found for “' + window.Formatters.escapeHTML(q) + '”.</p>';
+      resultsWrap.classList.add("open");
+      return;
+    }
+
+    resultsWrap.innerHTML = matches.map(function(p) {
+      const priceHTML = p.was
+        ? '<span class="was">' + window.Formatters.formatINR(p.was) + '</span>' + window.Formatters.formatINR(p.price)
+        : window.Formatters.formatINR(p.price);
+      return `
+        <a href="pages/customer/product-details.html?id=${p.id}" class="search-result-item" style="text-decoration:none;">
+          <span class="search-result-thumb">${p.image ? '<img src="' + window.Formatters.formatProductImage(p.image, false) + '">' : ''}</span>
+          <span class="search-result-name">${window.Formatters.escapeHTML(p.name)}</span>
+          <span class="search-result-price">${priceHTML}</span>
+        </a>
+      `;
+    }).join("");
+    resultsWrap.classList.add("open");
+  };
+
+  function syncWebsiteContent() {
+    const SITE_CONTENT_KEY = "rv_site_content";
+    if (!window.StorageUtils) return;
+
+    const DEFAULT_CONTENT = {
+      heroTitle: "Kurtas, coloured for everyday wear.",
+      heroSubtitle: "Handcrafted cotton kurtas, tunic sets, and breezy co-ords designed for effortless modern lifestyle.",
+      heroCtaText: "Explore Collection",
+      announcementText: "Complimentary shipping on prepaid orders, across India",
+      announcementActive: true,
+      contactEmail: "care@LIKSHORA.com",
+      contactPhone: "+91 9876543210",
+      studioAddress: "LIKSHORA Design Studio, Indiranagar 100ft Road, Bengaluru, KA 560038",
+      footerBrandBio: "Kurtas, coloured for everyday wear.",
+      copyrightText: "© 2026 Likshora. All rights reserved.",
+      heroSlides: [
+        { id: "slide_1", caption: "LIKSHORA model wearing kurta with embroidered stole", image: "assets/images/products/model-photo-1.jpg" },
+        { id: "slide_2", caption: "LIKSHORA model in courtyard wearing kurta with embroidered stole", image: "assets/images/products/model-photo-2.jpg" },
+        { id: "slide_3", caption: "LIKSHORA model leaning against pillar wearing kurta with stole", image: "assets/images/products/model-photo-4.jpg" },
+        { id: "slide_4", caption: "LIKSHORA model wearing white kurta outdoors", image: "assets/images/products/model-photo-7.jpg" }
+      ],
+      rotatingModels: [
+        { id: "mod_1", name: "Model photo 1", image: "assets/images/products/model-photo-1.jpg" },
+        { id: "mod_2", name: "Model photo 2", image: "assets/images/products/model-photo-2.jpg" },
+        { id: "mod_3", name: "Model photo 3", image: "assets/images/products/model-photo-3.jpg" },
+        { id: "mod_4", name: "Model photo 4", image: "assets/images/products/model-photo-4.jpg" },
+        { id: "mod_5", name: "Model photo 6", image: "assets/images/products/model-photo-6.jpg" },
+        { id: "mod_6", name: "Model photo 7", image: "assets/images/products/model-photo-7.jpg" }
+      ]
+    };
+
+    let siteContent = window.StorageUtils.readJSON(SITE_CONTENT_KEY, null);
+    if (!siteContent) {
+      siteContent = DEFAULT_CONTENT;
+      window.StorageUtils.writeJSON(SITE_CONTENT_KEY, siteContent);
+    }
+
+    // 1. Announcement Bar
+    const announceEl = document.querySelector(".announce-bar p");
+    const announceWrap = document.querySelector(".announce-bar");
+    if (announceEl && siteContent.announcementText) {
+      announceEl.textContent = siteContent.announcementText;
+    }
+    if (announceWrap) {
+      announceWrap.style.display = siteContent.announcementActive === false ? "none" : "";
+    }
+
+    // 2. Hero Headline, Subtitle, CTA
+    const heroH1 = document.querySelector(".hero-content h1");
+    const heroSub = document.querySelector(".hero-content .hero-sub");
+    const heroCta = document.querySelector(".hero-content .btn-primary");
+
+    if (heroH1 && siteContent.heroTitle) {
+      heroH1.innerHTML = window.Formatters ? window.Formatters.escapeHTML(siteContent.heroTitle) : siteContent.heroTitle;
+    }
+    if (heroSub && siteContent.heroSubtitle) {
+      heroSub.textContent = siteContent.heroSubtitle;
+    }
+    if (heroCta && siteContent.heroCtaText) {
+      heroCta.textContent = siteContent.heroCtaText;
+    }
+
+    // 3. Hero Slides
+    if (siteContent.heroSlides && Array.isArray(siteContent.heroSlides) && siteContent.heroSlides.length > 0) {
+      const heroSlidesWrap = document.getElementById("heroSlides");
+      if (heroSlidesWrap) {
+        heroSlidesWrap.innerHTML = siteContent.heroSlides.map(function(slide, idx) {
+          let src = slide.image ? slide.image.replace(/^(\.\.\/)+/, '') : '';
+          return `
+            <div class="hero-slide ${idx === 0 ? 'active' : ''}">
+              <img src="${src}" alt="${window.Formatters ? window.Formatters.escapeHTML(slide.caption || '') : (slide.caption || '')}">
+            </div>
+          `;
+        }).join("");
+
+        const dotsWrap = document.getElementById("heroDots");
+        if (dotsWrap) {
+          dotsWrap.innerHTML = siteContent.heroSlides.map(function(_, idx) {
+            return `<button class="hero-dot ${idx === 0 ? 'active' : ''}" data-slide="${idx}"></button>`;
+          }).join("");
+        }
+      }
+    }
+
+    // 4. Rotating Models Section (Marquee)
+    if (siteContent.rotatingModels && Array.isArray(siteContent.rotatingModels) && siteContent.rotatingModels.length > 0) {
+      const marqueeTrack = document.getElementById("marqueeTrack");
+      if (marqueeTrack) {
+        const slots = siteContent.rotatingModels.concat(siteContent.rotatingModels);
+        marqueeTrack.innerHTML = slots.map(function(mod) {
+          let src = mod.image ? mod.image.replace(/^(\.\.\/)+/, '') : '';
+          return `
+            <div class="marquee-slot">
+              <img src="${src}" alt="${window.Formatters ? window.Formatters.escapeHTML(mod.name || '') : (mod.name || '')}">
+            </div>
+          `;
+        }).join("");
+      }
+    }
+
+    // 5. Footer Bio & Copyright
+    const footerBio = document.querySelector(".footer-brand p");
+    if (footerBio && siteContent.footerBrandBio) {
+      footerBio.textContent = siteContent.footerBrandBio;
+    }
+
+    const footerCopyright = document.querySelector(".footer-bottom p");
+    if (footerCopyright && siteContent.copyrightText) {
+      footerCopyright.innerHTML = window.Formatters ? window.Formatters.escapeHTML(siteContent.copyrightText) : siteContent.copyrightText;
+    }
+  }
+
+  window.addEventListener("storage", function(e) {
+    if (e.key === "rv_site_content") {
+      syncWebsiteContent();
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    window.NavbarComponent.init();
+    window.FooterComponent.init();
+    syncWebsiteContent();
+    renderProducts();
+    renderCart();
+    initHeroSlider();
+    initCarousels();
+    window.NavbarComponent.updateUserAvatar(currentUser);
+
+    // Product cards click handling (grid & carousel)
+    function handleProductClick(e) {
+      const up = e.target.closest("[data-qty-card-up]");
+      const down = e.target.closest("[data-qty-card-down]");
+      const addBtn = e.target.closest("[data-add]");
+      const buyBtn = e.target.closest("[data-buy]");
+
+      if (up) {
+        e.stopPropagation();
+        const id = up.dataset.qtyCardUp;
+        cardQuantities[id] = (cardQuantities[id] || 1) + 1;
+        const valEl = document.getElementById("cardQtyVal_" + id);
+        if (valEl) valEl.textContent = cardQuantities[id];
+      }
+
+      if (down) {
+        e.stopPropagation();
+        const id = down.dataset.qtyCardDown;
+        let q = cardQuantities[id] || 1;
+        if (q > 1) q -= 1;
+        cardQuantities[id] = q;
+        const valEl = document.getElementById("cardQtyVal_" + id);
+        if (valEl) valEl.textContent = q;
+      }
+
+      if (addBtn) {
+        e.stopPropagation();
+        addToCart(addBtn.dataset.add);
+      }
+
+      if (buyBtn) {
+        e.stopPropagation();
+        buyNow(buyBtn.dataset.buy);
+      }
+    }
+
+    const gridEl = document.getElementById("productGrid");
+    if (gridEl) gridEl.addEventListener("click", handleProductClick);
+
+    const bestGridEl = document.getElementById("bestCollectionGrid");
+    if (bestGridEl) bestGridEl.addEventListener("click", handleProductClick);
+
+    document.addEventListener("click", function(e) {
+      const addBtn = e.target.closest("[data-add]");
+      if (addBtn) {
+        addToCart(addBtn.dataset.add);
+      }
+      const buyBtn = e.target.closest("[data-buy]");
+      if (buyBtn) {
+        buyNow(buyBtn.dataset.buy);
+      }
+    });
+
+    // Cart Drawer triggers
+    document.getElementById("cartToggle").addEventListener("click", openDrawer);
+    document.getElementById("cartClose").addEventListener("click", closeDrawer);
+    document.getElementById("drawerOverlay").addEventListener("click", function() {
+      closeDrawer();
+      window.Modal.close("checkoutOverlay");
+    });
+
+    // Cart items interactions
+    document.getElementById("drawerItems").addEventListener("click", function(e) {
+      const up = e.target.closest("[data-qty-up]");
+      const down = e.target.closest("[data-qty-down]");
+      const remove = e.target.closest("[data-remove]");
+
+      let localCart = window.StorageUtils ? window.StorageUtils.readJSON("rv_cart", []) : cart;
+
+      if (up) {
+        const id = up.dataset.qtyUp;
+        const size = up.dataset.size || 'M';
+        const item = localCart.find(function(i) { return i.id === id && (i.size || 'M') === size; });
+        if (item) { item.qty = (item.qty || 1) + 1; }
+      }
+
+      if (down) {
+        const id = down.dataset.qtyDown;
+        const size = down.dataset.size || 'M';
+        const item = localCart.find(function(i) { return i.id === id && (i.size || 'M') === size; });
+        if (item) {
+          item.qty = (item.qty || 1) - 1;
+          if (item.qty <= 0) {
+            localCart = localCart.filter(function(i) { return !(i.id === id && (i.size || 'M') === size); });
+          }
+        }
+      }
+
+      if (remove) {
+        const id = remove.dataset.remove;
+        const size = remove.dataset.size || 'M';
+        localCart = localCart.filter(function(i) { return !(i.id === id && (i.size || 'M') === size); });
+      }
+
+      cart = localCart;
+      if (window.StorageUtils) {
+        window.StorageUtils.writeJSON("rv_cart", cart);
+      }
+      renderCart();
+    });
+
+    // Checkout Drawer Action
+    const checkoutBtn = document.getElementById("checkoutBtn");
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const localCart = window.StorageUtils ? window.StorageUtils.readJSON("rv_cart", []) : cart;
+        if (localCart.length === 0) {
+          if (window.Toast) window.Toast.show("Your bag is empty");
+          return;
+        }
+        const redirectPath = window.NavbarComponent && window.NavbarComponent.getCheckoutRedirectPath ? window.NavbarComponent.getCheckoutRedirectPath() : "pages/customer/checkout.html";
+        window.location.href = redirectPath;
+      });
+    }
+    document.getElementById("checkoutClose").addEventListener("click", function() {
+      window.Modal.close("checkoutOverlay");
+    });
+    document.getElementById("placeOrderBtn").addEventListener("click", function() {
+      window.Toast.show("Order placed successfully!");
+      cart = [];
+      renderCart();
+      window.Modal.close("checkoutOverlay");
+    });
+
+    // Modals
+    document.getElementById("navAboutBtn").addEventListener("click", function() { window.Modal.open("aboutOverlay"); });
+    const navAboutBtnFooter = document.getElementById("navAboutBtnFooter");
+    if (navAboutBtnFooter) navAboutBtnFooter.addEventListener("click", function() { window.Modal.open("aboutOverlay"); });
+    document.getElementById("aboutClose").addEventListener("click", function() { window.Modal.close("aboutOverlay"); });
+
+    // Category Card click interaction — Redirect to Products page filtered by category
+    const categoryGrid = document.getElementById("categoryGrid");
+    if (categoryGrid) {
+      categoryGrid.addEventListener("click", function(e) {
+        const card = e.target.closest("[data-category]");
+        if (card) {
+          const catId = card.dataset.category || card.getAttribute("data-category");
+          if (catId) {
+            window.location.href = "pages/customer/products.html?category=" + encodeURIComponent(catId);
+          }
+        }
+      });
+    }
+
+    // Account Overlay Close button handler
+    const accountCloseBtn = document.getElementById("accountClose");
+    if (accountCloseBtn) accountCloseBtn.addEventListener("click", function() { window.Modal.close("accountOverlay"); });
+
+    // Auth Gate Modal
+    document.getElementById("authGateClose").addEventListener("click", function() { window.Modal.close("authGateOverlay"); });
+    document.getElementById("authGateContinueGuest").addEventListener("click", function() {
+      window.Modal.close("authGateOverlay");
+      if (checkoutContext) {
+        updateModalTotal();
+        window.Modal.open("checkoutOverlay");
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

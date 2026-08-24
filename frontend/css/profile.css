@@ -1,0 +1,554 @@
+/* =========================================================
+   LIKSHORA — Dedicated Customer Profile Styles
+   Sidebar navigation, user avatar header, stats cards, address CRUD & reviews
+   ========================================================= */
+
+/* ---------- Profile Page Layout ---------- */
+.profile-page-layout {
+  max-width: 1320px;
+  margin: 1.5em auto 4em;
+  padding: 0 1.5em;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5em;
+}
+
+/* ---------- Profile Sidebar ---------- */
+.profile-sidebar-card {
+  background: var(--white);
+  border: 1px solid var(--stone);
+  border-radius: 16px;
+  padding: 1.8em 1.2em;
+  box-shadow: 0 4px 14px rgba(52,11,16,.04);
+  height: fit-content;
+  position: sticky;
+  top: 6em;
+}
+
+.profile-avatar-block {
+  text-align: center;
+  border-bottom: 1px solid var(--sand-deep);
+  padding-bottom: 1.5em;
+  margin-bottom: 1.5em;
+}
+.profile-avatar-circle {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ink), var(--rust));
+  color: var(--sand);
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto .8em;
+  box-shadow: 0 6px 16px rgba(52,11,16,.15);
+  border: 2px solid var(--gold);
+}
+.profile-user-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0 0 .2em;
+  color: var(--ink);
+}
+.profile-user-email {
+  font-size: .8rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.profile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.profile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: .8em;
+  padding: .8em 1em;
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+  font-size: .9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all .2s var(--ease);
+}
+.profile-nav-link span {
+  display: inline-flex;
+  width: 24px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+.profile-nav-link:hover {
+  background: var(--sand-deep);
+  color: var(--ink);
+}
+.profile-nav-link.active {
+  background: var(--ink);
+  color: var(--sand);
+  font-weight: 600;
+}
+.profile-nav-link.active svg {
+  stroke: var(--gold);
+}
+.profile-nav-link.logout-link {
+  color: var(--rust);
+  margin-top: .8em;
+  border-top: 1px dashed var(--stone);
+  padding-top: 1em;
+}
+.profile-nav-link.logout-link:hover {
+  background: rgba(168,78,51,.08);
+}
+
+/* ---------- Stat Cards Grid ---------- */
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  margin-bottom: 2.2em;
+}
+.profile-stat-card {
+  background: var(--sand-deep);
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-md);
+  padding: 1.5em;
+  text-align: center;
+  transition: transform .2s var(--ease);
+}
+.profile-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: .2em;
+}
+.stat-label {
+  font-size: .82rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---------- Address Cards Grid ---------- */
+.addresses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5em;
+}
+.address-box {
+  background: linear-gradient(145deg, #FFFFFF, var(--sand-deep));
+  border: 1.5px solid var(--stone);
+  border-radius: 12px;
+  padding: 1.6em;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1em;
+  transition: all .25s var(--ease);
+  box-shadow: 0 4px 14px rgba(52,11,16,.03);
+}
+.address-box:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(52,11,16,.08);
+}
+.address-box.default-address {
+  border-color: var(--gold);
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 4px 16px rgba(200, 155, 60, 0.18);
+}
+.default-badge {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background: var(--gold);
+  color: var(--white);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .35em .75em;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(200, 155, 60, 0.3);
+}
+
+/* ---------- Add Address Modal Visual Enhancements ---------- */
+#addAddressModal .modal {
+  max-width: 580px !important;
+  width: 90% !important;
+  max-height: calc(100vh - 80px) !important;
+  overflow-y: auto !important;
+  margin: auto !important;
+  border-radius: 16px !important;
+  padding: 2.2em 2em !important;
+  border: 1px solid var(--stone) !important;
+  border-top: 4px solid var(--gold) !important;
+  background: linear-gradient(145deg, #FFFFFF, var(--sand-deep)) !important;
+  box-shadow: 0 20px 50px rgba(52, 11, 16, 0.22) !important;
+}
+
+#addAddressModal h3 {
+  font-family: var(--font-display) !important;
+  font-size: 1.4rem !important;
+  color: var(--ink) !important;
+  margin-top: 0 !important;
+  margin-bottom: 1em !important;
+  padding-bottom: .6em !important;
+  border-bottom: 1px solid rgba(52, 11, 16, 0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: .5em !important;
+}
+
+#addAddressModal h3::before {
+  content: '🏡';
+  font-size: 1.2rem;
+}
+
+#addAddressModal .auth-label {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: .45em !important;
+  width: 100% !important;
+  font-size: .84rem !important;
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+  letter-spacing: .02em !important;
+  margin-bottom: .2em !important;
+}
+
+#addAddressModal .auth-input {
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: .85em 1.1em !important;
+  border: 1.5px solid var(--stone) !important;
+  border-radius: 8px !important;
+  background: var(--white) !important;
+  font-family: var(--font-body) !important;
+  font-size: .92rem !important;
+  color: var(--ink) !important;
+  transition: all .25s var(--ease) !important;
+  box-shadow: 0 2px 6px rgba(52,11,16,.02) !important;
+}
+
+#addAddressModal .auth-input:focus {
+  outline: none !important;
+  border-color: var(--gold) !important;
+  background: var(--white) !important;
+  box-shadow: 0 0 0 4px rgba(200, 155, 60, 0.18) !important;
+}
+
+#addAddressModal .auth-input::placeholder {
+  color: #998B88 !important;
+  font-size: .88rem !important;
+}
+
+#addAddressModal .form-grid-2 {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 1.2em !important;
+  width: 100% !important;
+}
+
+#saveAddressModalBtn {
+  background: linear-gradient(135deg, var(--ink), #4A0E13) !important;
+  color: var(--sand) !important;
+  border: 1px solid var(--gold) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  font-size: .92rem !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  padding: 1em 2em !important;
+  border-radius: 8px !important;
+  box-shadow: 0 6px 20px rgba(52, 11, 16, 0.25) !important;
+  transition: all .25s var(--ease) !important;
+  width: 100% !important;
+  height: 50px !important;
+  margin-top: .8em !important;
+  cursor: pointer !important;
+}
+
+#saveAddressModalBtn:hover {
+  background: #8A5A3B !important;
+  color: var(--white) !important;
+  border-color: #8A5A3B !important;
+  box-shadow: 0 8px 24px rgba(138, 90, 59, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+@media (max-width: 580px) {
+  #addAddressModal .form-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: .8em !important;
+  }
+}
+
+/* ---------- Review Cards ---------- */
+.user-review-card {
+  background: var(--white);
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-md);
+  padding: 1.5em;
+  margin-bottom: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: .6em;
+}
+.review-product-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: 0;
+  color: var(--ink);
+}
+
+/* =========================================================
+   LIKSHORA — Write a Review Modal Luxury Enhancements
+   ========================================================= */
+#addReviewModal {
+  background: rgba(52, 11, 16, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  transition: opacity 0.3s var(--ease) !important;
+}
+
+#addReviewModal .modal-review-card,
+#addReviewModal .modal {
+  max-width: 520px !important;
+  width: 92% !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(200, 155, 60, 0.3) !important;
+  border-radius: 20px !important;
+  padding: 2.2em 2em !important;
+  box-shadow: 0 24px 60px rgba(52, 11, 16, 0.28) !important;
+  position: relative !important;
+  animation: reviewModalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes reviewModalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+#addReviewModal .modal-close {
+  position: absolute !important;
+  top: 1.4em !important;
+  right: 1.4em !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: var(--sand) !important;
+  border: 1px solid var(--stone) !important;
+  color: var(--ink) !important;
+  font-size: 1.3rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s var(--ease) !important;
+  line-height: 1 !important;
+}
+
+#addReviewModal .modal-close:hover {
+  background: var(--ink) !important;
+  color: var(--sand) !important;
+  border-color: var(--ink) !important;
+  transform: rotate(90deg) !important;
+}
+
+#addReviewModal .review-modal-header {
+  margin-bottom: 1.6em !important;
+}
+
+#addReviewModal .review-modal-header .eyebrow {
+  margin-bottom: 0.3em !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--gold) !important;
+  display: block !important;
+}
+
+#addReviewModal .review-modal-header h3 {
+  font-family: var(--font-display) !important;
+  font-size: 1.6rem !important;
+  font-weight: 500 !important;
+  color: var(--ink) !important;
+  margin: 0 0 0.3em !important;
+  line-height: 1.2 !important;
+}
+
+#addReviewModal .review-modal-sub {
+  font-size: 0.85rem !important;
+  color: var(--ink-soft) !important;
+  margin: 0 !important;
+  line-height: 1.45 !important;
+}
+
+#addReviewModal .review-modal-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.25em !important;
+}
+
+#addReviewModal .review-modal-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.45em !important;
+}
+
+#addReviewModal .review-modal-field label,
+#addReviewModal .auth-label {
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+  letter-spacing: 0.02em !important;
+  display: block !important;
+  margin-bottom: 0.2em !important;
+}
+
+#addReviewModal .select-field-wrap {
+  position: relative !important;
+}
+
+#addReviewModal .select-field-wrap::after {
+  content: "▾" !important;
+  position: absolute !important;
+  right: 1.1em !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 0.85rem !important;
+  color: var(--ink-soft) !important;
+  pointer-events: none !important;
+}
+
+#addReviewModal .review-modal-select,
+#addReviewModal select.auth-input {
+  width: 100% !important;
+  padding: 0.85em 2.4em 0.85em 1em !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-color: var(--sand) !important;
+  border: 1.5px solid var(--stone) !important;
+  border-radius: 10px !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  color: var(--ink) !important;
+  transition: all 0.25s var(--ease) !important;
+  cursor: pointer !important;
+}
+
+#addReviewModal .review-modal-select:focus,
+#addReviewModal select.auth-input:focus,
+#addReviewModal .review-modal-textarea:focus,
+#addReviewModal textarea.auth-input:focus {
+  outline: none !important;
+  border-color: var(--gold) !important;
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 0 3.5px rgba(200, 155, 60, 0.2) !important;
+}
+
+#addReviewModal .review-modal-textarea,
+#addReviewModal textarea.auth-input {
+  width: 100% !important;
+  padding: 0.9em 1em !important;
+  background-color: var(--sand) !important;
+  border: 1.5px solid var(--stone) !important;
+  border-radius: 10px !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  color: var(--ink) !important;
+  line-height: 1.5 !important;
+  resize: vertical !important;
+  min-height: 110px !important;
+  transition: all 0.25s var(--ease) !important;
+}
+
+#addReviewModal .review-modal-textarea::placeholder,
+#addReviewModal textarea.auth-input::placeholder {
+  color: #998B88 !important;
+  font-size: 0.86rem !important;
+}
+
+#addReviewModal .review-modal-submit-btn,
+#saveReviewModalBtn {
+  background: linear-gradient(135deg, var(--ink), #4A0E13) !important;
+  color: var(--sand) !important;
+  border: 1px solid var(--gold) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  font-size: 0.92rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 0.95em 2em !important;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 20px rgba(52, 11, 16, 0.25) !important;
+  transition: all 0.25s var(--ease) !important;
+  width: 100% !important;
+  height: 50px !important;
+  margin-top: 0.6em !important;
+  cursor: pointer !important;
+}
+
+#addReviewModal .review-modal-submit-btn:hover,
+#saveReviewModalBtn:hover {
+  background: #8A5A3B !important;
+  color: var(--white) !important;
+  border-color: #8A5A3B !important;
+  box-shadow: 0 8px 24px rgba(138, 90, 59, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+#addReviewModal .review-modal-submit-btn:active,
+#saveReviewModalBtn:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 4px 12px rgba(52, 11, 16, 0.2) !important;
+}
+
+@media (max-width: 580px) {
+  #addReviewModal .modal-review-card,
+  #addReviewModal .modal {
+    padding: 1.6em 1.3em !important;
+    border-radius: 16px !important;
+  }
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 980px) {
+  .profile-page-layout {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+  .profile-sidebar-card {
+    position: static;
+  }
+  .profile-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .addresses-grid {
+    grid-template-columns: 1fr;
+  }
+}

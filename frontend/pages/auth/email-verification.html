@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Verify Code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/authentication.css">
+</head>
+<body class="auth-page-body">
+
+<div class="auth-page-shell">
+
+  <!-- Right Form Side -->
+  <div class="auth-form-side">
+    <div class="auth-header">
+      <p class="eyebrow">Step 2 of 3</p>
+      <h1>Enter Verification Code</h1>
+      <p>Code sent to <strong id="verifyEmailEcho">your registered email/phone</strong></p>
+    </div>
+
+    <form id="otpVerificationForm">
+      <!-- 6-digit OTP input boxes -->
+      <div class="otp-input-group">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1" required data-otp-index="0" autofocus>
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1" required data-otp-index="1">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1" required data-otp-index="2">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1" required data-otp-index="3">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1" required data-otp-index="4">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1" required data-otp-index="5">
+      </div>
+
+      <div class="resend-timer-box">
+        Didn't receive the code?
+        <button type="button" class="resend-link-btn" id="resendOtpBtn">Resend Code</button>
+        <span id="timerText">(00:30)</span>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" style="height:48px; font-size:.9rem; margin-top:1.8em;">Verify &amp; Continue &rarr;</button>
+    </form>
+  </div>
+
+</div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+
+<!-- OTP Verification Controller -->
+<script src="../../js/auth/verification.js"></script>
+</body>
+</html>

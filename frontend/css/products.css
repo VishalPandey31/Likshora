@@ -1,0 +1,461 @@
+/* =========================================================
+   LIKSHORA — Product Discovery & Categories Styles
+   Filter bars, breadcrumbs, rating badges, wishlist hearts & category grids
+   ========================================================= */
+
+/* ---------- Breadcrumbs ---------- */
+.breadcrumb {
+  display: none !important;
+}
+.breadcrumb a {
+  color: var(--ink-soft);
+  transition: color .2s var(--ease);
+}
+.breadcrumb a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+.breadcrumb-sep {
+  color: var(--stone);
+  font-size: .7rem;
+}
+.breadcrumb-current {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* ---------- Discovery Header & Filter Toolbar ---------- */
+.discovery-header {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1.5em 1.5em 2em;
+}
+.discovery-header h1 {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  margin-bottom: .2em;
+}
+.discovery-sub {
+  color: var(--ink-soft);
+  font-size: .95rem;
+  margin: 0;
+}
+
+.filter-bar {
+  max-width: 1320px;
+  margin: 0 auto 2em;
+  padding: 1em 1.5em;
+  background: var(--sand-deep);
+  border-top: 1px solid rgba(52,11,16,.08);
+  border-bottom: 1px solid rgba(52,11,16,.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2em;
+  flex-wrap: wrap;
+}
+.filter-groups {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+  flex-wrap: wrap;
+}
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  font-size: .82rem;
+  color: var(--ink-soft);
+}
+.filter-select,
+.sort-select {
+  padding: .6em 1em;
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: .84rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color .2s var(--ease);
+}
+.filter-select:focus,
+.sort-select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.results-count {
+  font-size: .8rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* ---------- All Products Page Responsive Grid (4 Desktop / 3 Tablet / 2 Mobile) ---------- */
+.products-section .product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+  gap: 1.8em 1.2em !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  padding: 0 !important;
+}
+
+.products-section .product-grid .product-card {
+  flex: none !important;
+  width: 100% !important;
+  scroll-snap-align: none !important;
+}
+
+@media (max-width: 1100px) {
+  .products-section .product-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.6em 1em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-section .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.2em .8em !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-section .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1em .6em !important;
+  }
+}
+
+/* ---------- Reusable Product Card Extensions ---------- */
+.product-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: .25em;
+  font-size: .74rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-top: .2em;
+}
+.wishlist-btn {
+  position: absolute;
+  top: .7em;
+  right: .7em;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(4px);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  cursor: pointer;
+  z-index: 2;
+  transition: background .2s var(--ease), color .2s var(--ease), transform .15s var(--ease);
+}
+.wishlist-btn:hover {
+  background: var(--white);
+  color: var(--rust);
+  transform: scale(1.1);
+}
+.wishlist-btn.active {
+  background: var(--rust);
+  color: var(--white);
+}
+.wishlist-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* ---------- Empty State & Loading State ---------- */
+.empty-products-notice {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4em 1.5em;
+  background: var(--sand-deep);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--stone);
+}
+.empty-products-notice h3 {
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+.empty-products-notice p {
+  color: var(--ink-soft);
+  font-size: .9rem;
+}
+
+/* ---------- Category Showcase Page ---------- */
+.category-showcase-grid {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1em 1.5em 4em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+}
+.category-hero-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  box-shadow: 0 10px 25px -5px rgba(52,11,16,.15);
+  border: 1px solid var(--stone);
+}
+.category-hero-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s var(--ease);
+}
+.category-hero-card:hover img {
+  transform: scale(1.05);
+}
+.category-hero-content {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(52,11,16,.9) 0%, rgba(52,11,16,.3) 65%, transparent 100%);
+  padding: 2.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--sand);
+}
+.category-hero-content .eyebrow { color: var(--gold); }
+.category-hero-content h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  color: var(--sand);
+  margin-bottom: .3em;
+}
+.category-hero-content p {
+  font-size: .9rem;
+  color: rgba(248,245,238,.85);
+  margin-bottom: 1.2em;
+  max-width: 380px;
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 980px) {
+  .category-showcase-grid { grid-template-columns: 1fr; gap: 1.5em; }
+  .filter-bar { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 720px) {
+  .category-hero-content { padding: 1.5em; }
+  .discovery-header { padding: 1em 1.5em 1.5em; }
+}
+
+/* ---------- PDP Horizontal Size Selection Box Layout ---------- */
+.size-qty-matrix {
+  background: var(--sand-deep);
+  border: 1px solid var(--stone);
+  border-radius: 12px;
+  padding: 1.1em 1.2em;
+  margin-bottom: 1.2em;
+}
+
+.size-label {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: .8em;
+}
+
+.size-guide-link {
+  font-size: .8rem;
+  color: var(--gold);
+  cursor: pointer;
+  font-weight: 500;
+  transition: color .2s var(--ease);
+}
+
+.size-guide-link:hover {
+  text-decoration: underline;
+}
+
+.size-qty-list {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: .6em !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+}
+
+.size-qty-row {
+  flex: 1 1 0 !important;
+  min-width: 44px !important;
+  height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--white) !important;
+  border: 1.5px solid var(--stone) !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  transition: all .2s var(--ease) !important;
+  box-shadow: 0 1px 3px rgba(52,11,16,.05) !important;
+}
+
+.size-qty-row:hover {
+  border-color: var(--ink) !important;
+  background: var(--sand) !important;
+}
+
+.size-qty-row.active {
+  border-color: var(--gold) !important;
+  background: var(--sand) !important;
+  box-shadow: 0 0 0 1.5px var(--gold), 0 3px 10px rgba(181, 137, 47, 0.15) !important;
+}
+
+.size-name {
+  font-family: var(--font-body);
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ---------- PDP Tightly-Fitted Main Product Image Container ---------- */
+.pdp-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5em;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2em 1.5em;
+  align-items: start;
+}
+
+.pdp-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.pdp-main-image {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  max-width: 380px;
+  max-height: 480px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(52, 11, 16, 0.08);
+  border: 1px solid var(--stone);
+  background: var(--sand-deep);
+}
+
+.pdp-main-image img,
+#pdpMainImg {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  border-radius: 13px;
+  transition: opacity .3s var(--ease);
+}
+
+.thumbnail-strip {
+  display: flex;
+  gap: .8em;
+  margin-top: 1.2em;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 380px;
+  flex-wrap: wrap;
+}
+
+.thumb-btn {
+  width: 66px;
+  height: 66px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--stone);
+  background: var(--white);
+  padding: 0;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+  box-shadow: 0 2px 6px rgba(52, 11, 16, 0.06);
+}
+
+.thumb-btn:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.thumb-btn.active {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 2.5px var(--gold), 0 4px 12px rgba(181, 137, 47, 0.3) !important;
+  transform: scale(1.05);
+}
+
+.thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* ---------- PDP Gallery Navigation Controls (Previous / Next) ---------- */
+.pdp-gallery-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  margin-top: 1.2em;
+  width: 100%;
+  max-width: 380px;
+}
+
+.pdp-nav-btn {
+  background: var(--sand-deep);
+  border: 1.5px solid var(--stone);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  padding: .55em 1.5em;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+  box-shadow: 0 2px 8px rgba(52, 11, 16, 0.08);
+}
+
+.pdp-nav-btn:hover {
+  background: var(--ink);
+  color: var(--sand);
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .pdp-main-image {
+    max-width: 100%;
+    max-height: 380px;
+  }
+  .pdp-main-image img,
+  #pdpMainImg {
+    max-height: 380px;
+  }
+  .thumbnail-strip,
+  .pdp-gallery-controls {
+    max-width: 100%;
+  }
+}

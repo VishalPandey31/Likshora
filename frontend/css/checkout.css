@@ -1,0 +1,338 @@
+/* =========================================================
+   LIKSHORA — Checkout, Payment & Order Success Styles
+   Progress stepper, address selection cards, payment adapter
+   simulation & order confirmation receipt
+   ========================================================= */
+
+/* ---------- Progress Stepper ---------- */
+.stepper-bar {
+  max-width: 800px;
+  margin: 1.5em auto 2.5em;
+  padding: 0 1.5em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+.stepper-bar::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--stone);
+  z-index: 1;
+}
+.stepper-step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4em;
+  background: var(--sand);
+  padding: 0 .4em;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+}
+.step-number {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: var(--sand-deep);
+  border: 2px solid var(--stone);
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s var(--ease);
+}
+.step-title {
+  font-size: .76rem;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.25;
+  word-break: break-word;
+}
+.stepper-step.active .step-number {
+  background: var(--ink);
+  border-color: var(--gold);
+  color: var(--sand);
+  box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.25);
+}
+.stepper-step.active .step-title {
+  color: var(--ink);
+  font-weight: 600;
+}
+.stepper-step.completed .step-number {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--white);
+}
+
+/* ---------- Form Field Helpers ---------- */
+label.payment-option-fields,
+.payment-option-fields label,
+.form-group {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: .4em !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  font-size: .82rem;
+  color: var(--ink-soft);
+  margin-bottom: .8em;
+}
+label.payment-option-fields input,
+label.payment-option-fields select,
+.payment-option-fields input,
+.payment-option-fields select,
+.form-group input,
+.form-group select {
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: .75em .85em !important;
+  border: 1px solid var(--stone) !important;
+  border-radius: var(--radius-sm, 6px) !important;
+  background: var(--white) !important;
+  font-family: var(--font-body) !important;
+  font-size: .88rem !important;
+  color: var(--ink) !important;
+}
+label.payment-option-fields input:focus,
+label.payment-option-fields select:focus,
+.payment-option-fields input:focus,
+.payment-option-fields select:focus,
+.form-group input:focus,
+.form-group select:focus {
+  outline: 1px solid var(--gold) !important;
+  border-color: var(--gold) !important;
+}
+
+/* ---------- Checkout Layout ---------- */
+.checkout-layout {
+  max-width: 1320px;
+  margin: 0 auto 4em;
+  padding: 0 1.5em;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2.5em;
+}
+
+.checkout-section-box {
+  background: var(--white);
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-md);
+  padding: 1.8em;
+  margin-bottom: 1.8em;
+  box-shadow: 0 4px 14px rgba(52,11,16,.04);
+}
+.checkout-section-box h3 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 1.2em;
+  border-bottom: 1px solid rgba(52,11,16,.08);
+  padding-bottom: .6em;
+}
+
+/* ---------- Address Cards Selection ---------- */
+.address-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 1.2em;
+}
+.address-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+  padding: 1.2em;
+  border: 1.5px solid var(--stone);
+  border-radius: var(--radius-sm);
+  background: var(--sand-deep);
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+.address-card:hover {
+  border-color: var(--ink);
+}
+.address-card.selected {
+  border-color: var(--gold);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.18);
+}
+.address-card input[type="radio"] {
+  accent-color: var(--gold);
+  margin-top: .2em;
+}
+.address-details h4 {
+  font-size: .95rem;
+  margin: 0 0 .3em;
+}
+.address-details p {
+  font-size: .86rem;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.add-address-toggle {
+  background: linear-gradient(135deg, rgba(200, 155, 60, 0.08), rgba(68, 35, 0, 0.04));
+  border: 1.5px dashed var(--gold);
+  color: var(--ink);
+  padding: 1em 1.4em;
+  border-radius: 10px;
+  width: 100%;
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6em;
+  transition: all .25s var(--ease);
+  box-shadow: 0 2px 8px rgba(200, 155, 60, 0.06);
+}
+.add-address-toggle:hover {
+  background: #8A5A3B;
+  border-style: solid;
+  color: var(--white);
+  box-shadow: 0 8px 22px rgba(138, 90, 59, 0.35);
+  transform: translateY(-1px);
+}
+
+.new-address-box {
+  margin-top: 1.5em;
+  padding: 2em;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #FFFFFF, var(--sand-deep));
+  border: 1px solid var(--stone);
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 10px 28px rgba(52, 11, 16, 0.06);
+  transition: all .3s var(--ease);
+}
+
+.new-address-box h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-top: 0;
+  margin-bottom: 1.2em;
+  display: flex;
+  align-items: center;
+  gap: .5em;
+}
+
+.new-address-box h4::before {
+  content: '📍';
+  font-size: 1.1rem;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---------- QR Code Simulation Box ---------- */
+.qr-simulation-box {
+  text-align: center;
+  padding: 1.8em;
+  background: var(--sand-deep);
+  border: 1px dashed var(--gold);
+  border-radius: var(--radius-sm);
+  margin-top: 1em;
+}
+.qr-code-graphic {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1em;
+  background: var(--white);
+  padding: 10px;
+  border: 1px solid var(--stone);
+  border-radius: 8px;
+}
+.qr-code-graphic img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Order Success Receipt ---------- */
+.success-hero {
+  max-width: 720px;
+  margin: 2em auto 4em;
+  padding: 0 1.5em;
+  text-align: center;
+}
+.success-icon-badge {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--rust));
+  color: var(--white);
+  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2em;
+  box-shadow: 0 10px 25px rgba(200, 155, 60, 0.35);
+}
+.order-number-tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: .08em;
+  color: var(--gold);
+  background: var(--sand-deep);
+  padding: .5em 1.2em;
+  border-radius: 999px;
+  border: 1px solid var(--stone);
+  margin-bottom: 1.5em;
+}
+
+.success-receipt {
+  background: var(--white);
+  border: 1px solid var(--stone);
+  border-radius: 16px;
+  padding: 2em;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(52,11,16,.06);
+  margin-bottom: 2em;
+}
+.receipt-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0;
+}
+.receipt-table td {
+  padding: .7em 0;
+  border-bottom: 1px solid var(--sand-deep);
+  font-size: .88rem;
+}
+.receipt-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 980px) {
+  .checkout-layout { grid-template-columns: 1fr; gap: 2em; }
+}
+
+@media (max-width: 720px) {
+  .stepper-bar::before { display: none; }
+  .form-grid-2 { grid-template-columns: 1fr; }
+  .success-receipt { padding: 1.4em; }
+}

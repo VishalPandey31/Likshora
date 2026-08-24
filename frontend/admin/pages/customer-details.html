@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Customer Profile Details</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body>
+
+<div class="admin-app-shell">
+
+  <!-- REUSABLE SIDEBAR COMPONENT -->
+  <aside class="admin-sidebar">
+    <div>
+      <div class="admin-brand">
+        <img src="../../assets/images/website/logo-icon.png" alt="Likshora Icon" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover;">
+        <div>
+          <h3 class="admin-brand-title">LIKSHORA</h3>
+          <span class="admin-brand-sub">Admin Portal</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav-menu">
+        <li class="admin-nav-item"><a href="dashboard.html"><span>📊</span> Dashboard Overview</a></li>
+        <li class="admin-nav-item"><a href="products.html"><span>🛍️</span> Products Catalog</a></li>
+        <li class="admin-nav-item"><a href="inventory.html"><span>📦</span> Inventory &amp; Stock</a></li>
+        <li class="admin-nav-item"><a href="orders.html"><span>📦</span> Orders &amp; Fulfillment</a></li>
+        <li class="admin-nav-item"><a href="shipping.html"><span>🚚</span> Shipping &amp; Logistics</a></li>
+        <li class="admin-nav-item"><a href="categories.html"><span>🏷️</span> Categories &amp; Collections</a></li>
+        <li class="admin-nav-item active"><a href="customers.html"><span>👥</span> Customer Records</a></li>
+        <li class="admin-nav-item"><a href="payments.html"><span>💳</span> Payment Logs</a></li>
+        <li class="admin-nav-item"><a href="website-content.html"><span>🌐</span> Website Content</a></li>
+        <li class="admin-nav-item"><a href="settings.html"><span>⚙️</span> Portal Settings</a></li>
+      </ul>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,.08); padding-top:1em;">
+      <a href="#" class="admin-nav-item admin-logout-trigger" style="color:var(--admin-danger); display:flex; align-items:center; gap:.8em; text-decoration:none; padding:.8em 1em; font-size:.88rem; font-weight:600;">
+        <span>➔</span> Sign Out
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN RIGHT CONTAINER -->
+  <div style="display:flex; flex-direction:column; min-width:0;">
+
+    <!-- REUSABLE HEADER COMPONENT -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <h2 class="admin-header-title">Customer Profile</h2>
+      </div>
+
+      <div class="admin-header-right">
+        <a href="customers.html" class="btn-admin-secondary" style="text-decoration:none;">&larr; Back to Customers List</a>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="admin-main-content">
+
+      <div style="display:grid; grid-template-columns: 1fr 340px; gap:1.8em;">
+
+        <!-- Left Main Column: Personal Info, Orders, Payments, Cart, Wishlist, Search, Reviews -->
+        <div>
+
+          <!-- Customer Summary Card -->
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <div style="display:flex; align-items:center; gap:1em;">
+                <div class="admin-chip-avatar" style="width:48px; height:48px; font-size:1.1rem;" id="adminCustomerAvatar">CU</div>
+                <div>
+                  <h3 class="admin-card-title" id="adminCustomerDetailTitle" style="margin:0;">Customer Name</h3>
+                  <span style="font-size:.82rem; color:var(--admin-ink-soft);" id="adminCustomerDetailSub">Customer ID</span>
+                </div>
+              </div>
+
+              <span class="status-pill success" id="adminCustomerStatusPill">Active</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5em; font-size:.88rem;">
+              <div>
+                <h4 style="margin:0 0 .4em; font-size:.9rem; color:var(--admin-gold);">Contact Details</h4>
+                <p style="margin:0; color:var(--admin-ink-soft); line-height:1.6;">
+                  <strong>Email:</strong> <span id="adminCustomerEmail">email@example.com</span><br>
+                  <strong>Phone:</strong> <span id="adminCustomerPhone">+91 9876543210</span>
+                </p>
+              </div>
+
+              <div>
+                <h4 style="margin:0 0 .4em; font-size:.9rem; color:var(--admin-gold);">Saved Addresses</h4>
+                <div style="font-size:.84rem; color:var(--admin-ink-soft);" id="adminCustomerAddressBox">
+                  <!-- Injected dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customer Order History Table -->
+          <div class="admin-card" style="padding:0; overflow:hidden; margin-bottom:1.5em;">
+            <div class="admin-card-head" style="padding:1.2em 1.5em; margin:0;">
+              <h3 class="admin-card-title">Order History</h3>
+            </div>
+
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Date</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminCustomerOrdersTableBody">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Payment History Table -->
+          <div class="admin-card" style="padding:0; overflow:hidden; margin-bottom:1.5em;">
+            <div class="admin-card-head" style="padding:1.2em 1.5em; margin:0;">
+              <h3 class="admin-card-title">Payment Transaction History</h3>
+            </div>
+
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Payment ID</th>
+                  <th>Order #</th>
+                  <th>Method</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="adminCustomerPaymentsTableBody">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Cart & Wishlist Grid -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5em; margin-bottom:1.5em;">
+            
+            <div class="admin-card">
+              <div class="admin-card-head">
+                <h3 class="admin-card-title">Active Cart</h3>
+              </div>
+              <div id="adminCustomerCartBox" style="font-size:.86rem; color:var(--admin-ink-soft);">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <div class="admin-card-head">
+                <h3 class="admin-card-title">Saved Wishlist</h3>
+              </div>
+              <div id="adminCustomerWishlistBox" style="font-size:.86rem; color:var(--admin-ink-soft);">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Search History & Reviews Grid -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5em; margin-bottom:1.5em;">
+            
+            <div class="admin-card">
+              <div class="admin-card-head">
+                <h3 class="admin-card-title">Search Activity</h3>
+              </div>
+              <div id="adminCustomerSearchBox" style="font-size:.86rem; color:var(--admin-ink-soft);">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <div class="admin-card-head">
+                <h3 class="admin-card-title">Customer Reviews</h3>
+              </div>
+              <div id="adminCustomerReviewsBox" style="font-size:.86rem; color:var(--admin-ink-soft);">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Login Activity Audit Log -->
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <h3 class="admin-card-title">Recent Login Activity</h3>
+            </div>
+            <div id="adminCustomerLoginLogsBox" style="font-size:.86rem; color:var(--admin-ink-soft);">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Sidebar Column: Account Actions -->
+        <div>
+
+          <!-- Account Moderation Card -->
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <h3 class="admin-card-title">Account Controls</h3>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:1em;">
+              <p style="font-size:.84rem; color:var(--admin-ink-soft); margin:0;">
+                Block or unblock this customer's account. Blocked users cannot sign in or place new orders.
+              </p>
+
+              <button type="button" class="btn-admin-danger btn-block" id="toggleCustomerStatusBtn" style="height:44px;">Block Customer Account</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+<script src="../../js/api/api.js"></script>
+<script src="../../js/api/admin-api.js"></script>
+
+<!-- Admin Controllers -->
+<script src="../../js/admin/login.js"></script>
+<script src="../../js/admin/customers.js"></script>
+</body>
+</html>

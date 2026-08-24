@@ -1,0 +1,343 @@
+/* =========================================================
+   LIKSHORA — Customer Home Page Styles
+   Category grid, promotional banners, trending products section
+   ========================================================= */
+
+/* ---------- Categories Section ---------- */
+.categories-section {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1em 1.5em 1.2em;
+}
+.categories-section .section-head {
+  margin-bottom: 1.4em;
+}
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5em;
+}
+.category-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  border-radius: 999px;
+  overflow: hidden;
+  aspect-ratio: 3/4.2;
+  box-shadow: 0 6px 20px rgba(52,11,16,.1);
+  cursor: pointer;
+}
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s var(--ease);
+}
+.category-card:hover img {
+  transform: scale(1.06);
+}
+.category-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(52,11,16,.88) 0%, rgba(52,11,16,.2) 65%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 1.8em 1em 1.6em;
+  color: var(--sand);
+  transition: background .3s var(--ease);
+}
+.category-card:hover .category-overlay {
+  background: linear-gradient(0deg, rgba(52,11,16,.92) 0%, rgba(52,11,16,.35) 60%, transparent 100%);
+}
+.category-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 0 0 .2em;
+  color: var(--sand);
+}
+.category-count {
+  font-size: .78rem;
+  color: var(--gold);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ---------- Our Best Collection & Product Carousel Sections ---------- */
+.best-collection-section,
+.products-section {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1em 1.5em 2.5em;
+  position: relative;
+}
+.best-collection-section .section-head,
+.products-section .section-head {
+  margin-bottom: 1.4em;
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-track-container {
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0.5em 0.2em;
+}
+
+.carousel-track-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track {
+  display: flex !important;
+  grid-template-columns: none !important;
+  gap: 1.5em !important;
+}
+
+.carousel-track .product-card {
+  flex: 0 0 calc(25% - 1.125em) !important;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sand);
+  border: 1px solid var(--stone);
+  color: var(--ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(52, 11, 16, 0.15);
+  transition: all 0.25s var(--ease);
+}
+
+.carousel-nav:hover {
+  background: var(--ink);
+  color: var(--sand);
+  border-color: var(--ink);
+}
+
+.carousel-nav.prev {
+  left: -22px;
+}
+
+.carousel-nav.next {
+  right: -22px;
+}
+
+@media (max-width: 1100px) {
+  .carousel-track .product-card {
+    flex: 0 0 calc(33.333% - 1em) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .best-collection-section,
+  .products-section {
+    padding: 1.8em 1em 2.5em;
+  }
+  .carousel-track .product-card {
+    flex: 0 0 calc(50% - 0.75em) !important;
+  }
+  .carousel-nav.prev {
+    left: 2px;
+  }
+  .carousel-nav.next {
+    right: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-track .product-card {
+    flex: 0 0 calc(75% - 0.5em) !important;
+  }
+  .carousel-nav {
+    display: none;
+  }
+}
+
+/* ---------- Promotional Banner Section ---------- */
+.promo-banner-section {
+  max-width: 1320px;
+  margin: 2em auto 4em;
+  padding: 0 1.5em;
+}
+.promo-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(135deg, #420A10 0%, #442300 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--gold);
+  box-shadow: 0 16px 40px -12px rgba(52,11,16,.4);
+  color: var(--sand);
+}
+.promo-content {
+  padding: 3.5em 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.promo-content .eyebrow { color: var(--gold); }
+.promo-content h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  color: var(--sand);
+  line-height: 1.15;
+}
+.promo-content p {
+  color: rgba(248,245,238,.85);
+  font-size: .95rem;
+  margin-bottom: 1.8em;
+  max-width: 440px;
+}
+.promo-media {
+  position: relative;
+  min-height: 320px;
+}
+.promo-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Trending / Recommended Section ---------- */
+.trending-section {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2em 1.5em 4em;
+}
+.category-filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: .8em;
+  margin-bottom: 2em;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  background: var(--sand-deep);
+  border: 1px solid var(--stone);
+  color: var(--ink-soft);
+  padding: .6em 1.4em;
+  border-radius: 999px;
+  font-size: .8rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .25s var(--ease);
+}
+.tab-btn:hover,
+.tab-btn.active {
+  background: var(--ink);
+  color: var(--sand);
+  border-color: var(--ink);
+}
+
+/* ---------- Responsive Adjustments for Home ---------- */
+@media (max-width: 980px) {
+  .category-grid { grid-template-columns: repeat(2, 1fr); }
+  .promo-banner { grid-template-columns: 1fr; }
+  .promo-content { padding: 2.5em 2em; }
+  .promo-media { min-height: 250px; }
+}
+
+@media (max-width: 720px) {
+  .category-grid { grid-template-columns: 1fr 1fr; gap: 1em; }
+  .category-title { font-size: 1.05rem; }
+  .promo-content { padding: 2em 1.4em; }
+}
+
+/* ---------- Photoshoot Video Banner Section ---------- */
+.photoshoot-video-section {
+  max-width: 1320px;
+  margin: 2em auto;
+  padding: 0 1.5em;
+}
+
+.video-banner-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(52, 11, 16, 0.15);
+  border: 1px solid rgba(211, 184, 151, 0.3);
+  background: var(--ink);
+}
+
+.photoshoot-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.video-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(52,11,16,0.75) 0%, rgba(52,11,16,0.15) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5em 3em;
+  color: var(--sand);
+  pointer-events: none;
+}
+
+.video-banner-overlay .eyebrow {
+  color: var(--gold);
+  margin-bottom: 0.4em;
+}
+
+.video-banner-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--sand);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .photoshoot-video-section {
+    margin: 1.5em auto;
+    padding: 0 1em;
+  }
+  .video-banner-wrapper {
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+  }
+  .video-banner-overlay {
+    padding: 1.5em 1.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-banner-wrapper {
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+  }
+  .video-banner-overlay {
+    padding: 1.2em 1.2em;
+  }
+}

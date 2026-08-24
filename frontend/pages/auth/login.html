@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Log In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/authentication.css">
+</head>
+<body class="auth-page-body">
+
+<div class="auth-page-shell">
+
+
+
+  <!-- Form Side -->
+  <div class="auth-form-side">
+    <div class="auth-header">
+      <h1>Log in to LIKSHORA</h1>
+    </div>
+
+    <!-- Email Password Form -->
+    <form id="loginFormEmail" class="auth-form" novalidate>
+      <div class="auth-form-group">
+        <label class="auth-label">Email Address
+          <input type="email" id="loginEmail" class="auth-input" required placeholder="admin@rangvastra.com">
+        </label>
+
+        <label class="auth-label">Password
+          <div class="password-field-wrap">
+            <input type="password" id="loginPassword" class="auth-input" required placeholder="••••••••••••">
+            <button type="button" class="eye-toggle-btn" aria-label="Show password">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+        </label>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; margin-bottom:1.4em;">
+        <a href="forgot-password.html" class="auth-link-forgot">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block auth-btn-submit">LOG IN &rarr;</button>
+    </form>
+
+    <p class="auth-note" style="margin-top:1.5em; text-align:center; font-size:.9rem; color:#000000; font-weight:700; text-shadow:0 1px 2px rgba(255,255,255,0.85);">Don't have an account? <a href="signup.html" class="auth-link-terra">Create Account</a></p>
+    <p class="auth-note" style="text-align:center; font-size:.88rem; margin-top:.5em; text-shadow:0 1px 2px rgba(255,255,255,0.85);"><a href="../../index.html" class="auth-link-terra">&larr; Return to Storefront</a></p>
+  </div>
+
+</div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+<script src="../../js/api/api.js"></script>
+<script src="../../js/api/auth-api.js"></script>
+
+<!-- Login Controller -->
+<script src="../../js/auth/login.js"></script>
+</body>
+</html>

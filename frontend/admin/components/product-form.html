@@ -1,0 +1,90 @@
+<!-- Reusable Product Form Component -->
+<form id="productForm" class="auth-form" style="display:flex; flex-direction:column; gap:1.4em;">
+  
+  <div class="form-grid-2">
+    <label class="auth-label">Product Title / Name
+      <input type="text" id="prodName" class="auth-input" required placeholder="e.g. Rust Bell-Sleeve Printed Kurti">
+    </label>
+
+    <label class="auth-label">SKU (Stock Keeping Unit)
+      <input type="text" id="prodSKU" class="auth-input" required placeholder="e.g. AK01-RUST" style="text-transform:uppercase;">
+    </label>
+  </div>
+
+  <div class="form-grid-2">
+    <label class="auth-label">Category
+      <select id="prodCategory" class="auth-input">
+        <option value="kurtis">Printed Kurtis</option>
+        <option value="sets">Kurta Sets</option>
+        <option value="coords">Co-ord Sets</option>
+        <option value="festive">Festive Edit</option>
+      </select>
+    </label>
+
+    <label class="auth-label">Product Status
+      <select id="prodStatus" class="auth-input">
+        <option value="Active">Active (Visible in Store)</option>
+        <option value="Draft">Draft (Hidden)</option>
+        <option value="Out of Stock">Out of Stock</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-grid-2">
+    <label class="auth-label">Selling Price (₹)
+      <input type="number" id="prodPrice" class="auth-input" required min="0" placeholder="e.g. 2299">
+    </label>
+
+    <label class="auth-label">List Price / MRP (₹)
+      <input type="number" id="prodWasPrice" class="auth-input" min="0" placeholder="e.g. 2799 (Leave blank if no discount)">
+    </label>
+  </div>
+
+  <div class="form-grid-2">
+    <label class="auth-label">Stock Quantity
+      <input type="number" id="prodStock" class="auth-input" required min="0" placeholder="e.g. 15">
+    </label>
+
+    <label class="auth-label">Product Image
+      <select id="prodImagePreset" class="auth-input">
+        <option value="../../assets/images/products/product-kurti-1.jpg">Rust Printed Kurti Image 1</option>
+        <option value="../../assets/images/products/product-kurti-2.jpg">Maroon Paisley Image 2</option>
+        <option value="../../assets/images/products/product-kurti-3.jpg">Black Cami Image 3</option>
+        <option value="../../assets/images/products/product-kurti-4.jpg">Black Bell-Sleeve Image 4</option>
+        <option value="../../assets/images/products/product-kurti-5.jpg">Black Gold Set Image 5</option>
+      </select>
+    </label>
+  </div>
+
+  <label class="auth-label">Product Description
+    <textarea id="prodDescription" class="auth-input" rows="4" placeholder="Describe the fabric composition, sleeve fit, occasion suitability..." style="font-family:var(--font-body);"></textarea>
+  </label>
+
+  <!-- Size Variants Selection Pills -->
+  <div style="display:flex; flex-direction:column; gap:.5em;">
+    <span class="auth-label">Available Size Variants</span>
+    <div style="display:flex; gap:.6em; flex-wrap:wrap;">
+      <label class="size-pill selected" style="cursor:pointer;">
+        <input type="checkbox" name="prodSizes" value="S" checked style="margin-right:4px;"> S
+      </label>
+      <label class="size-pill selected" style="cursor:pointer;">
+        <input type="checkbox" name="prodSizes" value="M" checked style="margin-right:4px;"> M
+      </label>
+      <label class="size-pill selected" style="cursor:pointer;">
+        <input type="checkbox" name="prodSizes" value="L" checked style="margin-right:4px;"> L
+      </label>
+      <label class="size-pill selected" style="cursor:pointer;">
+        <input type="checkbox" name="prodSizes" value="XL" checked style="margin-right:4px;"> XL
+      </label>
+      <label class="size-pill selected" style="cursor:pointer;">
+        <input type="checkbox" name="prodSizes" value="XXL" checked style="margin-right:4px;"> XXL
+      </label>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:1em; margin-top:1em;">
+    <button type="submit" class="btn-admin-primary" style="height:46px; font-size:.9rem;" id="saveProductFormBtn">Save Product &rarr;</button>
+    <a href="products.html" class="btn-admin-secondary" style="height:46px; display:inline-flex; align-items:center; text-decoration:none;">Cancel</a>
+  </div>
+
+</form>

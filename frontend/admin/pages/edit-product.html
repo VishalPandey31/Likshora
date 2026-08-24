@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Edit Product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/authentication.css">
+<link rel="stylesheet" href="../../css/products.css">
+<link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body>
+
+<div class="admin-app-shell">
+
+  <!-- REUSABLE SIDEBAR COMPONENT -->
+  <aside class="admin-sidebar">
+    <div>
+      <div class="admin-brand">
+        <img src="../../assets/images/website/logo-icon.png" alt="Likshora Icon" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover;">
+        <div>
+          <h3 class="admin-brand-title">LIKSHORA</h3>
+          <span class="admin-brand-sub">Admin Portal</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav-menu">
+        <li class="admin-nav-item"><a href="dashboard.html"><span>📊</span> Dashboard Overview</a></li>
+        <li class="admin-nav-item active"><a href="products.html"><span>🛍️</span> Products Catalog</a></li>
+        <li class="admin-nav-item"><a href="inventory.html"><span>📦</span> Inventory &amp; Stock</a></li>
+        <li class="admin-nav-item"><a href="orders.html"><span>📦</span> Orders &amp; Fulfillment</a></li>
+        <li class="admin-nav-item"><a href="shipping.html"><span>🚚</span> Shipping &amp; Logistics</a></li>
+        <li class="admin-nav-item"><a href="categories.html"><span>🏷️</span> Categories &amp; Collections</a></li>
+        <li class="admin-nav-item"><a href="customers.html"><span>👥</span> Customer Records</a></li>
+        <li class="admin-nav-item"><a href="payments.html"><span>💳</span> Payment Logs</a></li>
+        <li class="admin-nav-item"><a href="website-content.html"><span>🌐</span> Website Content</a></li>
+        <li class="admin-nav-item"><a href="settings.html"><span>⚙️</span> Portal Settings</a></li>
+      </ul>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,.08); padding-top:1em;">
+      <a href="#" class="admin-nav-item admin-logout-trigger" style="color:var(--admin-danger); display:flex; align-items:center; gap:.8em; text-decoration:none; padding:.8em 1em; font-size:.88rem; font-weight:600;">
+        <span>➔</span> Sign Out
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN RIGHT CONTAINER -->
+  <div style="display:flex; flex-direction:column; min-width:0;">
+
+    <!-- REUSABLE HEADER COMPONENT -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <h2 class="admin-header-title" id="formPageTitle">Edit Product</h2>
+      </div>
+
+      <div class="admin-header-right">
+        <a href="products.html" class="btn-admin-secondary" style="text-decoration:none;">&larr; Back to Catalog</a>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="admin-main-content">
+
+      <div class="admin-card" style="max-width:860px; margin:0 auto;">
+        <div class="admin-card-head">
+          <h3 class="admin-card-title">Modify Product Information</h3>
+          <span class="status-pill success">Edit Mode</span>
+        </div>
+
+        <!-- EMBEDDED REUSABLE PRODUCT FORM COMPONENT -->
+        <form id="productForm" class="auth-form" style="display:flex; flex-direction:column; gap:1.4em;">
+          
+          <div class="form-grid-2">
+            <label class="auth-label">Product Title / Name
+              <input type="text" id="prodName" class="auth-input" required placeholder="e.g. Rust Bell-Sleeve Printed Kurti">
+            </label>
+
+            <label class="auth-label">SKU (Stock Keeping Unit)
+              <input type="text" id="prodSKU" class="auth-input" required placeholder="e.g. AK01-RUST" style="text-transform:uppercase;">
+            </label>
+          </div>
+
+          <div class="form-grid-2">
+            <label class="auth-label">Category
+              <select id="prodCategory" class="auth-input">
+                <option value="kurtis">Printed Kurtis</option>
+                <option value="sets">Kurta Sets</option>
+                <option value="coords">Co-ord Sets</option>
+                <option value="festive">Festive Edit</option>
+              </select>
+            </label>
+
+            <label class="auth-label">Product Status
+              <select id="prodStatus" class="auth-input">
+                <option value="Active">Active (Visible in Store)</option>
+                <option value="Draft">Draft (Hidden)</option>
+                <option value="Out of Stock">Out of Stock</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-grid-2">
+            <label class="auth-label">Selling Price (₹)
+              <input type="number" id="prodPrice" class="auth-input" required min="0" placeholder="e.g. 2299">
+            </label>
+
+            <label class="auth-label">List Price / MRP (₹)
+              <input type="number" id="prodWasPrice" class="auth-input" min="0" placeholder="e.g. 2799 (Leave blank if no discount)">
+            </label>
+          </div>
+
+          <div class="form-grid-2">
+            <label class="auth-label">Stock Quantity
+              <input type="number" id="prodStock" class="auth-input" required min="0" placeholder="e.g. 15">
+            </label>
+          </div>
+
+          <!-- MULTIPLE PRODUCT IMAGE URL MANAGER -->
+          <div class="admin-image-section">
+            <div class="admin-image-section-header">
+              <div>
+                <h4 class="admin-image-section-title">Product Images &amp; Image URLs</h4>
+                <p style="margin:2px 0 0 0; font-size:.78rem; color:var(--admin-ink-soft);">Browse an image file directly from your computer or enter a web URL / asset path.</p>
+              </div>
+            </div>
+
+            <div id="productImageList" class="admin-image-list">
+              <!-- Dynamic Image URL cards will be populated by products.js -->
+            </div>
+
+            <button type="button" id="addImageUrlBtn" class="btn-add-image-url">
+              <span>➕</span> Add Another Image URL
+            </button>
+          </div>
+
+          <label class="auth-label">Product Description
+            <textarea id="prodDescription" class="auth-input" rows="4" placeholder="Describe the fabric composition, sleeve fit, occasion suitability..." style="font-family:var(--font-body);"></textarea>
+          </label>
+
+          <!-- Size Variants Selection Pills -->
+          <div style="display:flex; flex-direction:column; gap:.5em;">
+            <span class="auth-label">Available Size Variants</span>
+            <div style="display:flex; gap:.6em; flex-wrap:wrap;">
+              <label class="size-pill selected" style="cursor:pointer;">
+                <input type="checkbox" name="prodSizes" value="S" checked style="margin-right:4px;"> S
+              </label>
+              <label class="size-pill selected" style="cursor:pointer;">
+                <input type="checkbox" name="prodSizes" value="M" checked style="margin-right:4px;"> M
+              </label>
+              <label class="size-pill selected" style="cursor:pointer;">
+                <input type="checkbox" name="prodSizes" value="L" checked style="margin-right:4px;"> L
+              </label>
+              <label class="size-pill selected" style="cursor:pointer;">
+                <input type="checkbox" name="prodSizes" value="XL" checked style="margin-right:4px;"> XL
+              </label>
+              <label class="size-pill selected" style="cursor:pointer;">
+                <input type="checkbox" name="prodSizes" value="XXL" checked style="margin-right:4px;"> XXL
+              </label>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1em; margin-top:1em;">
+            <button type="submit" class="btn-admin-primary" style="height:46px; font-size:.9rem;" id="saveProductFormBtn">Save Product Changes &rarr;</button>
+            <a href="products.html" class="btn-admin-secondary" style="height:46px; display:inline-flex; align-items:center; text-decoration:none;">Cancel</a>
+          </div>
+
+        </form>
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+
+<!-- Admin Controllers -->
+<script src="../../js/admin/login.js"></script>
+<script src="../../js/admin/products.js"></script>
+</body>
+</html>
+

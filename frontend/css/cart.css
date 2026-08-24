@@ -1,0 +1,341 @@
+/* =========================================================
+   LIKSHORA — Dedicated Cart & Wishlist Styles
+   Cart table, quantity controls, summary card & wishlist grids
+   ========================================================= */
+
+/* ---------- Cart Page Layout ---------- */
+.cart-page-layout {
+  max-width: 1320px;
+  margin: 1.5em auto 4em;
+  padding: 0 1.5em;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2.5em;
+}
+
+.cart-header {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1.5em 1.5em 0;
+}
+.cart-header h1 {
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  margin-bottom: .2em;
+}
+
+/* ---------- Cart Items Table / List ---------- */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(52,11,16,.04);
+}
+.cart-table th {
+  text-align: left;
+  font-size: .76rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: var(--sand-deep);
+  padding: 1.1em 1.2em;
+  border-bottom: 1px solid var(--stone);
+}
+.cart-table td {
+  padding: 1.2em;
+  border-bottom: 1px solid rgba(52,11,16,.08);
+  vertical-align: middle;
+}
+.cart-table tr:last-child td {
+  border-bottom: none;
+}
+
+.cart-item-info {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+}
+.cart-item-thumb {
+  width: 70px;
+  aspect-ratio: 3/4;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--sand-deep);
+  flex-shrink: 0;
+}
+.cart-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cart-item-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--ink);
+  margin: 0 0 .2em;
+}
+.cart-item-variant {
+  font-size: .78rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.cart-qty-wrap {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+}
+.cart-qty-wrap .qty-btn {
+  width: 30px;
+  height: 32px;
+  background: none;
+  border: none;
+  font-size: .95rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+.cart-qty-wrap .qty-btn:hover {
+  background: var(--sand-deep);
+}
+.cart-qty-wrap .qty-val {
+  width: 32px;
+  text-align: center;
+  font-size: .88rem;
+  font-weight: 600;
+}
+
+.cart-remove-btn {
+  background: none;
+  border: none;
+  color: var(--rust);
+  font-size: .78rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: .4em;
+  transition: color .2s var(--ease);
+}
+.cart-remove-btn:hover {
+  color: var(--rose);
+  text-decoration: underline;
+}
+
+/* ---------- Order Summary Sidebar Card ---------- */
+.order-summary-card {
+  background: var(--white);
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-md);
+  padding: 1.8em;
+  box-shadow: 0 4px 14px rgba(52,11,16,.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  height: fit-content;
+  position: sticky;
+  top: 6em;
+}
+.order-summary-card h3 {
+  font-size: 1.25rem;
+  margin: 0;
+  border-bottom: 1px solid rgba(52,11,16,.1);
+  padding-bottom: .8em;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .9rem;
+  color: var(--ink-soft);
+}
+.summary-row.total-row {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--ink);
+  font-weight: 600;
+  padding-top: .4em;
+  border-top: 1px dashed var(--stone);
+}
+.summary-row.total-row span:last-child {
+  color: var(--gold);
+}
+
+.promo-code-box {
+  display: flex;
+  gap: .5em;
+}
+.promo-code-box input {
+  flex: 1;
+  padding: .75em .9em;
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: .84rem;
+  color: var(--ink);
+}
+.promo-code-box input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.cart-continue-link {
+  display: block;
+  text-align: center;
+  font-size: .82rem;
+  color: var(--ink-soft);
+  margin-top: .6em;
+  text-decoration: underline;
+}
+.cart-continue-link:hover {
+  color: var(--ink);
+}
+
+/* ---------- Empty State Cards ---------- */
+.empty-notice-card {
+  text-align: center;
+  padding: 5em 2em;
+  background: var(--sand-deep);
+  border: 1px dashed var(--stone);
+  border-radius: var(--radius-md);
+  margin: 2em auto 4em;
+  max-width: 600px;
+}
+.empty-notice-card h2 {
+  font-size: 1.6rem;
+  color: var(--ink);
+}
+.empty-notice-card p {
+  color: var(--ink-soft);
+  font-size: .95rem;
+  margin-bottom: 1.8em;
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 980px) {
+  .cart-page-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 2em !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .cart-items-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .cart-summary-col,
+  .order-summary-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    position: static !important;
+    float: none !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .cart-header {
+    padding: 1.2em 1em 0;
+  }
+  .cart-header h1 {
+    font-size: 1.8rem;
+  }
+  .cart-page-layout {
+    gap: 1.5em !important;
+    padding: 0 1em !important;
+    margin: 1em auto 3em !important;
+  }
+  .order-summary-card {
+    padding: 1.4em 1.2em;
+  }
+}
+
+/* Mobile Responsive Card Transformation for Cart Items (< 640px) */
+@media (max-width: 640px) {
+  .cart-page-layout {
+    padding: 0 .8em !important;
+    gap: 1.2em !important;
+  }
+  
+  .cart-table,
+  .cart-table tbody,
+  .cart-table tr {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .cart-table thead {
+    display: none !important;
+  }
+
+  .cart-table {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .cart-table tr {
+    background: var(--white) !important;
+    border: 1px solid var(--stone) !important;
+    border-radius: var(--radius-md, 12px) !important;
+    padding: 1.1em 1em !important;
+    margin-bottom: 1em !important;
+    box-shadow: 0 4px 14px rgba(52,11,16,.04) !important;
+    position: relative !important;
+  }
+
+  .cart-table td {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  .cart-table td:nth-child(2) {
+    display: none !important;
+  }
+
+  .cart-table td:nth-child(1) {
+    margin-bottom: 1em !important;
+    padding-right: 2.5em !important;
+  }
+
+  .cart-table tr::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .cart-table td:nth-child(3) {
+    float: left !important;
+    width: auto !important;
+  }
+
+  .cart-table td:nth-child(4) {
+    float: right !important;
+    width: auto !important;
+    font-size: .98rem !important;
+    font-weight: 600 !important;
+    line-height: 28px !important;
+  }
+
+  .cart-table td:nth-child(5) {
+    position: absolute !important;
+    top: .9em !important;
+    right: .9em !important;
+    width: auto !important;
+  }
+
+  .order-summary-card {
+    padding: 1.2em 1em;
+  }
+}

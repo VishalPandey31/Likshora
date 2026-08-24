@@ -1,0 +1,1844 @@
+{
+  "info": {
+    "name": "Likshora D2C E-Commerce Backend API Collection",
+    "_postman_id": "likshora-api-v1-phase16",
+    "description": "Complete, production-ready Postman collection for all 45 Likshora Flask D2C E-Commerce backend API endpoints organized into 15 modules.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://127.0.0.1:5000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "CUSTOMER_TOKEN",
+      "value": "YOUR_CUSTOMER_JWT_HERE",
+      "type": "string"
+    },
+    {
+      "key": "CUSTOMER_B_TOKEN",
+      "value": "YOUR_CUSTOMER_B_JWT_HERE",
+      "type": "string"
+    },
+    {
+      "key": "ADMIN_TOKEN",
+      "value": "YOUR_ADMIN_JWT_HERE",
+      "type": "string"
+    },
+    {
+      "key": "PRODUCT_ID",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "CATEGORY_ID",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "ORDER_ID",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "ADDRESS_ID",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "COUPON_CODE",
+      "value": "SAVE10",
+      "type": "string"
+    },
+    {
+      "key": "RAZORPAY_ORDER_ID",
+      "value": "order_mock_123456",
+      "type": "string"
+    },
+    {
+      "key": "RAZORPAY_PAYMENT_ID",
+      "value": "pay_mock_123456",
+      "type": "string"
+    },
+    {
+      "key": "SHIPMENT_ID",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "AWB",
+      "value": "AWB-SR-800001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Authentication",
+      "item": [
+        {
+          "name": "POST Signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newcustomer@example.com\",\n  \"password\": \"Password123!\",\n  \"name\": \"New Customer\",\n  \"phone\": \"9876543210\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/signup",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"customer@example.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/login",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/auth/logout",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Auth Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/auth/me",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"customer@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/reset-password",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/profile",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "profile"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Profile Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Customer Name\",\n  \"phone\": \"9998887776\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/profile",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "profile"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Categories",
+      "item": [
+        {
+          "name": "GET All Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_URL}}/categories",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Category Detail",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_URL}}/categories/{{CATEGORY_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "categories",
+                "{{CATEGORY_ID}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Admin Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Footwear\",\n  \"slug\": \"footwear\",\n  \"description\": \"Shoes and Footwear\",\n  \"is_active\": true\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/categories",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Admin Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Premium Footwear\",\n  \"description\": \"Updated Shoes Collection\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/categories/{{CATEGORY_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "categories",
+                "{{CATEGORY_ID}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Admin Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/categories/{{CATEGORY_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "categories",
+                "{{CATEGORY_ID}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Products",
+      "item": [
+        {
+          "name": "GET All Products (Search & Filter)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_URL}}/products?category_id={{CATEGORY_ID}}&search=earbuds&min_price=100&max_price=5000&sort_by=price_asc&page=1&per_page=10",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "category_id",
+                  "value": "{{CATEGORY_ID}}"
+                },
+                {
+                  "key": "search",
+                  "value": "earbuds"
+                },
+                {
+                  "key": "min_price",
+                  "value": "100"
+                },
+                {
+                  "key": "max_price",
+                  "value": "5000"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "price_asc"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Product Detail",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_URL}}/products/{{PRODUCT_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "products",
+                "{{PRODUCT_ID}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Admin Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Running Shoes\",\n  \"slug\": \"running-shoes\",\n  \"sku\": \"SHOE-RUN-001\",\n  \"price\": 3499.0,\n  \"stock_quantity\": 25,\n  \"category_id\": 1,\n  \"description\": \"Comfortable running shoes\",\n  \"is_featured\": true,\n  \"is_trending\": true\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/products",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "products"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Admin Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Pro Running Shoes\",\n  \"price\": 3999.0\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/products/{{PRODUCT_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "products",
+                "{{PRODUCT_ID}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PATCH Admin Stock Update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stock_quantity\": 50\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/products/{{PRODUCT_ID}}/stock",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "products",
+                "{{PRODUCT_ID}}",
+                "stock"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Admin Add Product Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image_url\": \"https://example.com/images/shoe1.jpg\",\n  \"is_primary\": true\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/products/{{PRODUCT_ID}}/images",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "products",
+                "{{PRODUCT_ID}}",
+                "images"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Admin Product Image",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/products/{{PRODUCT_ID}}/images/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "products",
+                "{{PRODUCT_ID}}",
+                "images",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Admin Product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/products/{{PRODUCT_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "products",
+                "{{PRODUCT_ID}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Cart",
+      "item": [
+        {
+          "name": "GET User Cart",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/cart",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "cart"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Add Item to Cart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": 1,\n  \"quantity\": 2\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/cart",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "cart"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Update Cart Item Quantity",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 3\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/cart/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "cart",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Remove Cart Item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/cart/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "cart",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Clear Cart",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/cart",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "cart"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Wishlist",
+      "item": [
+        {
+          "name": "GET User Wishlist",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/wishlist",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "wishlist"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Add Item to Wishlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/wishlist",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "wishlist"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Check Wishlist Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/wishlist/check/{{PRODUCT_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "wishlist",
+                "check",
+                "{{PRODUCT_ID}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Move Wishlist Item to Cart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/wishlist/1/move-to-cart",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "wishlist",
+                "1",
+                "move-to-cart"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Remove Item from Wishlist",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/wishlist/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "wishlist",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 Address",
+      "item": [
+        {
+          "name": "GET User Addresses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/addresses",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "addresses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Add Address",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Customer Name\",\n  \"phone\": \"9876543210\",\n  \"address_line1\": \"100 MG Road\",\n  \"city\": \"Bengaluru\",\n  \"state\": \"Karnataka\",\n  \"postal_code\": \"560001\",\n  \"country\": \"India\",\n  \"is_default\": true\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/addresses",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "addresses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Address Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/addresses/{{ADDRESS_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "addresses",
+                "{{ADDRESS_ID}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Update Address",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address_line1\": \"105 MG Road, Suite 2B\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/addresses/{{ADDRESS_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "addresses",
+                "{{ADDRESS_ID}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Set Default Address",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/addresses/{{ADDRESS_ID}}/default",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "addresses",
+                "{{ADDRESS_ID}}",
+                "default"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Address",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/addresses/{{ADDRESS_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "addresses",
+                "{{ADDRESS_ID}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 Orders",
+      "item": [
+        {
+          "name": "POST Create Order (Online/COD)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address_id\": 1,\n  \"payment_method\": \"online\",\n  \"coupon_code\": \"SAVE10\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/orders",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET User Order History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/orders?page=1&per_page=10",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Order Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/orders/{{ORDER_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders",
+                "{{ORDER_ID}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Cancel Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Changed my mind\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/orders/{{ORDER_ID}}/cancel",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders",
+                "{{ORDER_ID}}",
+                "cancel"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Customer Order Tracking",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/orders/{{ORDER_ID}}/tracking",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders",
+                "{{ORDER_ID}}",
+                "tracking"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 Coupons",
+      "item": [
+        {
+          "name": "POST Validate Coupon",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"SAVE10\",\n  \"order_amount\": 2500.0\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/coupons/validate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "coupons",
+                "validate"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 Admin",
+      "item": [
+        {
+          "name": "GET Admin Dashboard Overview",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/dashboard",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Admin Orders List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/orders?page=1&per_page=10",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "orders"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Admin Order Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/orders/{{ORDER_ID}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "orders",
+                "{{ORDER_ID}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PATCH Admin Update Order Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"confirmed\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/admin/orders/{{ORDER_ID}}/status",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "orders",
+                "{{ORDER_ID}}",
+                "status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PATCH Admin Confirm COD Collection",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payment_status\": \"paid\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/admin/orders/{{ORDER_ID}}/cod-payment",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "orders",
+                "{{ORDER_ID}}",
+                "cod-payment"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Admin Customers List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/customers?page=1&per_page=10",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "customers"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Admin Customer Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/customers/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "customers",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Admin Customer Orders History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/customers/1/orders",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "customers",
+                "1",
+                "orders"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Admin Low Stock Alerts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/products/low-stock?threshold=5",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "products",
+                "low-stock"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 COD",
+      "item": [
+        {
+          "name": "POST Create COD Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address_id\": 1,\n  \"payment_method\": \"cod\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/orders",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PATCH Admin Collect COD Payment",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payment_status\": \"paid\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/admin/orders/{{ORDER_ID}}/cod-payment",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "orders",
+                "{{ORDER_ID}}",
+                "cod-payment"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 Razorpay",
+      "item": [
+        {
+          "name": "POST Create Razorpay Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/payments/razorpay/create-order",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "payments",
+                "razorpay",
+                "create-order"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Verify Razorpay Payment Signature",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"razorpay_order_id\": \"{{RAZORPAY_ORDER_ID}}\",\n  \"razorpay_payment_id\": \"{{RAZORPAY_PAYMENT_ID}}\",\n  \"razorpay_signature\": \"mock_signature_hex\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/payments/razorpay/verify",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "payments",
+                "razorpay",
+                "verify"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Payment Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/payments/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "payments",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 Razorpay Webhooks",
+      "item": [
+        {
+          "name": "POST Razorpay Webhook (payment.captured)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Razorpay-Signature",
+                "value": "HMAC_SHA256_HEX_SIGNATURE"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"evt_captured_001\",\n  \"event\": \"payment.captured\",\n  \"payload\": {\n    \"payment\": {\n      \"entity\": {\n        \"id\": \"pay_test_001\",\n        \"order_id\": \"{{RAZORPAY_ORDER_ID}}\",\n        \"status\": \"captured\",\n        \"amount\": 269900\n      }\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/payments/razorpay/webhook",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "payments",
+                "razorpay",
+                "webhook"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Razorpay Webhook Root Alias",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Razorpay-Signature",
+                "value": "HMAC_SHA256_HEX_SIGNATURE"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"evt_002\",\n  \"event\": \"order.paid\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/payments/razorpay/webhook",
+              "host": [
+                "http://127.0.0.1:5000"
+              ],
+              "path": [
+                "payments",
+                "razorpay",
+                "webhook"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 Shiprocket",
+      "item": [
+        {
+          "name": "POST Admin Create Shipment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": 1,\n  \"length\": 10,\n  \"width\": 10,\n  \"height\": 5,\n  \"weight\": 0.5\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/shipments/create",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "shipments",
+                "create"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Admin Sync Shipment Tracking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/shipments/{{SHIPMENT_ID}}/tracking/sync",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "shipments",
+                "{{SHIPMENT_ID}}",
+                "tracking",
+                "sync"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Shiprocket Status Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Api-Key",
+                "value": "mock_shiprocket_webhook_token"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": \"evt_sr_001\",\n  \"awb\": \"{{AWB}}\",\n  \"current_status\": \"DELIVERED\",\n  \"courier_name\": \"Delhivery Direct\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/shipments/shiprocket/webhook",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "shipments",
+                "shiprocket",
+                "webhook"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "14 Tracking",
+      "item": [
+        {
+          "name": "GET Shipment Tracking Timeline",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/shipments/{{SHIPMENT_ID}}/tracking",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "shipments",
+                "{{SHIPMENT_ID}}",
+                "tracking"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Order Tracking Timeline",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/orders/{{ORDER_ID}}/tracking",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders",
+                "{{ORDER_ID}}",
+                "tracking"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "15 Security & System Health",
+      "item": [
+        {
+          "name": "GET System Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_URL}}/health",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET DB Connection Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_URL}}/health/db",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "health",
+                "db"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET IDOR Security Check (Other Customer Order)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_B_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/orders/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Customer Accessing Admin API (Forbidden Check)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{CUSTOMER_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/dashboard",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

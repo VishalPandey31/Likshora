@@ -1,0 +1,45 @@
+/* =========================================================
+   LIKSHORA — CSS Variables & Design Tokens
+   Extracted from Reference Design (Source of Truth)
+   ========================================================= */
+
+:root {
+  /* Brand Color Tokens */
+  --ink: #442300;          /* Deep Burgundy Maroon (Header logo & brand primary) */
+  --ink-soft: #7A222B;     /* Rich Wine Maroon */
+  --ink-dark: #420A10;     /* Deep Shadow Maroon */
+  --sand: #FBF8F3;         /* Soft Ivory / Cream Off-White */
+  --sand-deep: #FAF6F0;    /* Warm Alabaster / Beige (Cards & footer background) */
+  --stone: #E5D5C5;        /* Soft Warm Tan border */
+  --brass: #C89B3C;        /* Rich Zari Gold Accent */
+  --gold: #C89B3C;         /* Rich Zari Gold Accent */
+  --gold-hover: #8A5A3B;   /* Gold Hover Accent */
+  --rust: #A84E33;         /* Burnt Terracotta / Rust */
+  --rose: #823324;         /* Rich Chestnut */
+  --leaf: #442300;         /* Deep Burgundy Wine */
+  --indigo: #442300;       /* Deep Burgundy Accent */
+  --indigo-deep: #420A10;  /* Deepest Dark Maroon */
+  --clay: #A84E33;         /* Burnt Terracotta */
+  --white: #FFFFFF;
+
+  /* Admin & System Feedback Tokens */
+  --danger: #A3312A;
+  --success: #3C7A4B;
+  --warn: #B5892F;
+
+  /* Typography Tokens */
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Work Sans', sans-serif;
+
+  /* Spacing & Radii Tokens */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Admin & Global Responsive Table & Graph Tokens */
+  --dashboard-table-min-width: 650px;
+  --table-min-width: 650px;
+  --graph-min-width: 500px;
+
+  /* Animation Easing Tokens */
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}

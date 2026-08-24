@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body>
+
+<div class="admin-app-shell">
+
+  <!-- REUSABLE SIDEBAR COMPONENT -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div>
+      <div class="admin-brand">
+        <img src="../../assets/images/website/logo-icon.png" alt="Likshora Icon" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover;">
+        <div>
+          <h3 class="admin-brand-title">LIKSHORA</h3>
+          <span class="admin-brand-sub">Admin Portal</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav-menu">
+        <li class="admin-nav-item active"><a href="dashboard.html"><span>📊</span> Dashboard Overview</a></li>
+        <li class="admin-nav-item"><a href="products.html"><span>🛍️</span> Products Catalog</a></li>
+        <li class="admin-nav-item"><a href="inventory.html"><span>📦</span> Inventory &amp; Stock</a></li>
+        <li class="admin-nav-item"><a href="orders.html"><span>📦</span> Orders &amp; Fulfillment</a></li>
+        <li class="admin-nav-item"><a href="shipping.html"><span>🚚</span> Shipping &amp; Logistics</a></li>
+        <li class="admin-nav-item"><a href="categories.html"><span>🏷️</span> Categories &amp; Collections</a></li>
+        <li class="admin-nav-item"><a href="customers.html"><span>👥</span> Customer Records</a></li>
+        <li class="admin-nav-item"><a href="payments.html"><span>💳</span> Payment Logs</a></li>
+        <li class="admin-nav-item"><a href="website-content.html"><span>🌐</span> Website Content</a></li>
+        <li class="admin-nav-item"><a href="settings.html"><span>⚙️</span> Portal Settings</a></li>
+      </ul>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,.08); padding-top:1em;">
+      <a href="#" class="admin-nav-item admin-logout-trigger" style="color:var(--admin-danger); display:flex; align-items:center; gap:.8em; text-decoration:none; padding:.8em 1em; font-size:.88rem; font-weight:600;">
+        <span>➔</span> Sign Out
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN RIGHT CONTAINER -->
+  <div style="display:flex; flex-direction:column; min-width:0; width:100%; flex:1;">
+
+    <!-- REUSABLE HEADER COMPONENT -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <button type="button" class="admin-menu-toggle" id="adminMenuToggle" aria-label="Toggle Sidebar Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <h2 class="admin-header-title" id="adminHeaderTitle">Dashboard Overview</h2>
+      </div>
+
+      <div class="admin-header-right">
+        <button class="icon-btn" aria-label="Notifications" style="position:relative;">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span style="position:absolute; top:2px; right:2px; width:8px; height:8px; border-radius:50%; background:var(--rust);"></span>
+        </button>
+
+        <div class="admin-profile-chip">
+          <div class="admin-chip-avatar" id="adminHeaderAvatar">AD</div>
+          <span style="font-size:.84rem; font-weight:600;" id="adminHeaderName">Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="admin-main-content">
+
+      <!-- 4 Key Metrics Cards Grid -->
+      <div class="admin-metrics-grid">
+        <div class="admin-metric-card">
+          <span class="metric-label">Total Revenue</span>
+          <span class="metric-value" id="metricTotalRevenue">₹0</span>
+          <span class="metric-change" id="metricRevenueChange"></span>
+        </div>
+        <div class="admin-metric-card">
+          <span class="metric-label">Total Orders</span>
+          <span class="metric-value" id="metricTotalOrders">0</span>
+          <span class="metric-change" id="metricOrdersChange"></span>
+        </div>
+        <div class="admin-metric-card">
+          <span class="metric-label">Total Customers</span>
+          <span class="metric-value" id="metricTotalCustomers">0</span>
+          <span class="metric-change" id="metricCustomersChange"></span>
+        </div>
+        <div class="admin-metric-card">
+          <span class="metric-label">Active Products</span>
+          <span class="metric-value" id="metricTotalProducts">0</span>
+          <span class="metric-change" id="metricProductsChange"></span>
+        </div>
+      </div>
+
+      <!-- 2-Column Dashboard Grid -->
+      <div class="dashboard-layout-grid" style="display:grid; grid-template-columns: 1fr 340px; gap:1.8em;">
+
+        <!-- Left Main Column: Bar Chart & Recent Orders -->
+        <div>
+
+          <!-- Revenue Trend Pure CSS Bar Chart -->
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <h3 class="admin-card-title">Monthly Revenue Trend</h3>
+              <span class="status-pill success">Live Stats</span>
+            </div>
+            <div class="dashboard-slider-box">
+              <div class="bar-chart-container" id="revenueBarChartWrap">
+                <!-- Injected by dashboard.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Customer Logins Analytics & Activity Graph Card -->
+          <div class="admin-card">
+            <div class="admin-card-head" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.8em;">
+              <div>
+                <h3 class="admin-card-title">👥 Customer Logins Activity Graph</h3>
+                <p style="font-size:.82rem; color:var(--admin-ink-soft); margin:.2em 0 0;">Real-time tracking of customer logins on the main website</p>
+              </div>
+              <div style="display:flex; gap:.6em; align-items:center; flex-wrap:wrap;">
+                <span class="status-pill success" id="loginLiveBadge">● Live System Active</span>
+                <span style="font-size:.84rem; font-weight:600; color:var(--admin-gold);" id="totalLoginsCount">0 Total Logins</span>
+              </div>
+            </div>
+
+            <!-- Customer Logins Bar & Trend Graph -->
+            <div class="dashboard-slider-box" style="margin:1.2em 0; background:rgba(0,0,0,.15); padding:1.2em; border-radius:8px; border:1px solid rgba(255,255,255,.05);">
+              <div style="display:flex; justify-content:space-between; align-items:flex-end; height:180px; gap:12px;" id="loginBarChartWrap">
+                <!-- Injected by dashboard.js -->
+              </div>
+            </div>
+
+            <!-- Recent Customer Login Records Table -->
+            <div style="margin-top:1.2em;">
+              <h4 style="font-size:.9rem; margin-bottom:.8em; color:var(--admin-ink);">Recent Customer Login Activity</h4>
+              <div class="dashboard-table-scroll-wrap">
+                <table class="admin-table" style="font-size:.84rem; min-width:650px;">
+                  <thead>
+                    <tr>
+                      <th>Customer Name</th>
+                      <th>Email Address</th>
+                      <th>Login Time</th>
+                      <th>Day</th>
+                      <th style="text-align:right;">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminCustomerLoginsTable">
+                    <!-- Injected by dashboard.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders Data Table -->
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <h3 class="admin-card-title">Recent Orders</h3>
+              <a href="#" style="font-size:.84rem; color:var(--admin-gold); text-decoration:none; font-weight:600;">View All Orders &rarr;</a>
+            </div>
+
+            <div class="dashboard-table-scroll-wrap">
+              <table class="admin-table" style="min-width:650px;">
+                <thead>
+                  <tr>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="adminRecentOrdersTable">
+                  <!-- Injected by dashboard.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Sidebar Column: Order Fulfillment & Low-Stock Alerts -->
+        <div>
+
+          <!-- Order Fulfillment Status Progress Bars -->
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <h3 class="admin-card-title">Fulfillment Progress</h3>
+            </div>
+
+            <div class="progress-meter">
+              <div class="progress-header">
+                <span>Pending Orders</span>
+                <span id="progressPendingVal">0 orders</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar" id="progressPendingBar" style="width:0%; background:var(--rust);"></div>
+              </div>
+            </div>
+
+            <div class="progress-meter">
+              <div class="progress-header">
+                <span>Delivered Orders</span>
+                <span id="progressDeliveredVal">0 orders</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar" id="progressDeliveredBar" style="width:0%; background:var(--admin-success);"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Low Stock Warning Card -->
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <h3 class="admin-card-title" style="color:var(--admin-danger);">⚠️ Low-Stock Alerts</h3>
+            </div>
+            <div id="lowStockListWrap">
+              <!-- Injected by dashboard.js -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+<!-- REUSABLE CONFIRMATION MODAL -->
+<div class="modal-overlay" id="adminConfirmModal">
+  <div class="modal modal-md">
+    <button class="icon-btn modal-close" onclick="window.Modal.close('adminConfirmModal')">&times;</button>
+    <div style="text-align:center; padding:1em 0;">
+      <div style="width:60px; height:60px; border-radius:50%; background:rgba(168,78,51,.12); color:var(--rust); font-size:1.8rem; display:flex; align-items:center; justify-content:center; margin:0 auto .8em;">⚠️</div>
+      <h3 style="margin:0 0 .4em; font-size:1.25rem;" id="adminConfirmModalTitle">Confirm Action</h3>
+      <p style="font-size:.88rem; color:var(--ink-soft); margin-bottom:1.5em;" id="adminConfirmModalSub">Are you sure you want to proceed? This action cannot be undone.</p>
+      
+      <div style="display:flex; gap:1em; justify-content:center;">
+        <button type="button" class="btn-admin-secondary" onclick="window.Modal.close('adminConfirmModal')">Cancel</button>
+        <button type="button" class="btn-admin-danger" id="adminConfirmModalActionBtn">Confirm &amp; Proceed</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+<script src="../../js/components/modal.js"></script>
+
+<!-- API Modules -->
+<script src="../../js/api/api.js"></script>
+<script src="../../js/api/admin-api.js"></script>
+
+<!-- Admin Controllers -->
+<script src="../../js/admin/login.js"></script>
+<script src="../../js/admin/dashboard.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const session = window.StorageUtils ? window.StorageUtils.readJSON("rv_admin_session", null) : null;
+  if (session) {
+    const nameEl = document.getElementById("adminHeaderName");
+    const avatarEl = document.getElementById("adminHeaderAvatar");
+    if (nameEl) nameEl.textContent = session.name || "Admin";
+    if (avatarEl && window.Formatters) avatarEl.textContent = window.Formatters.getInitials(session.name || "AD");
+  }
+});
+</script>
+</body>
+</html>
+

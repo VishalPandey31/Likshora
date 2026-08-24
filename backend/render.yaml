@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: likshora-api
+    runtime: python
+    region: singapore  # closest to India
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && flask db upgrade
+    startCommand: gunicorn -w 4 -b 0.0.0.0:$PORT --timeout 120 run:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+      - key: SHIPROCKET_EMAIL
+        sync: false
+      - key: SHIPROCKET_PASSWORD
+        sync: false
+      - key: SHIPROCKET_WEBHOOK_TOKEN
+        sync: false
+      - key: SHIPROCKET_PICKUP_LOCATION
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+    healthCheckPath: /api/v1/health

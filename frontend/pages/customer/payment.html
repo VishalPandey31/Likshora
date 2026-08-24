@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Select Payment Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/navbar.css">
+<link rel="stylesheet" href="../../css/footer.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/cart.css">
+<link rel="stylesheet" href="../../css/checkout.css">
+</head>
+<body>
+
+<!-- ============ ANNOUNCEMENT BAR ============ -->
+<div class="announce-bar">
+  <p>Complimentary shipping on prepaid orders, across India</p>
+</div>
+
+<!-- ============ HEADER / NAVBAR ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <div class="header-left">
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="logo-corner" id="logoCorner">
+        <img src="../../assets/images/website/logo-icon.png" alt="Likshora Logo Icon" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(52,11,16,0.25);">
+      </div>
+      
+      <nav class="main-nav" id="mainNav">
+        <a href="../../index.html">Home</a>
+        <a href="categories.html">Categories</a>
+        <a href="products.html">Shop</a>
+        <a href="../../index.html#contact">Contact</a>
+        <button type="button" class="nav-link-btn" id="navAboutBtn">About</button>
+      </nav>
+    </div>
+
+    <!-- LOGO — EXACT CENTRE OF THE HEADER -->
+    <a href="../../index.html" class="logo" id="logoSlot" title="LIKSHORA">
+      <img src="../../assets/images/website/logo-title.png" alt="LIKSHORA — Where Identity Meets Aura" style="height: 54px; max-width: 340px; width: auto; object-fit: contain;">
+    </a>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+
+      <button class="icon-btn account-toggle-btn" id="accountToggle" aria-label="Account">
+        <svg class="account-icon" viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.6"></circle><path d="M4.5 20.2c1.4-3.6 4.3-5.5 7.5-5.5s6.1 1.9 7.5 5.5"></path></svg>
+        <span class="user-avatar hidden" id="userAvatar" aria-hidden="true"></span>
+      </button>
+
+      <button class="icon-btn" id="wishToggle" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.2C.4 8.1 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.5C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4.1 3.6 7.8C19.5 16.4 12 21 12 21z"></path></svg>
+      </button>
+      <button class="icon-btn cart-btn" id="cartToggle" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="search-panel" id="searchPanel">
+    <input type="text" placeholder="Search" id="searchInput">
+    <button class="icon-btn" id="searchClose">&times;</button>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ PROGRESS STEPPER ============ -->
+  <div class="stepper-bar">
+    <div class="stepper-step completed">
+      <div class="step-number">✓</div>
+      <span class="step-title">Address &amp; Shipping</span>
+    </div>
+    <div class="stepper-step active">
+      <div class="step-number">2</div>
+      <span class="step-title">Payment Method</span>
+    </div>
+    <div class="stepper-step">
+      <div class="step-number">3</div>
+      <span class="step-title">Confirmation</span>
+    </div>
+  </div>
+
+  <!-- ============ PAYMENT MAIN LAYOUT ============ -->
+  <div class="checkout-layout">
+
+    <!-- Left Payment Options Column -->
+    <div class="checkout-form-col">
+      <div class="checkout-section-box">
+        <h3>Select Payment Method</h3>
+        <p style="font-size:.84rem; color:var(--ink-soft); margin-bottom:1.5em;">This is a clean frontend simulation adapter. Select a method below to simulate your order checkout.</p>
+
+        <div class="payment-options" id="paymentOptions">
+
+          <!-- Option 1: Pay with Razorpay -->
+          <label class="payment-option is-selected">
+            <input type="radio" name="paymentMethod" value="razorpay" checked>
+            <span class="payment-option-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            </span>
+            <span class="payment-option-main">
+              <span class="payment-option-title">Pay with Razorpay</span>
+              <span class="payment-option-sub">UPI, Credit/Debit Cards, Net Banking &amp; Wallets via Razorpay</span>
+            </span>
+          </label>
+
+          <div class="payment-option-fields" data-for="razorpay">
+            <p class="cod-note" style="background:var(--sand-deep); border-left:3px solid var(--gold); padding:.8em 1em; font-size:.84rem; color:var(--ink-soft); margin:0;">
+              Fast, secure checkout via Razorpay. Pay seamlessly using UPI, Debit/Credit Card, Netbanking, or Wallets.
+            </p>
+          </div>
+
+          <!-- Option 2: Cash on Delivery (COD) -->
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="cod">
+            <span class="payment-option-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+            </span>
+            <span class="payment-option-main">
+              <span class="payment-option-title">Cash on Delivery (COD)</span>
+              <span class="payment-option-sub">Pay in cash when your package arrives</span>
+            </span>
+          </label>
+
+          <div class="payment-option-fields" data-for="cod" hidden>
+            <p class="cod-note">Please keep exact change ready upon package delivery. Our delivery executive will collect payment at your doorstep.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-block" id="payNowBtn" style="height:50px; font-size:.95rem;">Pay &amp; Complete Order &rarr;</button>
+
+    </div>
+
+    <!-- Right Sidebar Column: Summary Confirmation -->
+    <aside class="checkout-summary-col">
+      <div class="order-summary-card">
+        <h3>Payment Summary</h3>
+
+        <div id="paymentAddressSummary" style="font-size:.84rem; color:var(--ink-soft); padding-bottom:.8em; border-bottom:1px solid rgba(52,11,16,.08);">
+          <!-- Delivery address injected dynamically -->
+        </div>
+
+        <div class="summary-row total-row">
+          <span>Amount Payable</span>
+          <span id="paymentGrandTotal">₹0</span>
+        </div>
+        <p style="margin:0; font-size:.74rem; color:var(--ink-soft); text-align:center;">🔒 Encrypted 256-bit SSL Simulation</p>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ============ PAYMENT VERIFICATION MODAL OVERLAY ============ -->
+  <div class="modal-overlay" id="paymentVerifyOverlay">
+    <div class="modal modal-md" style="text-align:center; padding:2.5em 2em;">
+      <div id="paymentVerifyingState">
+        <div style="font-size:2.5rem; margin-bottom:.4em;">⏳</div>
+        <h3 style="margin-top:0; font-family:var(--font-display);">Payment Verification Screen</h3>
+        <p style="font-size:.88rem; color:var(--ink-soft); margin-bottom:1.2em;">Verifying payment details with bank gateway...</p>
+        <div style="width:36px; height:36px; border:3px solid var(--stone); border-top-color:var(--gold); border-radius:50%; margin:0 auto; animation:spin 1s linear infinite;"></div>
+      </div>
+
+      <div id="paymentSuccessState" class="hidden">
+        <div style="font-size:2.5rem; color:var(--success); margin-bottom:.4em;">✓</div>
+        <h3 style="margin-top:0; font-family:var(--font-display); color:var(--success);">Verification Successful!</h3>
+        <p style="font-size:.88rem; color:var(--ink-soft); margin-bottom:1.2em;">Payment verified successfully. Placing your order...</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="../../index.html" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-word"></span>
+      </a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="products.html">New Arrivals</a>
+      <a href="categories.html">Categories</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <button type="button" class="footer-link-btn" id="navAboutBtnFooter">About Us</button>
+      <a href="#">Our Story</a>
+      <a href="#">Sustainability</a>
+      <a href="#">Careers</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="../../index.html#shipping-returns">Shipping &amp; returns</a>
+      <a href="#size-guide" class="size-guide-trigger">Size guide</a>
+      <a href="contact.html">Contact us</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Follow</h4>
+      <a href="https://www.instagram.com/likshora?igsi=MXdmY21hYXExOWZncg==" target="_blank" rel="noopener noreferrer" title="Follow Likshora on Instagram for the latest product launches, updates, offers, and exclusive content">Instagram</a>
+      <a href="javascript:void(0);" title="Facebook Page (Add Facebook URL here)">Facebook</a>
+      <a href="https://wa.me/918446664361" target="_blank" rel="noopener noreferrer" title="Contact us on WhatsApp (+91 8446664361) for product inquiries, order assistance, and customer support">WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="trust-strip">
+    <p>Designed by Likshora | &copy; Likshora 2026</p>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> Likshora. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+<script src="../../js/components/modal.js"></script>
+<script src="../../js/components/loader.js"></script>
+<script src="../../js/components/navbar.js"></script>
+<script src="../../js/components/footer.js"></script>
+
+<!-- Razorpay Checkout SDK & Modular API Scripts -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="../../js/api/api.js"></script>
+<script src="../../js/api/order-api.js"></script>
+<script src="../../js/api/payment-api.js"></script>
+
+<!-- Payment Controller -->
+<script src="../../js/customer/payment.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,31 @@
+# ─── Environment & Secrets ───
+backend/.env
+
+# ─── Python ───
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+backend/venv/
+backend/.venv/
+venv/
+
+# ─── OS ───
+.DS_Store
+Thumbs.db
+
+# ─── IDE ───
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── Flask ───
+backend/instance/
+.webassets-cache
+
+# ─── Misc ───
+*.mp4

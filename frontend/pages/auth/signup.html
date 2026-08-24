@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Create Account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/authentication.css">
+</head>
+<body class="auth-page-body">
+
+<div class="auth-page-shell">
+
+  <!-- Right Form Side -->
+  <div class="auth-form-side">
+    <div class="auth-header">
+      <p class="eyebrow">Sign Up</p>
+      <h1>Create your account</h1>
+      <p>Enter your details below to get started.</p>
+    </div>
+
+    <form id="signupForm" class="auth-form" novalidate>
+      <div class="auth-form-group">
+        <label class="auth-label">Full Name
+          <input type="text" id="signupName" class="auth-input" required placeholder="Full Name" autocomplete="name">
+        </label>
+
+        <label class="auth-label">Email Address
+          <input type="email" id="signupEmail" class="auth-input" required placeholder="you@example.com" autocomplete="email">
+        </label>
+
+        <label class="auth-label">Mobile Number
+          <div class="phone-input">
+            <span class="phone-prefix">+91</span>
+            <input type="tel" id="signupPhone" class="auth-input" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required placeholder="10-digit number" autocomplete="tel">
+          </div>
+        </label>
+
+        <label class="auth-label">Password
+          <div class="password-field-wrap">
+            <input type="password" id="signupPassword" class="auth-input" required minlength="8" placeholder="At least 8 chars (letters & numbers)" autocomplete="new-password">
+            <button type="button" class="eye-toggle-btn" aria-label="Show password">👁️</button>
+          </div>
+          <div class="strength-bar-wrap" style="margin-top:4px;">
+            <div class="strength-bar-fill" id="strengthBarFill"></div>
+          </div>
+        </label>
+
+        <label class="auth-label">Confirm Password
+          <div class="password-field-wrap">
+            <input type="password" id="signupConfirmPassword" class="auth-input" required minlength="8" placeholder="Re-enter password" autocomplete="new-password">
+            <button type="button" class="eye-toggle-btn" aria-label="Show password">👁️</button>
+          </div>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" style="height:48px; font-size:.9rem; margin-top:.8em;">Create Account &rarr;</button>
+
+      <p class="auth-note" style="margin-top:1.5em; text-align:center; font-size:.88rem; color:var(--ink-soft);">Already have an account? <a href="login.html" id="goToLoginLink" style="color:var(--gold); font-weight:600; text-decoration:none;">Login</a></p>
+      <p class="auth-note" style="text-align:center; font-size:.8rem; margin-top:.5em;"><a href="../../index.html" style="color:var(--ink-soft);">&larr; Return to Storefront</a></p>
+    </form>
+  </div>
+
+</div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+<script src="../../js/api/api.js"></script>
+<script src="../../js/api/auth-api.js"></script>
+
+<!-- Signup Controller -->
+<script src="../../js/auth/signup.js"></script>
+</body>
+</html>

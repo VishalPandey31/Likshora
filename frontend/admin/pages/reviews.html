@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Product Reviews Moderation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body>
+
+<div class="admin-app-shell">
+
+  <!-- REUSABLE SIDEBAR COMPONENT -->
+  <aside class="admin-sidebar">
+    <div>
+      <div class="admin-brand">
+        <img src="../../assets/images/website/logo-icon.png" alt="Likshora Icon" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover;">
+        <div>
+          <h3 class="admin-brand-title">LIKSHORA</h3>
+          <span class="admin-brand-sub">Admin Portal</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav-menu">
+        <li class="admin-nav-item"><a href="dashboard.html"><span>📊</span> Dashboard Overview</a></li>
+        <li class="admin-nav-item active"><a href="products.html"><span>🛍️</span> Products Catalog</a></li>
+        <li class="admin-nav-item"><a href="inventory.html"><span>📦</span> Inventory &amp; Stock</a></li>
+        <li class="admin-nav-item"><a href="orders.html"><span>📦</span> Orders &amp; Fulfillment</a></li>
+        <li class="admin-nav-item"><a href="shipping.html"><span>🚚</span> Shipping &amp; Logistics</a></li>
+        <li class="admin-nav-item"><a href="categories.html"><span>🏷️</span> Categories &amp; Collections</a></li>
+        <li class="admin-nav-item"><a href="customers.html"><span>👥</span> Customer Records</a></li>
+        <li class="admin-nav-item"><a href="payments.html"><span>💳</span> Payment Logs</a></li>
+        <li class="admin-nav-item"><a href="website-content.html"><span>🌐</span> Website Content</a></li>
+        <li class="admin-nav-item"><a href="settings.html"><span>⚙️</span> Portal Settings</a></li>
+      </ul>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,.08); padding-top:1em;">
+      <a href="#" class="admin-nav-item admin-logout-trigger" style="color:var(--admin-danger); display:flex; align-items:center; gap:.8em; text-decoration:none; padding:.8em 1em; font-size:.88rem; font-weight:600;">
+        <span>➔</span> Sign Out
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN RIGHT CONTAINER -->
+  <div style="display:flex; flex-direction:column; min-width:0;">
+
+    <!-- REUSABLE HEADER COMPONENT -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <h2 class="admin-header-title">Product Reviews Moderation</h2>
+      </div>
+
+      <div class="admin-header-right">
+        <span style="font-size:.84rem; color:var(--admin-ink-soft);" id="adminReviewsCount">Showing customer reviews</span>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="admin-main-content">
+
+      <!-- Filter Toolbar -->
+      <div class="admin-card" style="padding:1em 1.5em;">
+        <div style="display:flex; gap:1em; align-items:center;">
+          <label for="adminReviewStatusFilter" style="font-size:.78rem; font-weight:600;">Approval Status:</label>
+          <select id="adminReviewStatusFilter" class="filter-select" style="padding:.4em .8em; font-size:.84rem;">
+            <option value="all">All Reviews</option>
+            <option value="Approved">Approved</option>
+            <option value="Pending Approval">Pending Approval</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Reviews Data Table -->
+      <div class="admin-card" style="padding:0; overflow:hidden;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Product Info</th>
+              <th>Customer</th>
+              <th>Rating</th>
+              <th>Review Comment</th>
+              <th>Status</th>
+              <th style="text-align:right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminReviewsTableBody">
+            <!-- Injected by reviews.js -->
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<!-- REUSABLE CONFIRMATION MODAL -->
+<div class="modal-overlay" id="adminConfirmModal">
+  <div class="modal modal-md">
+    <button class="icon-btn modal-close" onclick="window.Modal.close('adminConfirmModal')">&times;</button>
+    <div style="text-align:center; padding:1em 0;">
+      <div style="width:60px; height:60px; border-radius:50%; background:rgba(168,78,51,.12); color:var(--rust); font-size:1.8rem; display:flex; align-items:center; justify-content:center; margin:0 auto .8em;">⚠️</div>
+      <h3 style="margin:0 0 .4em; font-size:1.25rem;">Confirm Review Deletion</h3>
+      <p style="font-size:.88rem; color:var(--ink-soft); margin-bottom:1.5em;">Are you sure you want to delete this customer review? It will be removed from product detail pages.</p>
+      
+      <div style="display:flex; gap:1em; justify-content:center;">
+        <button type="button" class="btn-admin-secondary" onclick="window.Modal.close('adminConfirmModal')">Cancel</button>
+        <button type="button" class="btn-admin-danger" id="adminConfirmModalActionBtn">Confirm Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+<script src="../../js/components/modal.js"></script>
+<script src="../../js/components/pagination.js"></script>
+
+<!-- Admin Controllers -->
+<script src="../../js/admin/login.js"></script>
+<script src="../../js/admin/reviews.js"></script>
+</body>
+</html>
+

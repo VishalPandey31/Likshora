@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Contact Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/navbar.css">
+<link rel="stylesheet" href="../../css/footer.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/order-tracking.css">
+</head>
+<body>
+
+<!-- ============ ANNOUNCEMENT BAR ============ -->
+<div class="announce-bar">
+  <p>Complimentary shipping on prepaid orders, across India</p>
+</div>
+
+<!-- ============ HEADER / NAVBAR ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <div class="header-left">
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="logo-corner" id="logoCorner">
+        <img src="../../assets/images/website/logo-icon.png" alt="Likshora Logo Icon" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(52,11,16,0.25);">
+      </div>
+      
+      <nav class="main-nav" id="mainNav">
+        <a href="../../index.html">Home</a>
+        <a href="categories.html">Categories</a>
+        <a href="products.html">Shop</a>
+        <a href="contact.html" class="active" style="color: var(--gold);">Contact</a>
+        <button type="button" class="nav-link-btn" id="navAboutBtn">About</button>
+      </nav>
+    </div>
+
+    <!-- LOGO — EXACT CENTRE OF THE HEADER -->
+    <a href="../../index.html" class="logo" id="logoSlot" title="LIKSHORA">
+      <img src="../../assets/images/website/logo-title.png" alt="LIKSHORA — Where Identity Meets Aura" style="height: 54px; max-width: 340px; width: auto; object-fit: contain;">
+    </a>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+
+      <button class="icon-btn account-toggle-btn" id="accountToggle" aria-label="Account">
+        <svg class="account-icon" viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.6"></circle><path d="M4.5 20.2c1.4-3.6 4.3-5.5 7.5-5.5s6.1 1.9 7.5 5.5"></path></svg>
+        <span class="user-avatar hidden" id="userAvatar" aria-hidden="true"></span>
+      </button>
+
+      <button class="icon-btn" id="wishToggle" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.2C.4 8.1 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.5C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4.1 3.6 7.8C19.5 16.4 12 21 12 21z"></path></svg>
+      </button>
+      <button class="icon-btn cart-btn" id="cartToggle" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="search-panel" id="searchPanel">
+    <input type="text" placeholder="Search" id="searchInput">
+    <button class="icon-btn" id="searchClose">&times;</button>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ CONTACT HEADER ============ -->
+  <div class="discovery-header">
+    <p class="eyebrow">Customer Care</p>
+    <h1>Get in Touch</h1>
+    <p class="discovery-sub">Have a question about sizing, fabrics, or order status? We are here to help you daily.</p>
+  </div>
+
+  <!-- ============ CONTACT 2-COLUMN LAYOUT ============ -->
+  <div class="contact-page-layout">
+
+    <!-- Left Column: Contact Details Cards -->
+    <div class="contact-info-col">
+
+      <div class="contact-info-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <div>
+          <h4 style="margin:0 0 .3em; font-size:1.05rem;">Flagship Boutique</h4>
+          <p style="margin:0; font-size:.88rem; color:var(--ink-soft); line-height:1.5;">104 Heritage Lane, Near Indiranagar Park,<br>Bengaluru, Karnataka 560038</p>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </div>
+        <div>
+          <h4 style="margin:0 0 .3em; font-size:1.05rem;">Email Support</h4>
+          <p style="margin:0; font-size:.88rem; color:var(--ink-soft); line-height:1.5;">care@LIKSHORA.com<br>Response time within 24 hours</p>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </div>
+        <div>
+          <h4 style="margin:0 0 .3em; font-size:1.05rem;">Customer Care Helpline</h4>
+          <p style="margin:0; font-size:.88rem; color:var(--ink-soft); line-height:1.5;">+91 8446664361<br>Monday to Saturday, 10:00 AM – 7:00 PM IST</p>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon" style="color:#25D366;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </div>
+        <div>
+          <h4 style="margin:0 0 .3em; font-size:1.05rem;">WhatsApp Support</h4>
+          <p style="margin:0 0 .5em; font-size:.88rem; color:var(--ink-soft); line-height:1.5;">Contact us on WhatsApp for product inquiries, order assistance, and customer support.</p>
+          <a href="https://wa.me/918446664361" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display:inline-flex; align-items:center; gap:.4em; padding:.4em .8em; font-size:.8rem;">Chat on WhatsApp (+91 8446664361) &rarr;</a>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon" style="color:#E1306C;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </div>
+        <div>
+          <h4 style="margin:0 0 .3em; font-size:1.05rem;">Instagram</h4>
+          <p style="margin:0 0 .5em; font-size:.88rem; color:var(--ink-soft); line-height:1.5;">Follow Likshora on Instagram for the latest product launches, updates, offers, and exclusive content.</p>
+          <a href="https://www.instagram.com/likshora?igsi=MXdmY21hYXExOWZncg==" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display:inline-flex; align-items:center; gap:.4em; padding:.4em .8em; font-size:.8rem;">Follow @likshora on Instagram &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Contact Form -->
+    <div class="contact-form-col">
+      <div style="background:var(--white); border:1px solid var(--stone); border-radius:var(--radius-md); padding:2em; box-shadow:0 4px 14px rgba(52,11,16,.04);">
+        <h3 style="font-size:1.3rem; margin-top:0; margin-bottom:1.2em;">Send Us a Message</h3>
+
+        <form id="contactForm" class="auth-form" style="display:flex; flex-direction:column; gap:1.2em;">
+          <label style="font-size:.88rem; font-weight:600; color:var(--ink);">Full Name
+            <input type="text" id="contactFormName" required placeholder="Your full name" style="width:100%; margin-top:.4em; padding:.8em 1em; border:1.5px solid var(--stone); border-radius:var(--radius-sm);">
+          </label>
+
+          <label style="font-size:.88rem; font-weight:600; color:var(--ink);">Email address
+            <input type="email" id="contactFormEmail" required placeholder="you@example.com" style="width:100%; margin-top:.4em; padding:.8em 1em; border:1.5px solid var(--stone); border-radius:var(--radius-sm);">
+          </label>
+
+          <label style="font-size:.88rem; font-weight:600; color:var(--ink);">Subject
+            <select id="contactFormSubject" style="width:100%; margin-top:.4em; padding:.8em 1em; border:1.5px solid var(--stone); border-radius:var(--radius-sm); background:var(--white);">
+              <option value="General Query">General Query</option>
+              <option value="Order & Delivery">Order &amp; Delivery Status</option>
+              <option value="Returns & Exchange">Returns &amp; Exchange</option>
+              <option value="Size Consultation">Size Consultation</option>
+            </select>
+          </label>
+
+          <label style="font-size:.88rem; font-weight:600; color:var(--ink);">Message
+            <textarea id="contactFormMessage" rows="5" required placeholder="How can we help you today?" style="width:100%; margin-top:.4em; padding:.8em 1em; border:1.5px solid var(--stone); border-radius:var(--radius-sm); font-family:var(--font-body);"></textarea>
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-block" style="height:48px; font-size:.9rem;">Send Message &rarr;</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="../../index.html" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-word"></span>
+      </a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="products.html">New Arrivals</a>
+      <a href="categories.html">Categories</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <button type="button" class="footer-link-btn" id="navAboutBtnFooter">About Us</button>
+      <a href="#">Our Story</a>
+      <a href="#">Sustainability</a>
+      <a href="#">Careers</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="../../index.html#shipping-returns">Shipping &amp; returns</a>
+      <a href="#size-guide" class="size-guide-trigger">Size guide</a>
+      <a href="contact.html">Contact us</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Follow</h4>
+      <a href="https://www.instagram.com/likshora?igsi=MXdmY21hYXExOWZncg==" target="_blank" rel="noopener noreferrer" title="Follow Likshora on Instagram for the latest product launches, updates, offers, and exclusive content">Instagram</a>
+      <a href="javascript:void(0);" title="Facebook Page (Add Facebook URL here)">Facebook</a>
+      <a href="https://wa.me/918446664361" target="_blank" rel="noopener noreferrer" title="Contact us on WhatsApp (+91 8446664361) for product inquiries, order assistance, and customer support">WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="trust-strip">
+    <p>Designed by Likshora | &copy; Likshora 2026</p>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> Likshora. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+<script src="../../js/components/modal.js"></script>
+<script src="../../js/components/loader.js"></script>
+<script src="../../js/components/navbar.js"></script>
+<script src="../../js/components/footer.js"></script>
+
+<!-- Tracking & Contact Controller -->
+<script src="../../js/customer/tracking.js"></script>
+</body>
+</html>
+
+
+

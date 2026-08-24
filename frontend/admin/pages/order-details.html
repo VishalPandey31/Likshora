@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Order Details</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/cart.css">
+<link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body>
+
+<div class="admin-app-shell">
+
+  <!-- REUSABLE SIDEBAR COMPONENT -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div>
+      <div class="admin-brand">
+        <img src="../../assets/images/website/logo-icon.png" alt="Likshora Icon" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover;">
+        <div>
+          <h3 class="admin-brand-title">LIKSHORA</h3>
+          <span class="admin-brand-sub">Admin Portal</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav-menu">
+        <li class="admin-nav-item"><a href="dashboard.html"><span>📊</span> Dashboard Overview</a></li>
+        <li class="admin-nav-item"><a href="products.html"><span>🛍️</span> Products Catalog</a></li>
+        <li class="admin-nav-item"><a href="inventory.html"><span>📦</span> Inventory &amp; Stock</a></li>
+        <li class="admin-nav-item active"><a href="orders.html"><span>📦</span> Orders &amp; Fulfillment</a></li>
+        <li class="admin-nav-item"><a href="shipping.html"><span>🚚</span> Shipping &amp; Logistics</a></li>
+        <li class="admin-nav-item"><a href="categories.html"><span>🏷️</span> Categories &amp; Collections</a></li>
+        <li class="admin-nav-item"><a href="customers.html"><span>👥</span> Customer Records</a></li>
+        <li class="admin-nav-item"><a href="payments.html"><span>💳</span> Payment Logs</a></li>
+        <li class="admin-nav-item"><a href="website-content.html"><span>🌐</span> Website Content</a></li>
+        <li class="admin-nav-item"><a href="settings.html"><span>⚙️</span> Portal Settings</a></li>
+      </ul>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,.08); padding-top:1em;">
+      <a href="#" class="admin-nav-item admin-logout-trigger" style="color:var(--admin-danger); display:flex; align-items:center; gap:.8em; text-decoration:none; padding:.8em 1em; font-size:.88rem; font-weight:600;">
+        <span>➔</span> Sign Out
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN RIGHT CONTAINER -->
+  <div style="display:flex; flex-direction:column; min-width:0; width:100%; flex:1;">
+
+    <!-- REUSABLE HEADER COMPONENT -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <button type="button" class="admin-menu-toggle" id="adminMenuToggle" aria-label="Toggle Sidebar Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <h2 class="admin-header-title" id="adminOrderDetailTitle">Order Details</h2>
+      </div>
+
+      <div class="admin-header-right">
+        <a href="orders.html" class="btn-admin-secondary" style="text-decoration:none; display:inline-flex; align-items:center; gap:.4em;">
+          <span>&larr;</span> Back to Orders List
+        </a>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="admin-main-content">
+
+      <div class="order-details-grid" style="display:grid; grid-template-columns: 1fr 340px; gap:1.8em;">
+
+        <!-- Left Main Column: Items & Details -->
+        <div>
+
+          <!-- Order Summary Header Card & Table -->
+          <div class="admin-card">
+            <div class="admin-card-head" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.8em;">
+              <div>
+                <h3 class="admin-card-title" style="margin:0 0 .2em;">Order Summary</h3>
+                <span style="font-size:.82rem; color:var(--admin-ink-soft);" id="adminOrderDetailDate">Placed on 12 Aug 2026</span>
+              </div>
+              <span class="status-pill success">Payment Confirmed</span>
+            </div>
+
+            <div class="order-summary-details-wrapper">
+              <table class="admin-table admin-summary-table-desktop" id="adminOrderSummaryTable" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th>Customer Information</th>
+                    <th>Shipping Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="vertical-align:top; width:50%;" data-label="Customer Information">
+                      <p style="margin:0; color:var(--admin-ink-soft); line-height:1.5;" id="adminOrderCustomerBox">
+                        <!-- Injected dynamically -->
+                      </p>
+                    </td>
+                    <td style="vertical-align:top; width:50%;" data-label="Shipping Address">
+                      <p style="margin:0; color:var(--admin-ink-soft); line-height:1.5;" id="adminOrderAddressBox">
+                        <!-- Injected dynamically -->
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Items Table Card -->
+          <div class="admin-card" style="padding:0;">
+            <div class="admin-card-head" style="padding:1.2em 1.5em; margin:0;">
+              <h3 class="admin-card-title">Purchased Products</h3>
+            </div>
+
+            <div class="admin-table-scroll-wrap">
+              <table class="admin-table" style="min-width: 600px;">
+                <thead>
+                  <tr>
+                    <th>Product Item</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
+                    <th style="text-align:right;">Line Total</th>
+                  </tr>
+                </thead>
+                <tbody id="adminOrderItemsBody">
+                  <!-- Injected dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Sidebar Column: Status Update & Tracking -->
+        <div>
+
+          <!-- Status & Tracking Update Card -->
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <h3 class="admin-card-title">Fulfillment Actions</h3>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:1.2em;">
+              <label class="auth-label">Order Fulfillment Status
+                <select id="adminOrderStatusSelect" class="auth-input">
+                  <option value="Processing">Processing (Order Received)</option>
+                  <option value="Confirmed">Confirmed (Payment Verified)</option>
+                  <option value="Packed">Packed (Quality Checked)</option>
+                  <option value="Shipped">Shipped (In Transit)</option>
+                  <option value="Out for Delivery">Out for Delivery</option>
+                  <option value="Delivered">Delivered (Handed Over)</option>
+                </select>
+              </label>
+
+              <label class="auth-label">Courier Carrier &amp; AWB Number
+                <input type="text" id="adminOrderCarrierInput" class="auth-input" placeholder="e.g. Bluedart Priority (AWB: 89432019)">
+              </label>
+
+              <button type="button" class="btn-admin-primary" id="updateOrderStatusBtn" style="height:46px; font-size:.88rem; margin-bottom:.6em;">Save Status &amp; Tracking &rarr;</button>
+              <button type="button" class="btn-admin-secondary" id="adminFulfillShiprocketBtn" style="height:46px; font-size:.88rem; width:100%; border:1px solid var(--admin-gold); color:var(--admin-gold);">🚀 Dispatch Shiprocket Order</button>
+            </div>
+          </div>
+
+          <!-- Price Breakdown Summary Card -->
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <h3 class="admin-card-title">Financial Breakdown</h3>
+            </div>
+
+            <div class="summary-row" style="margin-bottom:.6em;">
+              <span>Items Subtotal</span>
+              <span id="adminOrderSubtotal">₹0</span>
+            </div>
+
+            <div class="summary-row" style="margin-bottom:.6em;">
+              <span>Shipping Fee</span>
+              <span id="adminOrderShipping" style="color:var(--admin-success); font-weight:500;">FREE</span>
+            </div>
+
+            <div class="summary-row total-row" style="border-top:1px dashed var(--admin-border); padding-top:.6em;">
+              <span>Grand Total</span>
+              <span id="adminOrderGrandTotal" style="color:var(--admin-gold);">₹0</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+
+<!-- API Modules -->
+<script src="../../js/api/api.js"></script>
+<script src="../../js/api/order-api.js"></script>
+<script src="../../js/api/admin-api.js"></script>
+
+<!-- Admin Controllers -->
+<script src="../../js/admin/login.js"></script>
+<script src="../../js/admin/orders.js"></script>
+</body>
+</html>
+

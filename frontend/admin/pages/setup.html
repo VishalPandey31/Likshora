@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Admin First-Time Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/authentication.css">
+<link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body class="auth-page-body" style="background:var(--admin-bg);">
+
+<div class="auth-page-shell" style="grid-template-columns: 1fr;">
+
+  <div class="auth-form-side" style="max-width:600px; margin:0 auto; padding:3em 2em;">
+
+    <!-- Step 1: Admin Details -->
+    <div id="setupStep1">
+      <div class="auth-header" style="text-align:center;">
+        <p class="eyebrow" style="color:var(--gold);">Admin Configuration</p>
+        <h1>Initial Portal Setup</h1>
+        <p>Configure your administrator credentials to access the LIKSHORA Admin Portal.</p>
+      </div>
+
+      <form id="adminSetupStep1Form">
+        <div class="auth-form-group">
+          <label class="auth-label">Administrator Full Name
+            <input type="text" id="adminName" class="auth-input" required placeholder="e.g. System Administrator">
+          </label>
+
+          <label class="auth-label">Admin ID
+            <input type="text" id="adminId" class="auth-input" required placeholder="e.g. ADM_001" style="text-transform:uppercase;">
+          </label>
+
+          <label class="auth-label">Mobile Phone
+            <input type="tel" id="adminPhone" class="auth-input" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required placeholder="10-digit mobile number">
+          </label>
+
+          <label class="auth-label">Administrator Email
+            <input type="email" id="adminEmail" class="auth-input" required placeholder="admin@LIKSHORA.com">
+          </label>
+        </div>
+
+        <button type="submit" class="btn-admin-primary" style="width:100%; height:48px; font-size:.9rem;">Continue &rarr;</button>
+      </form>
+    </div>
+
+    <!-- Step 2: Simulated OTP Verification -->
+    <div id="setupStep2" class="hidden">
+      <div class="auth-header" style="text-align:center;">
+        <p class="eyebrow" style="color:var(--gold);">Step 2 of 3</p>
+        <h1>Verify Admin Identity</h1>
+        <p>Enter the 6-digit security code sent to your registered admin contact.</p>
+      </div>
+
+      <div class="otp-input-group">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1" autofocus>
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1">
+        <input class="otp-digit-box" type="text" inputmode="numeric" maxlength="1">
+      </div>
+
+      <button type="button" class="btn-admin-primary" id="verifyAdminOtpBtn" style="width:100%; height:48px; margin-top:1.5em;">Verify Code &rarr;</button>
+    </div>
+
+    <!-- Step 3: Password Creation -->
+    <div id="setupStep3" class="hidden">
+      <div class="auth-header" style="text-align:center;">
+        <p class="eyebrow" style="color:var(--gold);">Step 3 of 3</p>
+        <h1>Set Admin Password</h1>
+        <p>Create a secure password for your administrator account.</p>
+      </div>
+
+      <form id="adminPasswordForm">
+        <div class="auth-form-group">
+          <label class="auth-label">Admin Password
+            <input type="password" id="adminPassword" class="auth-input" required minlength="6" placeholder="At least 6 characters">
+          </label>
+
+          <label class="auth-label">Confirm Admin Password
+            <input type="password" id="adminConfirmPassword" class="auth-input" required minlength="6" placeholder="Re-enter password">
+          </label>
+        </div>
+
+        <button type="submit" class="btn-admin-primary" style="width:100%; height:48px; margin-top:1em;">Complete Setup &amp; Save &rarr;</button>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/formatters.js"></script>
+<script src="../../js/utils/validation.js"></script>
+<script src="../../js/utils/helpers.js"></script>
+<script src="../../js/components/toast.js"></script>
+
+<!-- Admin Setup Controller -->
+<script src="../../js/admin/setup.js"></script>
+</body>
+</html>

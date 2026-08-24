@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIKSHORA — Admin Portal Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Modular Relative CSS Resources -->
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+<div class="admin-app-shell">
+
+  <!-- REUSABLE SIDEBAR COMPONENT -->
+  <aside class="admin-sidebar">
+    <div>
+      <div class="admin-brand">
+        <img src="../assets/images/website/logo-icon.png" alt="Likshora Icon" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover;">
+        <div>
+          <h3 class="admin-brand-title">LIKSHORA</h3>
+          <span class="admin-brand-sub">Admin Portal</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav-menu">
+        <li class="admin-nav-item active"><a href="pages/dashboard.html"><span>📊</span> Dashboard Overview</a></li>
+        <li class="admin-nav-item"><a href="pages/products.html"><span>🛍️</span> Products Catalog</a></li>
+        <li class="admin-nav-item"><a href="pages/inventory.html"><span>📦</span> Inventory &amp; Stock</a></li>
+        <li class="admin-nav-item"><a href="pages/orders.html"><span>📦</span> Orders &amp; Fulfillment</a></li>
+        <li class="admin-nav-item"><a href="pages/shipping.html"><span>🚚</span> Shipping &amp; Logistics</a></li>
+        <li class="admin-nav-item"><a href="pages/categories.html"><span>🏷️</span> Categories &amp; Collections</a></li>
+        <li class="admin-nav-item"><a href="pages/customers.html"><span>👥</span> Customer Records</a></li>
+        <li class="admin-nav-item"><a href="pages/payments.html"><span>💳</span> Payment Logs</a></li>
+        <li class="admin-nav-item"><a href="pages/website-content.html"><span>🌐</span> Website Content</a></li>
+        <li class="admin-nav-item"><a href="pages/settings.html"><span>⚙️</span> Portal Settings</a></li>
+      </ul>
+    </div>
+
+    <div style="border-top:1px solid rgba(181, 138, 58, 0.08); padding-top:1em;">
+      <a href="#" class="admin-nav-item admin-logout-trigger" style="color:var(--admin-danger); display:flex; align-items:center; gap:.8em; text-decoration:none; padding:.8em 1em; font-size:.88rem; font-weight:600;">
+        <span>➔</span> Sign Out
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN RIGHT CONTAINER -->
+  <div style="display:flex; flex-direction:column; min-width:0;">
+
+    <!-- REUSABLE HEADER COMPONENT -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <h2 class="admin-header-title" id="adminHeaderTitle">Dashboard</h2>
+      </div>
+
+      <div class="admin-header-right">
+        <button class="icon-btn" aria-label="Notifications" style="position:relative;">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span style="position:absolute; top:2px; right:2px; width:8px; height:8px; border-radius:50%; background:var(--rust);"></span>
+        </button>
+
+        <div class="admin-profile-chip">
+          <div class="admin-chip-avatar" id="adminHeaderAvatar">AD</div>
+          <span style="font-size:.84rem; font-weight:600;" id="adminHeaderName">Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN DASHBOARD CONTENT PLACEHOLDER (TO BE POPULATED IN FUTURE ADMIN PHASES) -->
+    <main class="admin-main-content">
+      
+      <!-- Component Demonstration Shell Container -->
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <h3 class="admin-card-title">Admin Layout &amp; Reusable Component Shell</h3>
+          <span class="status-pill success">Layout Initialized</span>
+        </div>
+        <p style="font-size:.9rem; color:var(--admin-ink-soft); margin:0;">
+          The Admin Portal foundation layout, sticky navigation sidebar, top header, protected session guard, and UI tokens have been established. Detailed dashboard widgets and subpage controllers will be populated in subsequent admin phases.
+        </p>
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<!-- REUSABLE CONFIRMATION MODAL -->
+<div class="modal-overlay" id="adminConfirmModal">
+  <div class="modal modal-md">
+    <button class="icon-btn modal-close" onclick="window.Modal.close('adminConfirmModal')">&times;</button>
+    <div style="text-align:center; padding:1em 0;">
+      <div style="width:60px; height:60px; border-radius:50%; background:rgba(168,78,51,.12); color:var(--rust); font-size:1.8rem; display:flex; align-items:center; justify-content:center; margin:0 auto .8em;">⚠️</div>
+      <h3 style="margin:0 0 .4em; font-size:1.25rem;" id="adminConfirmModalTitle">Confirm Action</h3>
+      <p style="font-size:.88rem; color:var(--ink-soft); margin-bottom:1.5em;" id="adminConfirmModalSub">Are you sure you want to proceed? This action cannot be undone.</p>
+      
+      <div style="display:flex; gap:1em; justify-content:center;">
+        <button type="button" class="btn-admin-secondary" onclick="window.Modal.close('adminConfirmModal')">Cancel</button>
+        <button type="button" class="btn-admin-danger" id="adminConfirmModalActionBtn">Confirm &amp; Proceed</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modular Relative JavaScript Resources -->
+<script src="../js/config.js"></script>
+<script src="../js/utils/storage.js"></script>
+<script src="../js/utils/formatters.js"></script>
+<script src="../js/utils/validation.js"></script>
+<script src="../js/utils/helpers.js"></script>
+<script src="../js/components/toast.js"></script>
+<script src="../js/components/modal.js"></script>
+
+<!-- Admin Login Controller & Session Guard -->
+<script src="../js/admin/login.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const session = window.StorageUtils ? window.StorageUtils.readJSON("rv_admin_session", null) : null;
+  if (session) {
+    const nameEl = document.getElementById("adminHeaderName");
+    const avatarEl = document.getElementById("adminHeaderAvatar");
+    if (nameEl) nameEl.textContent = session.name || "Admin";
+    if (avatarEl && window.Formatters) avatarEl.textContent = window.Formatters.getInitials(session.name || "AD");
+  }
+});
+</script>
+</body>
+</html>
+

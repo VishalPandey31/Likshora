@@ -1,0 +1,16 @@
+<!-- Reusable Admin Confirmation Modal Component -->
+<div class="modal-overlay" id="adminConfirmModal">
+  <div class="modal modal-md">
+    <button class="icon-btn modal-close" onclick="window.Modal.close('adminConfirmModal')">&times;</button>
+    <div style="text-align:center; padding:1em 0;">
+      <div style="width:60px; height:60px; border-radius:50%; background:rgba(168,78,51,.12); color:var(--rust); font-size:1.8rem; display:flex; align-items:center; justify-content:center; margin:0 auto .8em;">⚠️</div>
+      <h3 style="margin:0 0 .4em; font-size:1.25rem;" id="adminConfirmModalTitle">Confirm Action</h3>
+      <p style="font-size:.88rem; color:var(--ink-soft); margin-bottom:1.5em;" id="adminConfirmModalSub">Are you sure you want to proceed? This action cannot be undone.</p>
+      
+      <div style="display:flex; gap:1em; justify-content:center;">
+        <button type="button" class="btn-admin-secondary" onclick="window.Modal.close('adminConfirmModal')">Cancel</button>
+        <button type="button" class="btn-admin-danger" id="adminConfirmModalActionBtn">Confirm &amp; Proceed</button>
+      </div>
+    </div>
+  </div>
+</div>

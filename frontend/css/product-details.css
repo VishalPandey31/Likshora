@@ -1,0 +1,391 @@
+/* =========================================================
+   LIKSHORA — Product Details & Search Styles
+   PDP 2-column layout, image thumbnail gallery, size pills,
+   spec accordions, review cards, and search result headers
+   ========================================================= */
+
+/* ---------- PDP Main Layout ---------- */
+.pdp-layout {
+  max-width: 1320px;
+  margin: 1.5em auto 4em;
+  padding: 0 1.5em;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 3.5em;
+}
+
+/* ---------- PDP Image Gallery ---------- */
+.pdp-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.pdp-main-image {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--sand-deep);
+  border: 1px solid var(--stone);
+  box-shadow: 0 4px 14px rgba(52,11,16,.08);
+}
+.pdp-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform .4s var(--ease);
+}
+.pdp-main-image:hover img {
+  transform: scale(1.03);
+}
+
+.thumbnail-strip {
+  display: flex;
+  gap: .8em;
+  overflow-x: auto;
+  padding-bottom: .4em;
+}
+.thumb-btn {
+  flex: 0 0 76px;
+  aspect-ratio: 3/4;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--stone);
+  overflow: hidden;
+  background: var(--sand-deep);
+  cursor: pointer;
+  padding: 0;
+  opacity: .7;
+  transition: opacity .2s var(--ease), border-color .2s var(--ease), transform .15s var(--ease);
+}
+.thumb-btn:hover {
+  opacity: 1;
+}
+.thumb-btn.active {
+  opacity: 1;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(200,155,60,.25);
+  transform: translateY(-2px);
+}
+.thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- PDP Info Column ---------- */
+.pdp-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+.pdp-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin: 0;
+  line-height: 1.15;
+}
+.pdp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: .8em;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--ink);
+}
+.pdp-price-row .was {
+  font-size: 1.1rem;
+  color: var(--stone);
+  text-decoration: line-through;
+  font-family: var(--font-body);
+}
+.pdp-discount-tag {
+  font-family: var(--font-body);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  background: rgba(168,78,51,.12);
+  color: var(--rust);
+  padding: .3em .6em;
+  border-radius: var(--radius-sm);
+}
+
+.pdp-rating-row {
+  display: flex;
+  align-items: center;
+  gap: .8em;
+  font-size: .86rem;
+}
+.rating-stars {
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+.rating-count {
+  color: var(--ink-soft);
+}
+
+.pdp-description {
+  font-size: .95rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Size Selector */
+.size-section {
+  display: flex;
+  flex-direction: column;
+  gap: .6em;
+}
+.size-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.size-guide-link {
+  font-size: .78rem;
+  color: var(--gold);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.size-pills {
+  display: flex;
+  gap: .6em;
+  flex-wrap: wrap;
+}
+.size-pill {
+  min-width: 44px;
+  height: 44px;
+  padding: 0 1em;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--stone);
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: .84rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+.size-pill:hover {
+  border-color: var(--ink);
+}
+.size-pill.selected {
+  background: var(--ink);
+  color: var(--sand);
+  border-color: var(--ink);
+}
+
+/* Quantity & Action Row */
+.action-row {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  margin-top: .6em;
+  flex-wrap: wrap;
+}
+.qty-selector {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--stone);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  height: 48px;
+}
+.qty-btn {
+  width: 38px;
+  height: 100%;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qty-btn:hover { background: var(--sand-deep); }
+.qty-val {
+  width: 38px;
+  text-align: center;
+  font-weight: 600;
+  font-size: .95rem;
+}
+.btn-pdp-cart {
+  flex: 1;
+  min-width: 150px;
+  height: 48px;
+}
+.btn-pdp-buy {
+  flex: 1;
+  min-width: 150px;
+  height: 48px;
+}
+
+/* ---------- PDP Information Tabs & Specifications ---------- */
+.pdp-details-tabs {
+  max-width: 1320px;
+  margin: 3em auto;
+  padding: 0 1.5em;
+  border-top: 1px solid rgba(52,11,16,.1);
+  padding-top: 2.5em;
+}
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+}
+.spec-box {
+  background: var(--sand-deep);
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-md);
+  padding: 1.5em;
+}
+.spec-box h4 {
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: .6em;
+}
+.spec-box p {
+  font-size: .88rem;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ---------- Customer Reviews Preview ---------- */
+.reviews-section {
+  max-width: 1320px;
+  margin: 0 auto 4em;
+  padding: 0 1.5em;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5em;
+  margin-top: 1.5em;
+}
+.review-card {
+  background: var(--white);
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-md);
+  padding: 1.4em;
+  display: flex;
+  flex-direction: column;
+  gap: .6em;
+}
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reviewer-name {
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--ink);
+}
+.review-date {
+  font-size: .76rem;
+  color: var(--stone);
+}
+.review-body {
+  font-size: .88rem;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ---------- Dedicated Search Page Header ---------- */
+.search-page-header {
+  max-width: 800px;
+  margin: 1.5em auto 2.5em;
+  padding: 0 1.5em;
+  text-align: center;
+}
+.search-input-group {
+  display: flex;
+  gap: .8em;
+  margin-top: 1.2em;
+}
+.search-input-group input {
+  flex: 1;
+  padding: .9em 1.2em;
+  border: 1.5px solid var(--stone);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+}
+.search-input-group input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.2);
+}
+
+/* ---------- Responsive PDP Adjustments ---------- */
+@media (max-width: 980px) {
+  .pdp-layout { grid-template-columns: 1fr; gap: 2em; }
+  .specs-grid { grid-template-columns: 1fr; gap: 1.2em; }
+  .reviews-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .action-row { flex-direction: column; align-items: stretch; }
+  .btn-pdp-cart, .btn-pdp-buy { width: 100%; }
+}
+
+/* ---------- Size & Quantity Selection Matrix ---------- */
+.size-qty-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: .8em;
+  background: var(--sand-light, #faf7f2);
+  border: 1px solid var(--stone, #e2d9cd);
+  border-radius: var(--radius-md, 8px);
+  padding: 1.2em;
+}
+.size-qty-list {
+  display: flex;
+  flex-direction: column;
+  gap: .6em;
+}
+.size-qty-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .6em 1em;
+  border-radius: var(--radius-sm, 6px);
+  background: #fff;
+  border: 1.5px solid var(--stone, #e2d9cd);
+  transition: border-color .2s, box-shadow .2s;
+  cursor: pointer;
+}
+.size-qty-row.active {
+  border-color: var(--gold, #c89b3c);
+  box-shadow: 0 0 0 2px rgba(200,155,60,.15);
+  background: rgba(200,155,60,.04);
+}
+.size-qty-row .size-name {
+  font-weight: 700;
+  font-size: .95rem;
+  width: 40px;
+  color: var(--ink, #211c1d);
+}
+.size-qty-row .qty-selector {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+}
+.size-qty-row .qty-label {
+  font-size: .8rem;
+  color: var(--ink-soft, #6b6363);
+  margin-right: .4em;
+}
+

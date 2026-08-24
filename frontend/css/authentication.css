@@ -1,0 +1,380 @@
+/* =========================================================
+   LIKSHORA — Dedicated Customer Authentication Styles
+   Split-screen visual layout, form fields, password eye toggle,
+   6-digit OTP input boxes & resend countdown timer
+   ========================================================= */
+
+/* ---------- Auth Page Outer Shell ---------- */
+.auth-page-body {
+  background: url("../assets/images/website/custom-login-bg.jpg") center center / cover no-repeat fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 2em 1em;
+}
+
+/* ---------- Auth Page Outer Shell ---------- */
+.auth-page-body {
+  background: url("../assets/images/website/custom-login-bg.jpg") center center / cover no-repeat fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 2em 1em;
+}
+
+.auth-page-shell {
+  max-width: 500px;
+  width: 92%;
+  margin: 2em auto;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  display: block;
+  min-height: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.auth-page-shell:has(> .auth-form-side:only-child),
+.auth-page-shell.single-panel {
+  grid-template-columns: 1fr;
+  max-width: 500px;
+  min-height: auto;
+}
+
+/* Left Visual Side */
+.auth-visual-side {
+  position: relative;
+  background: var(--ink);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5em;
+}
+.auth-visual-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: .55;
+  mix-blend-mode: luminosity;
+  transition: transform .6s var(--ease);
+}
+.auth-visual-side:hover .auth-visual-img {
+  transform: scale(1.04);
+}
+.auth-visual-content {
+  position: relative;
+  z-index: 2;
+  color: var(--sand);
+}
+.auth-visual-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+  margin-bottom: .4em;
+  color: var(--sand);
+  line-height: 1.15;
+}
+.auth-visual-content p {
+  font-size: .9rem;
+  color: rgba(251,248,243,.8);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Right Form Side — Borderless Transparent Card */
+.auth-form-side {
+  padding: 1.5em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
+  position: relative;
+  border-radius: 0;
+}
+
+.auth-header {
+  margin-bottom: 1.8em;
+  text-align: center;
+}
+.auth-header .eyebrow {
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #1A1A1A;
+  margin-bottom: .4em;
+}
+.auth-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  margin: 0 0 .3em;
+  color: #1A1A1A;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.auth-header p,
+.auth-subtitle {
+  font-size: .92rem;
+  color: #333333;
+  font-weight: 500;
+  margin: .4em 0 0;
+  text-align: center;
+  line-height: 1.45;
+}
+
+/* Form Controls & Password Eye Toggle */
+.auth-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  margin-bottom: 1.2em;
+}
+.auth-label {
+  display: flex;
+  flex-direction: column;
+  gap: .4em;
+  font-size: .95rem;
+  font-weight: 700;
+  color: #000000;
+  text-align: left;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+.auth-input {
+  width: 100%;
+  padding: .75em 1em;
+  border: 1px solid #E2D798;
+  border-radius: 6px;
+  background-color: #FEF9D7;
+  font-family: var(--font-body);
+  font-size: .98rem;
+  color: #000000;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+}
+.auth-input::placeholder {
+  color: #665D43;
+  font-weight: 500;
+  opacity: 1;
+}
+.auth-input:focus {
+  outline: none;
+  border-color: #C89B3C;
+  background-color: #FEF9D7;
+  box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.25);
+}
+
+.auth-link-forgot {
+  color: #000000;
+  font-weight: 700;
+  font-size: .88rem;
+  text-decoration: underline;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+  transition: opacity 0.2s ease;
+}
+.auth-link-forgot:hover {
+  opacity: 0.75;
+  color: #581318;
+}
+
+.auth-link-bold {
+  color: #000000;
+  font-weight: 700;
+  text-decoration: underline;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+  transition: opacity 0.2s ease;
+}
+.auth-link-bold:hover {
+  opacity: 0.75;
+  color: #581318;
+}
+
+.auth-link-subtle {
+  color: #000000;
+  font-weight: 700;
+  text-decoration: underline;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+  transition: opacity 0.2s ease;
+}
+.auth-link-subtle:hover {
+  opacity: 0.75;
+  color: #581318;
+}
+
+.auth-link-terra {
+  color: #581318;
+  font-weight: 700;
+  text-decoration: underline;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+  transition: opacity 0.2s ease;
+}
+.auth-link-terra:hover {
+  opacity: 0.8;
+  color: #340B10;
+}
+
+.btn-primary.btn-block,
+.auth-btn-submit {
+  width: 100%;
+  height: 48px;
+  background-color: #581318;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color .2s ease;
+}
+.btn-primary.btn-block:hover,
+.auth-btn-submit:hover {
+  background-color: #420C0F;
+}
+
+.password-field-wrap {
+  position: relative;
+}
+.password-field-wrap input {
+  padding-right: 2.8em;
+}
+.eye-toggle-btn {
+  position: absolute;
+  right: .8em;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #1A1A1A;
+  cursor: pointer;
+  padding: .3em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: opacity .2s var(--ease);
+}
+.eye-toggle-btn:hover {
+  opacity: 0.7;
+}
+.eye-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #1A1A1A;
+  stroke-width: 2;
+  display: block;
+}
+
+/* ---------- 6-Digit OTP Input UI ---------- */
+.otp-input-group {
+  display: flex;
+  gap: .6em;
+  justify-content: center;
+  margin: 1.2em 0;
+}
+.otp-digit-box {
+  width: 48px;
+  height: 54px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: 1.5px solid var(--stone);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--ink);
+  transition: all .2s var(--ease);
+}
+.otp-digit-box:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.25);
+  transform: translateY(-2px);
+}
+
+.resend-timer-box {
+  text-align: center;
+  font-size: .84rem;
+  color: var(--ink-soft);
+  margin-top: .8em;
+}
+.resend-link-btn {
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+.resend-link-btn:disabled {
+  color: var(--stone);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+/* Password Strength Indicator */
+.strength-bar-wrap {
+  height: 4px;
+  background: var(--stone);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: .3em;
+}
+.strength-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--rust);
+  transition: width .3s var(--ease), background .3s var(--ease);
+}
+
+/* Input Validation Error Highlight */
+.auth-input.input-error {
+  border-color: var(--rust) !important;
+  background-color: rgba(184, 51, 42, 0.04) !important;
+  box-shadow: 0 0 0 3px rgba(184, 51, 42, 0.15) !important;
+}
+
+/* Smooth Page Entry Animation */
+.auth-page-shell {
+  animation: fadeInAuth 0.35s ease-out forwards;
+}
+
+@keyframes fadeInAuth {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 980px) {
+  .auth-page-shell {
+    grid-template-columns: 1fr;
+    margin: 1.5em auto;
+  }
+  .auth-visual-side {
+    display: none;
+  }
+  .auth-form-side {
+    padding: 1.5em 1em;
+  }
+}
