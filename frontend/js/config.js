@@ -6,19 +6,20 @@
 window.RV_CONFIG = {
   // ──────────────────────────────────────────────────────────
   // API_BASE_URL: Points to your backend server.
-  //   • Locally  → http://127.0.0.1:5000
-  //   • Production → Your Render backend URL (e.g. https://likshora-api.onrender.com)
+  //   • Locally     → http://127.0.0.1:5000
+  //   • Production  → https://api.likshora.com (custom domain on Render)
+  //                    OR https://likshora-api.onrender.com (Render default)
   // ──────────────────────────────────────────────────────────
   API_BASE_URL: (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "")
     ? "http://127.0.0.1:5000"
-    : "https://likshora-api.onrender.com",  // ← CHANGE THIS to your actual Render backend URL after deployment
+    : "https://likshora-api.onrender.com",  // ← Will update after Render deploy
 
   // ──────────────────────────────────────────────────────────
   // Razorpay Publishable Key (safe to expose in frontend)
   //   • Test mode → rzp_test_XXXXXXXXXX
   //   • Live mode → rzp_live_XXXXXXXXXX (switch after KYC)
   // ──────────────────────────────────────────────────────────
-  RAZORPAY_KEY_ID: "rzp_test_TTBpNyeq3F4cfi",  // ← CHANGE to rzp_live_... after Razorpay KYC
+  RAZORPAY_KEY_ID: "rzp_test_TTBpNyeq3F4cfi",  // ← CHANGE to rzp_live_... after Razorpay Live mode
 
   // Shared LocalStorage keys (syncs storefront & admin panel)
   STORAGE_KEYS: {
