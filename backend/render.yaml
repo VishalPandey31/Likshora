@@ -42,4 +42,4 @@ services:
       - key: SHIPROCKET_PICKUP_LOCATION
         value: Primary
       - key: CORS_ORIGINS
-        value: https://likshora.com,https://www.likshora.com
+        value: https://likshora.com,https://www.likshora.com,https://likshora.vercel.app
