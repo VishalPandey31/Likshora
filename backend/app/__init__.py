@@ -58,4 +58,8 @@ def create_app(config_name=None) -> Flask:
             response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
         return response
 
+    # Start keep-alive pinger in production (prevents Render free tier sleep)
+    from app.keep_alive import start_keep_alive
+    start_keep_alive(app)
+
     return app
