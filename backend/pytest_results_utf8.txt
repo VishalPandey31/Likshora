@@ -1,0 +1,2732 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.13.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\Vishal\Downloads\Likshora\Likshora\backend
+plugins: anyio-4.10.0
+collected 166 items
+
+tests\test_addresses.py ......                                           [  3%]
+tests\test_admin.py ..FFFF..                                             [  8%]
+tests\test_auth.py ..........                                            [ 14%]
+tests\test_cart.py .......                                               [ 18%]
+tests\test_categories.py ......                                          [ 22%]
+tests\test_cod.py FFF...FFF                                              [ 27%]
+tests\test_config.py ...                                                 [ 29%]
+tests\test_customer_data.py ....F..                                      [ 33%]
+tests\test_health.py .....                                               [ 36%]
+tests\test_models.py .....                                               [ 39%]
+tests\test_orders.py FF...F.FFF                                          [ 45%]
+tests\test_payments.py F...F.F..F...F                                    [ 54%]
+tests\test_products.py ............                                      [ 61%]
+tests\test_security.py ..............................                    [ 79%]
+tests\test_shipments.py .FF.FFFFF                                        [ 84%]
+tests\test_shiprocket_integration.py FFFFFF                              [ 88%]
+tests\test_signup_login_flow.py ...                                      [ 90%]
+tests\test_tracking.py .........                                         [ 95%]
+tests\test_wishlist.py .......                                           [100%]
+
+================================== FAILURES ===================================
+__________________ test_admin_orders_list_search_and_filter ___________________
+
+client = <FlaskClient <Flask 'app'>>
+admin_user = {'id': 'test-admin-dash-uid', 'supabase_uid': 'test-admin-dash-uid', 'email': 'admindash@example.com'}
+admin_test_data = {'p_low_id': 2, 'o1_id': 1, 'o2_id': 2}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6647EC60>
+
+    def test_admin_orders_list_search_and_filter(client, admin_user, admin_test_data, monkeypatch):
+        """Test GET /api/v1/admin/orders filtering by status and searching."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        # Status filter
+        res_pending = client.get("/api/v1/admin/orders?status=pending", headers={"Authorization": "Bearer admin-token"})
+>       assert res_pending.status_code == 200
+E       assert 500 == 200
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_admin.py:207: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:22] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:22] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:22] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:22] [ERROR] [app]: Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 154, in get_admin_orders
+    o_dict = serialize_order(order, include_items=True)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 154, in get_admin_orders
+    o_dict = serialize_order(order, include_items=True)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+___________________________ test_admin_order_detail ___________________________
+
+client = <FlaskClient <Flask 'app'>>
+admin_user = {'id': 'test-admin-dash-uid', 'supabase_uid': 'test-admin-dash-uid', 'email': 'admindash@example.com'}
+admin_test_data = {'p_low_id': 2, 'o1_id': 1, 'o2_id': 2}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6647E6C0>
+
+    def test_admin_order_detail(client, admin_user, admin_test_data, monkeypatch):
+        """Test GET /api/v1/admin/orders/<id> includes customer snapshot, items, and payments."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        o1_id = admin_test_data["o1_id"]
+        response = client.get(f"/api/v1/admin/orders/{o1_id}", headers={"Authorization": "Bearer admin-token"})
+>       assert response.status_code == 200
+E       assert 500 == 200
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_admin.py:225: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:23] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:23] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:23] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:23] [ERROR] [app]: Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 193, in get_admin_order_detail
+    res = serialize_order(order, include_items=True)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 193, in get_admin_order_detail
+    res = serialize_order(order, include_items=True)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+____________________ test_admin_customers_list_and_detail _____________________
+
+client = <FlaskClient <Flask 'app'>>
+admin_user = {'id': 'test-admin-dash-uid', 'supabase_uid': 'test-admin-dash-uid', 'email': 'admindash@example.com'}
+customer_user = {'id': 'test-cust-dash-uid', 'supabase_uid': 'test-cust-dash-uid', 'email': 'alice@example.com'}
+admin_test_data = {'p_low_id': 2, 'o1_id': 1, 'o2_id': 2}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A677B7070>
+
+    def test_admin_customers_list_and_detail(client, admin_user, customer_user, admin_test_data, monkeypatch):
+        """Test GET /api/v1/admin/customers and GET /api/v1/admin/customers/<id>."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        # Customer List
+        res_list = client.get("/api/v1/admin/customers", headers={"Authorization": "Bearer admin-token"})
+        assert res_list.status_code == 200
+        custs = res_list.get_json()["data"]
+        assert len(custs) == 1
+        assert custs[0]["email"] == "alice@example.com"
+        assert custs[0]["total_spent"] == 2500.0
+        assert "password" not in custs[0]
+    
+        # Customer Detail
+        c_id = customer_user["id"]
+        res_detail = client.get(f"/api/v1/admin/customers/{c_id}", headers={"Authorization": "Bearer admin-token"})
+>       assert res_detail.status_code == 200
+E       assert 500 == 200
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_admin.py:252: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:23] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:23] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:23] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:23] [ERROR] [app]: Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 349, in get_admin_customer_detail
+    profile_data["recent_orders"] = [serialize_order(o, include_items=False) for o in recent_orders]
+                                     ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 349, in get_admin_customer_detail
+    profile_data["recent_orders"] = [serialize_order(o, include_items=False) for o in recent_orders]
+                                     ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+_____________________ test_admin_customer_orders_history ______________________
+
+client = <FlaskClient <Flask 'app'>>
+admin_user = {'id': 'test-admin-dash-uid', 'supabase_uid': 'test-admin-dash-uid', 'email': 'admindash@example.com'}
+customer_user = {'id': 'test-cust-dash-uid', 'supabase_uid': 'test-cust-dash-uid', 'email': 'alice@example.com'}
+admin_test_data = {'p_low_id': 2, 'o1_id': 1, 'o2_id': 2}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A67A24050>
+
+    def test_admin_customer_orders_history(client, admin_user, customer_user, admin_test_data, monkeypatch):
+        """Test GET /api/v1/admin/customers/<id>/orders."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        c_id = customer_user["id"]
+        response = client.get(f"/api/v1/admin/customers/{c_id}/orders", headers={"Authorization": "Bearer admin-token"})
+>       assert response.status_code == 200
+E       assert 500 == 200
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_admin.py:267: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:23] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:23] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:23] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:23] [ERROR] [app]: Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 386, in get_admin_customer_orders
+    "data": [serialize_order(order, include_items=True) for order in pagination.items],
+             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 386, in get_admin_customer_orders
+    "data": [serialize_order(order, include_items=True) for order in pagination.items],
+             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+_______________________ test_cod_order_creation_success _______________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-cod-a-uid', 'supabase_uid': 'test-customer-cod-a-uid', 'email': 'cod_a@example.com'}
+cod_setup = {'p1_id': 1, 'p_out_id': 2, 'addr_a_id': 1, 'addr_b_id': 2, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A67B1CD70>
+
+    def test_cod_order_creation_success(client, app, customer_user_a, cod_setup, monkeypatch):
+        """TEST 1-5, 8, 15, 16, 17: Valid COD order checkout, initial states, stock deduction, and cart clearing."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        p1_id = cod_setup["p1_id"]
+    
+        # Add item to cart
+        client.post("/api/v1/cart", json={"product_id": p1_id, "quantity": 2}, headers={"Authorization": "Bearer token-a"})
+    
+        # Create COD Order
+        response = client.post(
+            "/api/v1/orders",
+            json={"address_id": cod_setup["addr_a_id"], "payment_method": "cod", "coupon_code": cod_setup["coupon_code"]},
+            headers={"Authorization": "Bearer token-a"},
+        )
+>       assert response.status_code == 201
+E       assert 500 == 201
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_cod.py:148: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:27] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:27] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:27] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:27] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_________________ test_cod_order_cannot_create_razorpay_order _________________
+
+client = <FlaskClient <Flask 'app'>>
+customer_user_a = {'id': 'test-customer-cod-a-uid', 'supabase_uid': 'test-customer-cod-a-uid', 'email': 'cod_a@example.com'}
+cod_setup = {'p1_id': 1, 'p_out_id': 2, 'addr_a_id': 1, 'addr_b_id': 2, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6A656040>
+
+    def test_cod_order_cannot_create_razorpay_order(client, customer_user_a, cod_setup, monkeypatch):
+        """TEST 6, 7: COD order rejects Razorpay order creation calls."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        # Create COD order
+        client.post("/api/v1/cart", json={"product_id": cod_setup["p1_id"], "quantity": 1}, headers={"Authorization": "Bearer token-a"})
+        res_ord = client.post("/api/v1/orders", json={"address_id": cod_setup["addr_a_id"], "payment_method": "cod"}, headers={"Authorization": "Bearer token-a"})
+>       cod_order_id = res_ord.get_json()["data"]["id"]
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_cod.py:189: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:27] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:27] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:27] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:27] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+___________________ test_online_payment_flow_remains_intact ___________________
+
+client = <FlaskClient <Flask 'app'>>
+customer_user_a = {'id': 'test-customer-cod-a-uid', 'supabase_uid': 'test-customer-cod-a-uid', 'email': 'cod_a@example.com'}
+cod_setup = {'p1_id': 1, 'p_out_id': 2, 'addr_a_id': 1, 'addr_b_id': 2, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6951D160>
+
+    def test_online_payment_flow_remains_intact(client, customer_user_a, cod_setup, monkeypatch):
+        """TEST 9, 10: Online payment flow works and creates Razorpay Order."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        client.post("/api/v1/cart", json={"product_id": cod_setup["p1_id"], "quantity": 1}, headers={"Authorization": "Bearer token-a"})
+        res_ord = client.post("/api/v1/orders", json={"address_id": cod_setup["addr_a_id"], "payment_method": "online"}, headers={"Authorization": "Bearer token-a"})
+>       online_order_id = res_ord.get_json()["data"]["id"]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_cod.py:209: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:27] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:27] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:27] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:27] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_____________ test_cod_cancellation_restores_stock_without_refund _____________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-cod-a-uid', 'supabase_uid': 'test-customer-cod-a-uid', 'email': 'cod_a@example.com'}
+cod_setup = {'p1_id': 1, 'p_out_id': 2, 'addr_a_id': 1, 'addr_b_id': 2, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A67C54D00>
+
+    def test_cod_cancellation_restores_stock_without_refund(client, app, customer_user_a, cod_setup, monkeypatch):
+        """TEST 18, 19: COD order cancellation restores stock and leaves payment_status=pending without refunds."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        p1_id = cod_setup["p1_id"]  # stock = 10
+    
+        client.post("/api/v1/cart", json={"product_id": p1_id, "quantity": 2}, headers={"Authorization": "Bearer token-a"})
+        res_create = client.post("/api/v1/orders", json={"address_id": cod_setup["addr_a_id"], "payment_method": "cod"}, headers={"Authorization": "Bearer token-a"})
+>       order_id = res_create.get_json()["data"]["id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_cod.py:289: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:28] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:28] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:28] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:28] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+__________________ test_razorpay_webhook_ignores_cod_payment __________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-cod-a-uid', 'supabase_uid': 'test-customer-cod-a-uid', 'email': 'cod_a@example.com'}
+cod_setup = {'p1_id': 1, 'p_out_id': 2, 'addr_a_id': 1, 'addr_b_id': 2, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A67B40F30>
+
+    def test_razorpay_webhook_ignores_cod_payment(client, app, customer_user_a, cod_setup, monkeypatch):
+        """TEST 20: Razorpay webhook does NOT affect or update COD orders."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        client.post("/api/v1/cart", json={"product_id": cod_setup["p1_id"], "quantity": 1}, headers={"Authorization": "Bearer token-a"})
+        res_create = client.post("/api/v1/orders", json={"address_id": cod_setup["addr_a_id"], "payment_method": "cod"}, headers={"Authorization": "Bearer token-a"})
+>       cod_order_id = res_create.get_json()["data"]["id"]
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_cod.py:312: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:28] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:28] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:28] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:28] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_________ test_admin_cod_payment_confirmation_and_revenue_accounting __________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+admin_user = {'id': 'test-admin-cod-uid', 'supabase_uid': 'test-admin-cod-uid', 'email': 'admincod@example.com'}
+customer_user_a = {'id': 'test-customer-cod-a-uid', 'supabase_uid': 'test-customer-cod-a-uid', 'email': 'cod_a@example.com'}
+cod_setup = {'p1_id': 1, 'p_out_id': 2, 'addr_a_id': 1, 'addr_b_id': 2, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A65F53E00>
+
+    def test_admin_cod_payment_confirmation_and_revenue_accounting(client, app, admin_user, customer_user_a, cod_setup, monkeypatch):
+        """TEST 21, 22, 23: Admin confirms COD payment collection, and revenue metrics include paid COD while excluding pending COD."""
+        # Create COD order as customer
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        client.post("/api/v1/cart", json={"product_id": cod_setup["p1_id"], "quantity": 1}, headers={"Authorization": "Bearer token-a"})
+        res_create = client.post("/api/v1/orders", json={"address_id": cod_setup["addr_a_id"], "payment_method": "cod"}, headers={"Authorization": "Bearer token-a"})
+>       cod_order_id = res_create.get_json()["data"]["id"]
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_cod.py:341: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:28] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:28] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:28] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:58:28] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_______________________ test_admin_customer_management ________________________
+
+client = <FlaskClient <Flask 'app'>>
+test_setup = {'prod_id': 1, 'user_a_id': 'supa-uuid-cust-a', 'user_a_email': 'customer_a@example.com', 'user_a_uid': 'supa-uuid-cust-a', ...}
+
+    def test_admin_customer_management(client, test_setup):
+        """Test Admin endpoints for listing customers and inspecting full customer details & sub-resources."""
+        headers_admin = {"Authorization": f"Bearer dev-admin-token-{test_setup['admin_email']}"}
+    
+        # Admin list customers
+        res = client.get("/api/v1/admin/customers", headers=headers_admin)
+        assert res.status_code == 200
+        assert len(res.json["data"]) >= 2
+    
+        cust_a_id = test_setup["user_a_id"]
+    
+        # Admin inspect customer detail
+        res = client.get(f"/api/v1/admin/customers/{cust_a_id}", headers=headers_admin)
+        assert res.status_code == 200
+        assert res.json["data"]["email"] == test_setup["user_a_email"]
+    
+        # Admin inspect sub-resources
+        for sub in ["orders", "payments", "addresses", "cart", "wishlist", "search-history", "reviews", "login-logs"]:
+            res = client.get(f"/api/v1/admin/customers/{cust_a_id}/{sub}", headers=headers_admin)
+>           assert res.status_code == 200, f"Failed on sub-resource: {sub}"
+E           AssertionError: Failed on sub-resource: login-logs
+E           assert 500 == 200
+E            +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_customer_data.py:191: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:58:44] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:58:44] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:58:44] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:12] [ERROR] [app]: Unhandled Exception: 'property' object has no attribute 'desc'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 55, in decorated_function
+    user_info = supabase_auth.verify_token(token)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\supabase_client.py", line 138, in verify_token
+    raise APIException("Invalid or expired access token", status_code=401, code="UNAUTHORIZED")
+app.errors.APIException: Invalid or expired access token
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 77, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 631, in get_admin_customer_login_logs
+    .order_by(CustomerLoginLog.login_at.desc())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'property' object has no attribute 'desc'
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'property' object has no attribute 'desc'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 55, in decorated_function
+    user_info = supabase_auth.verify_token(token)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\supabase_client.py", line 138, in verify_token
+    raise APIException("Invalid or expired access token", status_code=401, code="UNAUTHORIZED")
+app.errors.APIException: Invalid or expired access token
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 77, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\admin.py", line 631, in get_admin_customer_login_logs
+    .order_by(CustomerLoginLog.login_at.desc())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'property' object has no attribute 'desc'
+________________________ test_create_order_success_cod ________________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-a-ord-uid', 'supabase_uid': 'test-customer-a-ord-uid', 'email': 'customeraord@example.com'}
+checkout_setup = {'p1_id': 1, 'p2_id': 2, 'p_inactive_id': 3, 'addr_a_id': 1, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6A853460>
+
+    def test_create_order_success_cod(client, app, customer_user_a, checkout_setup, monkeypatch):
+        """TEST 1: Create order with valid cart + valid address + COD."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        p1_id = checkout_setup["p1_id"]
+        addr_a_id = checkout_setup["addr_a_id"]
+    
+        # Add 2 items to cart (2000.0 * 2 = 4000.0)
+        client.post(
+            "/api/v1/cart",
+            json={"product_id": p1_id, "quantity": 2},
+            headers={"Authorization": "Bearer mock-token"},
+        )
+    
+        response = client.post(
+            "/api/v1/orders",
+            json={"address_id": addr_a_id, "payment_method": "cod"},
+            headers={"Authorization": "Bearer mock-token"},
+        )
+>       assert response.status_code == 201
+E       assert 500 == 201
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_orders.py:169: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:18] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:18] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:18] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:19] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+__________________ test_create_order_online_payment_pending ___________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-a-ord-uid', 'supabase_uid': 'test-customer-a-ord-uid', 'email': 'customeraord@example.com'}
+checkout_setup = {'p1_id': 1, 'p2_id': 2, 'p_inactive_id': 3, 'addr_a_id': 1, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6A7CC750>
+
+    def test_create_order_online_payment_pending(client, app, customer_user_a, checkout_setup, monkeypatch):
+        """TEST 2: Create order with online payment method has payment_status=pending without Razorpay calls."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        p1_id = checkout_setup["p1_id"]
+        addr_a_id = checkout_setup["addr_a_id"]
+    
+        client.post(
+            "/api/v1/cart",
+            json={"product_id": p1_id, "quantity": 1},
+            headers={"Authorization": "Bearer mock-token"},
+        )
+    
+        response = client.post(
+            "/api/v1/orders",
+            json={"address_id": addr_a_id, "payment_method": "online"},
+            headers={"Authorization": "Bearer mock-token"},
+        )
+>       assert response.status_code == 201
+E       assert 500 == 201
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_orders.py:208: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:19] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:19] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:19] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:19] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_____________________ test_create_order_with_valid_coupon _____________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-a-ord-uid', 'supabase_uid': 'test-customer-a-ord-uid', 'email': 'customeraord@example.com'}
+checkout_setup = {'p1_id': 1, 'p2_id': 2, 'p_inactive_id': 3, 'addr_a_id': 1, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6AEEBEE0>
+
+    def test_create_order_with_valid_coupon(client, app, customer_user_a, checkout_setup, monkeypatch):
+        """TEST 8: Order with valid percentage coupon calculates correct discount and creates coupon usage."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        p1_id = checkout_setup["p1_id"]  # price 2000.0
+    
+        client.post(
+            "/api/v1/cart",
+            json={"product_id": p1_id, "quantity": 1},
+            headers={"Authorization": "Bearer mock-token"},
+        )
+    
+        response = client.post(
+            "/api/v1/orders",
+            json={
+                "address_id": checkout_setup["addr_a_id"],
+                "payment_method": "cod",
+                "coupon_code": "SAVE10",
+            },
+            headers={"Authorization": "Bearer mock-token"},
+        )
+>       assert response.status_code == 201
+E       assert 500 == 201
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_orders.py:307: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:19] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:19] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:19] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:19] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_________________ test_get_user_orders_and_single_order_idor __________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-a-ord-uid', 'supabase_uid': 'test-customer-a-ord-uid', 'email': 'customeraord@example.com'}
+customer_user_b = {'id': 'test-customer-b-ord-uid', 'supabase_uid': 'test-customer-b-ord-uid', 'email': 'customerbord@example.com'}
+checkout_setup = {'p1_id': 1, 'p2_id': 2, 'p_inactive_id': 3, 'addr_a_id': 1, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A68075F60>
+
+    def test_get_user_orders_and_single_order_idor(client, app, customer_user_a, customer_user_b, checkout_setup, monkeypatch):
+        """TEST 12, 13, 14: Customer can view their own order details, but User B cannot view User A's order."""
+        # User A creates order
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        client.post("/api/v1/cart", json={"product_id": checkout_setup["p1_id"], "quantity": 1}, headers={"Authorization": "Bearer token-a"})
+        res_create = client.post("/api/v1/orders", json={"address_id": checkout_setup["addr_a_id"], "payment_method": "cod"}, headers={"Authorization": "Bearer token-a"})
+>       order_a_id = res_create.get_json()["data"]["id"]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_orders.py:354: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:20] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:20] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:20] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:20] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_____________ test_cancel_order_and_idempotent_stock_restoration ______________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-a-ord-uid', 'supabase_uid': 'test-customer-a-ord-uid', 'email': 'customeraord@example.com'}
+checkout_setup = {'p1_id': 1, 'p2_id': 2, 'p_inactive_id': 3, 'addr_a_id': 1, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6AE34520>
+
+    def test_cancel_order_and_idempotent_stock_restoration(client, app, customer_user_a, checkout_setup, monkeypatch):
+        """TEST 15, 18: Cancel pending order restores stock and is idempotent."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        p1_id = checkout_setup["p1_id"]  # initial stock = 10
+    
+        client.post("/api/v1/cart", json={"product_id": p1_id, "quantity": 2}, headers={"Authorization": "Bearer token-a"})
+        res_create = client.post("/api/v1/orders", json={"address_id": checkout_setup["addr_a_id"], "payment_method": "cod"}, headers={"Authorization": "Bearer token-a"})
+>       order_id = res_create.get_json()["data"]["id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_orders.py:380: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:20] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:20] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:20] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:20] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_____________________ test_admin_order_status_transitions _____________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+admin_user = {'id': 'test-admin-ord-uid', 'supabase_uid': 'test-admin-ord-uid', 'email': 'adminord@example.com'}
+customer_user_a = {'id': 'test-customer-a-ord-uid', 'supabase_uid': 'test-customer-a-ord-uid', 'email': 'customeraord@example.com'}
+checkout_setup = {'p1_id': 1, 'p2_id': 2, 'p_inactive_id': 3, 'addr_a_id': 1, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A67F20B40>
+
+    def test_admin_order_status_transitions(client, app, admin_user, customer_user_a, checkout_setup, monkeypatch):
+        """TEST 19-24: Admin state machine transitions and invalid transition rejection."""
+        # Create order as Customer A
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        client.post("/api/v1/cart", json={"product_id": checkout_setup["p1_id"], "quantity": 1}, headers={"Authorization": "Bearer token-a"})
+        res_create = client.post("/api/v1/orders", json={"address_id": checkout_setup["addr_a_id"], "payment_method": "cod"}, headers={"Authorization": "Bearer token-a"})
+>       order_id = res_create.get_json()["data"]["id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_orders.py:414: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:20] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:20] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:20] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:20] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_______________ test_webhook_1_valid_signature_event_processed ________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-pay-a-uid', 'supabase_uid': 'test-customer-pay-a-uid', 'email': 'pay_a@example.com'}
+payment_setup = {'order_online_id': 1, 'order_cod_id': 2, 'order_paid_id': 3}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6922A9E0>
+
+    def test_webhook_1_valid_signature_event_processed(client, app, customer_user_a, payment_setup, monkeypatch):
+        """TEST 1: Valid webhook signature -> 200, event processed."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        res_create = client.post("/api/v1/payments/razorpay/create-order", json={"order_id": payment_setup["order_online_id"]}, headers={"Authorization": "Bearer token-a"})
+        rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+    
+        payload = {
+            "event_id": "evt_test_001",
+            "event": "payment.captured",
+            "payload": {"payment": {"entity": {"id": "pay_test_001", "order_id": rzp_order_id, "amount": 150000, "status": "captured"}}},
+        }
+        body = json.dumps(payload).encode("utf-8")
+        sig = generate_webhook_signature(app, body)
+    
+        response = client.post("/api/v1/payments/razorpay/webhook", data=body, content_type="application/json", headers={"X-Razorpay-Signature": sig})
+        assert response.status_code == 200
+        assert response.get_json()["success"] is True
+    
+        with app.app_context():
+            order = db.session.get(Order, payment_setup["order_online_id"])
+>           assert order.payment_status == "paid"
+E           AssertionError: assert 'captured' == 'paid'
+E             
+E             - paid
+E             + captured
+
+tests\test_payments.py:164: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:20] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:20] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:20] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:20] [INFO] [app]: Razorpay SDK client initialized successfully.
+[2026-08-25 15:59:22] [INFO] [app]: Razorpay Order created: order_TTyCBzgAehnjzF
+[2026-08-25 15:59:22] [ERROR] [app]: Automatic Shiprocket Webhook fulfillment failed for order ORD-2026-ONLINE: 'Order' object has no attribute 'shipping_address_line2'
+------------------------------ Captured log call ------------------------------
+INFO     app:razorpay_service.py:43 Razorpay SDK client initialized successfully.
+INFO     app:razorpay_service.py:83 Razorpay Order created: order_TTyCBzgAehnjzF
+ERROR    app:payments.py:318 Automatic Shiprocket Webhook fulfillment failed for order ORD-2026-ONLINE: 'Order' object has no attribute 'shipping_address_line2'
+__________ test_webhook_5_payment_captured_updates_payment_and_order __________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-pay-a-uid', 'supabase_uid': 'test-customer-pay-a-uid', 'email': 'pay_a@example.com'}
+payment_setup = {'order_online_id': 1, 'order_cod_id': 2, 'order_paid_id': 3}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A67CCB3F0>
+
+    def test_webhook_5_payment_captured_updates_payment_and_order(client, app, customer_user_a, payment_setup, monkeypatch):
+        """TEST 5: payment.captured -> payment.status = captured, order.payment_status = paid."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        res_create = client.post("/api/v1/payments/razorpay/create-order", json={"order_id": payment_setup["order_online_id"]}, headers={"Authorization": "Bearer token-a"})
+        rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+    
+        payload = {
+            "event_id": "evt_captured_005",
+            "event": "payment.captured",
+            "payload": {"payment": {"entity": {"id": "pay_cap_005", "order_id": rzp_order_id}}},
+        }
+        body = json.dumps(payload).encode("utf-8")
+        sig = generate_webhook_signature(app, body)
+    
+        response = client.post("/api/v1/payments/razorpay/webhook", data=body, content_type="application/json", headers={"X-Razorpay-Signature": sig})
+        assert response.status_code == 200
+    
+        with app.app_context():
+            p = Payment.query.filter_by(provider_order_id=rzp_order_id).first()
+            assert p.status == "captured"
+>           assert p.order.payment_status == "paid"
+E           AssertionError: assert 'captured' == 'paid'
+E             
+E             - paid
+E             + captured
+
+tests\test_payments.py:239: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:22] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:22] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:22] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:22] [INFO] [app]: Razorpay Order created: order_TTyCCy60PUwpeO
+[2026-08-25 15:59:22] [ERROR] [app]: Automatic Shiprocket Webhook fulfillment failed for order ORD-2026-ONLINE: 'Order' object has no attribute 'shipping_address_line2'
+------------------------------ Captured log call ------------------------------
+INFO     app:razorpay_service.py:83 Razorpay Order created: order_TTyCCy60PUwpeO
+ERROR    app:payments.py:318 Automatic Shiprocket Webhook fulfillment failed for order ORD-2026-ONLINE: 'Order' object has no attribute 'shipping_address_line2'
+__________ test_webhook_7_order_paid_synchronizes_payment_and_order ___________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-pay-a-uid', 'supabase_uid': 'test-customer-pay-a-uid', 'email': 'pay_a@example.com'}
+payment_setup = {'order_online_id': 1, 'order_cod_id': 2, 'order_paid_id': 3}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A659D0590>
+
+    def test_webhook_7_order_paid_synchronizes_payment_and_order(client, app, customer_user_a, payment_setup, monkeypatch):
+        """TEST 7: order.paid -> payment/order synchronized."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        res_create = client.post("/api/v1/payments/razorpay/create-order", json={"order_id": payment_setup["order_online_id"]}, headers={"Authorization": "Bearer token-a"})
+        rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+    
+        payload = {
+            "event_id": "evt_order_paid_007",
+            "event": "order.paid",
+            "payload": {"payment": {"entity": {"id": "pay_ord_paid_007", "order_id": rzp_order_id}}},
+        }
+        body = json.dumps(payload).encode("utf-8")
+        sig = generate_webhook_signature(app, body)
+    
+        response = client.post("/api/v1/payments/razorpay/webhook", data=body, content_type="application/json", headers={"X-Razorpay-Signature": sig})
+        assert response.status_code == 200
+    
+        with app.app_context():
+            p = Payment.query.filter_by(provider_order_id=rzp_order_id).first()
+            assert p.status == "captured"
+>           assert p.order.payment_status == "paid"
+E           AssertionError: assert 'captured' == 'paid'
+E             
+E             - paid
+E             + captured
+
+tests\test_payments.py:293: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:23] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:23] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:23] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:23] [INFO] [app]: Razorpay Order created: order_TTyCDd9f5jZrZz
+[2026-08-25 15:59:23] [ERROR] [app]: Automatic Shiprocket Webhook fulfillment failed for order ORD-2026-ONLINE: 'Order' object has no attribute 'shipping_address_line2'
+------------------------------ Captured log call ------------------------------
+INFO     app:razorpay_service.py:83 Razorpay Order created: order_TTyCDd9f5jZrZz
+ERROR    app:payments.py:318 Automatic Shiprocket Webhook fulfillment failed for order ORD-2026-ONLINE: 'Order' object has no attribute 'shipping_address_line2'
+________ test_webhook_10_late_event_cannot_downgrade_captured_payment _________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-pay-a-uid', 'supabase_uid': 'test-customer-pay-a-uid', 'email': 'pay_a@example.com'}
+payment_setup = {'order_online_id': 1, 'order_cod_id': 2, 'order_paid_id': 3}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A67FFEA50>
+
+    def test_webhook_10_late_event_cannot_downgrade_captured_payment(client, app, customer_user_a, payment_setup, monkeypatch):
+        """TEST 10: Late event (payment.failed) cannot downgrade an already captured payment."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        res_create = client.post("/api/v1/payments/razorpay/create-order", json={"order_id": payment_setup["order_online_id"]}, headers={"Authorization": "Bearer token-a"})
+        rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+    
+        # 1. Capture payment first
+        payload1 = {
+            "event_id": "evt_cap_first_010",
+            "event": "payment.captured",
+            "payload": {"payment": {"entity": {"id": "pay_010", "order_id": rzp_order_id}}},
+        }
+        body1 = json.dumps(payload1).encode("utf-8")
+        sig1 = generate_webhook_signature(app, body1)
+        client.post("/api/v1/payments/razorpay/webhook", data=body1, content_type="application/json", headers={"X-Razorpay-Signature": sig1})
+    
+        # 2. Late failed event arrives
+        payload2 = {
+            "event_id": "evt_late_failed_010",
+            "event": "payment.failed",
+            "payload": {"payment": {"entity": {"id": "pay_010", "order_id": rzp_order_id}}},
+        }
+        body2 = json.dumps(payload2).encode("utf-8")
+        sig2 = generate_webhook_signature(app, body2)
+        res2 = client.post("/api/v1/payments/razorpay/webhook", data=body2, content_type="application/json", headers={"X-Razorpay-Signature": sig2})
+        assert res2.status_code == 200
+    
+        # Verify payment remains 'captured' and order remains 'paid'
+        with app.app_context():
+            p = Payment.query.filter_by(provider_order_id=rzp_order_id).first()
+            assert p.status == "captured"
+>           assert p.order.payment_status == "paid"
+E           AssertionError: assert 'captured' == 'paid'
+E             
+E             - paid
+E             + captured
+
+tests\test_payments.py:362: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:23] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:23] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:23] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:24] [INFO] [app]: Razorpay Order created: order_TTyCEEB8Hepi8q
+[2026-08-25 15:59:24] [ERROR] [app]: Automatic Shiprocket Webhook fulfillment failed for order ORD-2026-ONLINE: 'Order' object has no attribute 'shipping_address_line2'
+------------------------------ Captured log call ------------------------------
+INFO     app:razorpay_service.py:83 Razorpay Order created: order_TTyCEEB8Hepi8q
+ERROR    app:payments.py:318 Automatic Shiprocket Webhook fulfillment failed for order ORD-2026-ONLINE: 'Order' object has no attribute 'shipping_address_line2'
+__________________ test_verify_duplicate_request_idempotency __________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+customer_user_a = {'id': 'test-customer-pay-a-uid', 'supabase_uid': 'test-customer-pay-a-uid', 'email': 'pay_a@example.com'}
+payment_setup = {'order_online_id': 1, 'order_cod_id': 2, 'order_paid_id': 3}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A676FFD20>
+
+    def test_verify_duplicate_request_idempotency(client, app, customer_user_a, payment_setup, monkeypatch):
+        """Duplicate payment verification requests return success without re-processing."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        res_create = client.post("/api/v1/payments/razorpay/create-order", json={"order_id": payment_setup["order_online_id"]}, headers={"Authorization": "Bearer token-a"})
+        rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+    
+        monkeypatch.setattr("app.services.razorpay_service.RazorpayService.verify_payment_signature", lambda o, p, s: True)
+    
+        # First verification
+        res1 = client.post(
+            "/api/v1/payments/razorpay/verify",
+            json={
+                "razorpay_order_id": rzp_order_id,
+                "razorpay_payment_id": "pay_idempotent_01",
+                "razorpay_signature": "sig_mock",
+            },
+            headers={"Authorization": "Bearer token-a"},
+        )
+>       assert res1.status_code == 200
+E       assert 502 == 200
+E        +  where 502 = <WrapperTestResponse streamed [502 BAD GATEWAY]>.status_code
+
+tests\test_payments.py:472: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:25] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:25] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:25] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:26] [INFO] [app]: Razorpay Order created: order_TTyCGLNDnca3vD
+[2026-08-25 15:59:27] [ERROR] [app]: Razorpay fetch payment pay_idempotent_01 failed: The id provided does not exist
+------------------------------ Captured log call ------------------------------
+INFO     app:razorpay_service.py:83 Razorpay Order created: order_TTyCGLNDnca3vD
+ERROR    app:razorpay_service.py:171 Razorpay fetch payment pay_idempotent_01 failed: The id provided does not exist
+_________________ test_admin_create_shipment_prepaid_success __________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+admin_user = {'id': 'test-admin-ship-uid', 'supabase_uid': 'test-admin-ship-uid', 'email': 'adminship@example.com'}
+shipment_setup = {'order_paid_id': 1, 'order_unpaid_id': 2, 'order_cod_id': 3, 'order_cancelled_id': 4}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A65F94440>
+
+    def test_admin_create_shipment_prepaid_success(client, app, admin_user, shipment_setup, monkeypatch):
+        """Test Admin creates shipment for paid prepaid order -> 201 Created with assigned status and AWB."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        o_id = shipment_setup["order_paid_id"]
+    
+        response = client.post("/api/v1/shipments/create", json={"order_id": o_id}, headers={"Authorization": "Bearer admin-token"})
+>       assert response.status_code == 201
+E       assert 400 == 201
+E        +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code
+
+tests\test_shipments.py:210: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:47] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:47] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:47] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+___________________ test_admin_create_shipment_cod_success ____________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+admin_user = {'id': 'test-admin-ship-uid', 'supabase_uid': 'test-admin-ship-uid', 'email': 'adminship@example.com'}
+shipment_setup = {'order_paid_id': 1, 'order_unpaid_id': 2, 'order_cod_id': 3, 'order_cancelled_id': 4}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6C3988A0>
+
+    def test_admin_create_shipment_cod_success(client, app, admin_user, shipment_setup, monkeypatch):
+        """Test Admin creates shipment for confirmed COD order -> 201 Created."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        o_id = shipment_setup["order_cod_id"]
+    
+        response = client.post("/api/v1/shipments/create", json={"order_id": o_id}, headers={"Authorization": "Bearer admin-token"})
+>       assert response.status_code == 201
+E       assert 500 == 201
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_shipments.py:232: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:47] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:47] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:47] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:47] [ERROR] [app]: Unhandled Exception: 'Order' object has no attribute 'shipping_address_line2'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\shipments.py", line 88, in create_shipment
+    shipment, is_created = ShiprocketService.fulfill_order_in_shiprocket(order)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\services\shiprocket_service.py", line 461, in fulfill_order_in_shiprocket
+    "billing_address_2": order.shipping_address_line2 or "",
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'shipping_address_line2'. Did you mean: 'shipping_address_line1'?
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'Order' object has no attribute 'shipping_address_line2'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\shipments.py", line 88, in create_shipment
+    shipment, is_created = ShiprocketService.fulfill_order_in_shiprocket(order)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\services\shiprocket_service.py", line 461, in fulfill_order_in_shiprocket
+    "billing_address_2": order.shipping_address_line2 or "",
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'shipping_address_line2'. Did you mean: 'shipping_address_line1'?
+_____________________ test_duplicate_shipment_prevention ______________________
+
+client = <FlaskClient <Flask 'app'>>
+admin_user = {'id': 'test-admin-ship-uid', 'supabase_uid': 'test-admin-ship-uid', 'email': 'adminship@example.com'}
+shipment_setup = {'order_paid_id': 1, 'order_unpaid_id': 2, 'order_cod_id': 3, 'order_cancelled_id': 4}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A69448D00>
+
+    def test_duplicate_shipment_prevention(client, admin_user, shipment_setup, monkeypatch):
+        """Test duplicate shipment creation calls for same order are idempotent."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        o_id = shipment_setup["order_paid_id"]
+    
+        res1 = client.post("/api/v1/shipments/create", json={"order_id": o_id}, headers={"Authorization": "Bearer admin-token"})
+>       assert res1.status_code == 201
+E       assert 400 == 201
+E        +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code
+
+tests\test_shipments.py:265: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:48] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:48] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:48] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+__________________ test_customer_shipment_tracking_and_idor ___________________
+
+client = <FlaskClient <Flask 'app'>>
+customer_user_a = {'id': 'test-customer-ship-a-uid', 'supabase_uid': 'test-customer-ship-a-uid', 'email': 'ship_a@example.com'}
+customer_user_b = {'id': 'test-customer-ship-b-uid', 'supabase_uid': 'test-customer-ship-b-uid', 'email': 'ship_b@example.com'}
+admin_user = {'id': 'test-admin-ship-uid', 'supabase_uid': 'test-admin-ship-uid', 'email': 'adminship@example.com'}
+shipment_setup = {'order_paid_id': 1, 'order_unpaid_id': 2, 'order_cod_id': 3, 'order_cancelled_id': 4}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6C39A0B0>
+
+    def test_customer_shipment_tracking_and_idor(client, customer_user_a, customer_user_b, admin_user, shipment_setup, monkeypatch):
+        """Test Customer tracking endpoint is IDOR protected."""
+        # Create shipment first as Admin
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        res_create = client.post("/api/v1/shipments/create", json={"order_id": shipment_setup["order_paid_id"]}, headers={"Authorization": "Bearer admin-token"})
+>       shipment_id = res_create.get_json()["data"]["id"]
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_shipments.py:280: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:48] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:48] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:48] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+________________ test_customer_order_detail_includes_shipment _________________
+
+client = <FlaskClient <Flask 'app'>>
+customer_user_a = {'id': 'test-customer-ship-a-uid', 'supabase_uid': 'test-customer-ship-a-uid', 'email': 'ship_a@example.com'}
+admin_user = {'id': 'test-admin-ship-uid', 'supabase_uid': 'test-admin-ship-uid', 'email': 'adminship@example.com'}
+shipment_setup = {'order_paid_id': 1, 'order_unpaid_id': 2, 'order_cod_id': 3, 'order_cancelled_id': 4}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A660E1E80>
+
+    def test_customer_order_detail_includes_shipment(client, customer_user_a, admin_user, shipment_setup, monkeypatch):
+        """Test GET /api/v1/orders/<id> enriches response with active shipment snapshot."""
+        # Admin creates shipment
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        o_id = shipment_setup["order_paid_id"]
+        client.post("/api/v1/shipments/create", json={"order_id": o_id}, headers={"Authorization": "Bearer admin-token"})
+    
+        # Customer retrieves order
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": customer_user_a["supabase_uid"], "email": customer_user_a["email"]},
+        )
+        response = client.get(f"/api/v1/orders/{o_id}", headers={"Authorization": "Bearer token-a"})
+>       assert response.status_code == 200
+E       assert 500 == 200
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_shipments.py:316: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:48] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:48] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:48] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:48] [ERROR] [app]: Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 397, in get_order_detail
+    "data": serialize_order(order, include_items=True)
+            ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'Order' object has no attribute 'notes'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 397, in get_order_detail
+    "data": serialize_order(order, include_items=True)
+            ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 43, in serialize_order
+    "notes": order.notes,
+             ^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'notes'
+___________ test_shiprocket_webhook_status_sync_and_cod_collection ____________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+admin_user = {'id': 'test-admin-ship-uid', 'supabase_uid': 'test-admin-ship-uid', 'email': 'adminship@example.com'}
+shipment_setup = {'order_paid_id': 1, 'order_unpaid_id': 2, 'order_cod_id': 3, 'order_cancelled_id': 4}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A65F956A0>
+
+    def test_shiprocket_webhook_status_sync_and_cod_collection(client, app, admin_user, shipment_setup, monkeypatch):
+        """Test Shiprocket Webhook synchronizes status and confirms COD payment collection upon delivery."""
+        # 1. Create COD Shipment
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        o_id = shipment_setup["order_cod_id"]
+        res_create = client.post("/api/v1/shipments/create", json={"order_id": o_id}, headers={"Authorization": "Bearer admin-token"})
+>       awb_code = res_create.get_json()["data"]["awb_code"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_shipments.py:331: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:48] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:48] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:48] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:48] [ERROR] [app]: Unhandled Exception: 'Order' object has no attribute 'shipping_address_line2'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\shipments.py", line 88, in create_shipment
+    shipment, is_created = ShiprocketService.fulfill_order_in_shiprocket(order)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\services\shiprocket_service.py", line 461, in fulfill_order_in_shiprocket
+    "billing_address_2": order.shipping_address_line2 or "",
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'shipping_address_line2'. Did you mean: 'shipping_address_line1'?
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'Order' object has no attribute 'shipping_address_line2'
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 138, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\shipments.py", line 88, in create_shipment
+    shipment, is_created = ShiprocketService.fulfill_order_in_shiprocket(order)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\services\shiprocket_service.py", line 461, in fulfill_order_in_shiprocket
+    "billing_address_2": order.shipping_address_line2 or "",
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'shipping_address_line2'. Did you mean: 'shipping_address_line1'?
+_________ test_shiprocket_webhook_token_verification_and_idempotency __________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+admin_user = {'id': 'test-admin-ship-uid', 'supabase_uid': 'test-admin-ship-uid', 'email': 'adminship@example.com'}
+shipment_setup = {'order_paid_id': 1, 'order_unpaid_id': 2, 'order_cod_id': 3, 'order_cancelled_id': 4}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A67C0CFA0>
+
+    def test_shiprocket_webhook_token_verification_and_idempotency(client, app, admin_user, shipment_setup, monkeypatch):
+        """Test webhook rejects invalid token and handles duplicate event IDs idempotently."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        res_create = client.post("/api/v1/shipments/create", json={"order_id": shipment_setup["order_paid_id"]}, headers={"Authorization": "Bearer admin-token"})
+>       awb_code = res_create.get_json()["data"]["awb_code"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_shipments.py:382: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:48] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:48] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:48] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+_______________________ test_shiprocket_service_methods _______________________
+
+app = <Flask 'app'>
+
+    def test_shiprocket_service_methods(app):
+        """Test core ShiprocketService methods in test/mock mode."""
+        with app.app_context():
+            token = ShiprocketService.get_auth_token()
+>           assert token == "mock_shiprocket_jwt_token"
+E           AssertionError: assert 'eyJhbGciOiJI...nzDn2J2fNt3k8' == 'mock_shiprocket_jwt_token'
+E             
+E             - mock_shiprocket_jwt_token
+E             + eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExNjQ0MzMyLCJzb3VyY2UiOiJzci1hdXRoLWludCIsImV4cCI6MTc4ODUxNzc4NywianRpIjoicGJnQmszQnhPaWZhT3B5TCIsImlhdCI6MTc4NzY1Mzc4NywiaXNzIjoiaHR0cHM6Ly9zci1hdXRoLnNoaXByb2NrZXQuaW4vYXV0aG9yaXplL3VzZXIiLCJuYmYiOjE3ODc2NTM3ODcsImNpZCI6MTEzMzQ0MDEsInRjIjozNjAsInZlcmJvc2UiOmZhbHNlLCJ2ZW5kb3JfaWQiOjAsInZlbmRvcl9jb2RlIjoiIn0.fj8g5exrUMixhPNFjIjctkHv0j6Cx-nzDn2J2fNt3k8
+
+tests\test_shiprocket_integration.py:100: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:48] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:48] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:48] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+__________________ test_automatic_cod_shiprocket_fulfillment __________________
+
+client = <FlaskClient <Flask 'app'>>
+test_user = {'id': 'test-sr-user-uid', 'supabase_uid': 'test-sr-user-uid', 'email': 'sr_user@example.com'}
+setup_catalog_and_address = {'category_id': 1, 'product_id': 1, 'address_id': 1}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A695B3070>
+
+    def test_automatic_cod_shiprocket_fulfillment(client, test_user, setup_catalog_and_address, monkeypatch):
+        """Test that placing a COD order automatically creates the Shiprocket order & shipment."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": test_user["supabase_uid"], "email": test_user["email"]},
+        )
+        headers = {"Authorization": "Bearer mock-token"}
+    
+        # Add item to cart
+        cart_resp = client.post(
+            "/api/v1/cart",
+            json={"product_id": setup_catalog_and_address["product_id"], "quantity": 2},
+            headers=headers,
+        )
+        assert cart_resp.status_code == 201
+    
+        # Place COD order
+        order_resp = client.post(
+            "/api/v1/orders",
+            json={"address_id": setup_catalog_and_address["address_id"], "payment_method": "cod"},
+            headers=headers,
+        )
+>       assert order_resp.status_code == 201
+E       assert 500 == 201
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_shiprocket_integration.py:158: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:49] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:49] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:49] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:49] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+_____________ test_prepaid_payment_verification_auto_fulfillment ______________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+test_user = {'id': 'test-sr-user-uid', 'supabase_uid': 'test-sr-user-uid', 'email': 'sr_user@example.com'}
+setup_catalog_and_address = {'category_id': 1, 'product_id': 1, 'address_id': 1}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A6AA03620>
+
+    def test_prepaid_payment_verification_auto_fulfillment(client, app, test_user, setup_catalog_and_address, monkeypatch):
+        """Test that server-side Razorpay payment verification triggers automatic Shiprocket fulfillment."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": test_user["supabase_uid"], "email": test_user["email"]},
+        )
+        headers = {"Authorization": "Bearer mock-token"}
+    
+        # Add item to cart and create online order
+        client.post(
+            "/api/v1/cart",
+            json={"product_id": setup_catalog_and_address["product_id"], "quantity": 1},
+            headers=headers,
+        )
+        order_resp = client.post(
+            "/api/v1/orders",
+            json={"address_id": setup_catalog_and_address["address_id"], "payment_method": "online"},
+            headers=headers,
+        )
+>       assert order_resp.status_code == 201
+E       assert 500 == 201
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+tests\test_shiprocket_integration.py:190: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:49] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:49] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:49] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:49] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+___________________ test_shiprocket_idempotency_protection ____________________
+
+app = <Flask 'app'>
+test_user = {'id': 'test-sr-user-uid', 'supabase_uid': 'test-sr-user-uid', 'email': 'sr_user@example.com'}
+setup_catalog_and_address = {'category_id': 1, 'product_id': 1, 'address_id': 1}
+
+    def test_shiprocket_idempotency_protection(app, test_user, setup_catalog_and_address):
+        """Verify that calling fulfill_order_in_shiprocket multiple times returns the existing shipment without duplication."""
+        with app.app_context():
+            order = Order(
+                user_id=test_user["id"],
+                address_id=setup_catalog_and_address["address_id"],
+                order_number="ORD-IDEMPOTENT-01",
+                subtotal=2500.00,
+                total_amount=2500.00,
+                payment_method="cod",
+                payment_status="pending",
+                order_status="confirmed",
+                shipping_full_name="SR Test User",
+                shipping_phone="9988776655",
+                shipping_address_line1="45 Tech Park",
+                shipping_city="Bengaluru",
+                shipping_state="Karnataka",
+                shipping_postal_code="560001",
+                shipping_country="India",
+            )
+            db.session.add(order)
+            db.session.flush()
+    
+            item = OrderItem(
+                order_id=order.id,
+                product_id=setup_catalog_and_address["product_id"],
+                product_name="Wireless Headphones",
+                sku="WH-100",
+                quantity=1,
+                unit_price=2500.00,
+                subtotal=2500.00,
+            )
+            db.session.add(item)
+            db.session.commit()
+    
+            # First fulfillment
+>           s1, _ = ShiprocketService.fulfill_order_in_shiprocket(order)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_shiprocket_integration.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'app.services.shiprocket_service.ShiprocketService'>
+order = <Order ORD-IDEMPOTENT-01 (confirmed)>
+
+    @classmethod
+    def fulfill_order_in_shiprocket(cls, order: Order) -> tuple[Shipment, bool]:
+        """High-level atomic orchestrator: create order \u2192 assign AWB \u2192 request pickup
+        and persist all tracking details in the database.
+    
+        Returns (shipment, is_newly_created).
+        """
+        # 1. Idempotency: return existing active shipment
+        existing_shipment = (
+            next((s for s in order.shipments if s.status != "cancelled"), None)
+            if hasattr(order, "shipments") and order.shipments
+            else None
+        )
+        if existing_shipment and existing_shipment.awb_code and existing_shipment.status != "failed":
+            current_app.logger.info(
+                f"Order {order.order_number} already has active shipment {existing_shipment.awb_code}."
+            )
+            return existing_shipment, False
+    
+        # 2. Calculate total weight (kg)
+        total_weight = 0.0
+        for item in order.order_items:
+            item_weight = 0.5
+            if item.product and hasattr(item.product, "weight") and item.product.weight is not None:
+                item_weight = float(item.product.weight)
+            total_weight += item_weight * item.quantity
+    
+        if total_weight <= 0:
+            total_weight = current_app.config.get("SHIPROCKET_DEFAULT_WEIGHT", 0.5)
+        total_weight = round(total_weight, 3)
+    
+        # Configured dimensions & pickup location
+        length = current_app.config.get("SHIPROCKET_DEFAULT_LENGTH", 10)
+        breadth = current_app.config.get("SHIPROCKET_DEFAULT_BREADTH", 10)
+        height = current_app.config.get("SHIPROCKET_DEFAULT_HEIGHT", 10)
+        pickup_loc = current_app.config.get("SHIPROCKET_PICKUP_LOCATION", "Primary")
+    
+        # 3. Construct Shiprocket adhoc order payload
+        order_date_str = (
+            order.created_at.strftime("%Y-%m-%d %H:%M")
+            if order.created_at
+            else datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+        )
+    
+        customer_email = "customer@example.com"
+        if order.user and hasattr(order.user, "email") and order.user.email:
+            customer_email = order.user.email
+    
+        sr_items = [
+            {
+                "name": item.product_name,
+                "sku": item.sku or f"SKU-{item.product_id or item.id}",
+                "units": item.quantity,
+                "selling_price": float(item.unit_price),
+                "discount": 0,
+                "tax": 0,
+            }
+            for item in order.order_items
+        ]
+    
+        sr_payload = {
+            "order_id": order.order_number,
+            "order_date": order_date_str,
+            "pickup_location": pickup_loc,
+            "billing_customer_name": order.shipping_full_name or "Customer",
+            "billing_last_name": "",
+            "billing_address": order.shipping_address_line1 or "",
+>           "billing_address_2": order.shipping_address_line2 or "",
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "billing_city": order.shipping_city or "",
+            "billing_pincode": order.shipping_postal_code or "",
+            "billing_state": order.shipping_state or "",
+            "billing_country": order.shipping_country or "India",
+            "billing_email": customer_email,
+            "billing_phone": order.shipping_phone or "",
+            "shipping_is_billing": True,
+            "order_items": sr_items,
+            "payment_method": "COD" if order.payment_method == "cod" else "Prepaid",
+            "shipping_charges": float(order.shipping_amount),
+            "discount": float(order.discount_amount),
+            "sub_total": float(order.subtotal),
+            "length": length,
+            "breadth": breadth,
+            "height": height,
+            "weight": total_weight,
+        }
+E       AttributeError: 'Order' object has no attribute 'shipping_address_line2'. Did you mean: 'shipping_address_line1'?
+
+app\services\shiprocket_service.py:461: AttributeError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:49] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:49] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:49] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+____________________ test_shiprocket_webhook_status_update ____________________
+
+client = <FlaskClient <Flask 'app'>>, app = <Flask 'app'>
+test_user = {'id': 'test-sr-user-uid', 'supabase_uid': 'test-sr-user-uid', 'email': 'sr_user@example.com'}
+setup_catalog_and_address = {'category_id': 1, 'product_id': 1, 'address_id': 1}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A680696A0>
+
+    def test_shiprocket_webhook_status_update(client, app, test_user, setup_catalog_and_address, monkeypatch):
+        """Test receiving a Shiprocket webhook and verifying shipment/order status updates."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": test_user["supabase_uid"], "email": test_user["email"]},
+        )
+        headers = {"Authorization": "Bearer mock-token"}
+    
+        client.post(
+            "/api/v1/cart",
+            json={"product_id": setup_catalog_and_address["product_id"], "quantity": 1},
+            headers=headers,
+        )
+        order_resp = client.post(
+            "/api/v1/orders",
+            json={"address_id": setup_catalog_and_address["address_id"], "payment_method": "cod"},
+            headers=headers,
+        )
+>       order_id = order_resp.get_json()["data"]["id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'data'
+
+tests\test_shiprocket_integration.py:289: KeyError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:49] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:49] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:49] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 15:59:49] [ERROR] [app]: Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+------------------------------ Captured log call ------------------------------
+ERROR    app:errors.py:87 Unhandled Exception: 'coupon_id' is an invalid keyword argument for Order
+Traceback (most recent call last):
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\auth\decorators.py", line 124, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 343, in create_order
+    raise e
+  File "C:\Users\Vishal\Downloads\Likshora\Likshora\backend\app\api\orders.py", line 247, in create_order
+    order = Order(
+        user_id=g.current_user.id,
+    ...<19 lines>...
+        shipping_country=address.country,
+    )
+  File "<string>", line 4, in __init__
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'coupon_id' is an invalid keyword argument for Order
+________________________ test_admin_shiprocket_actions ________________________
+
+client = <FlaskClient <Flask 'app'>>
+admin_user = {'id': 'test-sr-admin-uid', 'supabase_uid': 'test-sr-admin-uid', 'email': 'sr_admin@example.com'}
+test_user = {'id': 'test-sr-user-uid', 'supabase_uid': 'test-sr-user-uid', 'email': 'sr_user@example.com'}
+setup_catalog_and_address = {'category_id': 1, 'product_id': 1, 'address_id': 1}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021A67A13A10>
+
+    def test_admin_shiprocket_actions(client, admin_user, test_user, setup_catalog_and_address, monkeypatch):
+        """Test admin manual retry, pickup request, label, and manifest generation endpoints."""
+        monkeypatch.setattr(
+            "app.auth.decorators.supabase_auth.verify_token",
+            lambda t: {"id": admin_user["supabase_uid"], "email": admin_user["email"]},
+        )
+        admin_headers = {"Authorization": "Bearer mock-admin-token"}
+    
+        # Create paid order manually
+        with client.application.app_context():
+            order = Order(
+                user_id=test_user["id"],
+                address_id=setup_catalog_and_address["address_id"],
+                order_number="ORD-ADMIN-RETRY-01",
+                subtotal=2500.00,
+                total_amount=2500.00,
+                payment_method="online",
+                payment_status="paid",
+                order_status="confirmed",
+                shipping_full_name="SR Test User",
+                shipping_phone="9988776655",
+                shipping_address_line1="45 Tech Park",
+                shipping_city="Bengaluru",
+                shipping_state="Karnataka",
+                shipping_postal_code="560001",
+                shipping_country="India",
+            )
+            db.session.add(order)
+            db.session.flush()
+    
+            item = OrderItem(
+                order_id=order.id,
+                product_id=setup_catalog_and_address["product_id"],
+                product_name="Wireless Headphones",
+                sku="WH-100",
+                quantity=1,
+                unit_price=2500.00,
+                subtotal=2500.00,
+            )
+            db.session.add(item)
+            db.session.commit()
+            order_id = order.id
+    
+        # Admin manual fulfillment trigger
+        fulfill_resp = client.post(f"/api/v1/admin/orders/{order_id}/fulfill-shiprocket", headers=admin_headers)
+>       assert fulfill_resp.status_code == 200
+E       assert 400 == 200
+E        +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code
+
+tests\test_shiprocket_integration.py:356: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 15:59:49] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 15:59:49] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 15:59:49] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+============================== warnings summary ===============================
+tests/test_customer_data.py::test_customer_data_isolation
+tests/test_customer_data.py::test_search_history
+tests/test_customer_data.py::test_review_submission_and_moderation
+tests/test_customer_data.py::test_admin_customer_management
+tests/test_customer_data.py::test_admin_authorization_enforcement
+tests/test_customer_data.py::test_no_passwords_or_secrets_exposed
+tests/test_security.py::test_26_rate_limiting_on_auth_login
+  C:\Users\Vishal\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'sarebabwvlfpakoedens.supabase.co'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_admin.py::test_admin_orders_list_search_and_filter - assert...
+FAILED tests/test_admin.py::test_admin_order_detail - assert 500 == 200
+FAILED tests/test_admin.py::test_admin_customers_list_and_detail - assert 500...
+FAILED tests/test_admin.py::test_admin_customer_orders_history - assert 500 =...
+FAILED tests/test_cod.py::test_cod_order_creation_success - assert 500 == 201
+FAILED tests/test_cod.py::test_cod_order_cannot_create_razorpay_order - KeyEr...
+FAILED tests/test_cod.py::test_online_payment_flow_remains_intact - KeyError:...
+FAILED tests/test_cod.py::test_cod_cancellation_restores_stock_without_refund
+FAILED tests/test_cod.py::test_razorpay_webhook_ignores_cod_payment - KeyErro...
+FAILED tests/test_cod.py::test_admin_cod_payment_confirmation_and_revenue_accounting
+FAILED tests/test_customer_data.py::test_admin_customer_management - Assertio...
+FAILED tests/test_orders.py::test_create_order_success_cod - assert 500 == 201
+FAILED tests/test_orders.py::test_create_order_online_payment_pending - asser...
+FAILED tests/test_orders.py::test_create_order_with_valid_coupon - assert 500...
+FAILED tests/test_orders.py::test_get_user_orders_and_single_order_idor - Key...
+FAILED tests/test_orders.py::test_cancel_order_and_idempotent_stock_restoration
+FAILED tests/test_orders.py::test_admin_order_status_transitions - KeyError: ...
+FAILED tests/test_payments.py::test_webhook_1_valid_signature_event_processed
+FAILED tests/test_payments.py::test_webhook_5_payment_captured_updates_payment_and_order
+FAILED tests/test_payments.py::test_webhook_7_order_paid_synchronizes_payment_and_order
+FAILED tests/test_payments.py::test_webhook_10_late_event_cannot_downgrade_captured_payment
+FAILED tests/test_payments.py::test_verify_duplicate_request_idempotency - as...
+FAILED tests/test_shipments.py::test_admin_create_shipment_prepaid_success - ...
+FAILED tests/test_shipments.py::test_admin_create_shipment_cod_success - asse...
+FAILED tests/test_shipments.py::test_duplicate_shipment_prevention - assert 4...
+FAILED tests/test_shipments.py::test_customer_shipment_tracking_and_idor - Ke...
+FAILED tests/test_shipments.py::test_customer_order_detail_includes_shipment
+FAILED tests/test_shipments.py::test_shiprocket_webhook_status_sync_and_cod_collection
+FAILED tests/test_shipments.py::test_shiprocket_webhook_token_verification_and_idempotency
+FAILED tests/test_shiprocket_integration.py::test_shiprocket_service_methods
+FAILED tests/test_shiprocket_integration.py::test_automatic_cod_shiprocket_fulfillment
+FAILED tests/test_shiprocket_integration.py::test_prepaid_payment_verification_auto_fulfillment
+FAILED tests/test_shiprocket_integration.py::test_shiprocket_idempotency_protection
+FAILED tests/test_shiprocket_integration.py::test_shiprocket_webhook_status_update
+FAILED tests/test_shiprocket_integration.py::test_admin_shiprocket_actions - ...
+============ 35 failed, 131 passed, 7 warnings in 92.67s (0:01:32) ============

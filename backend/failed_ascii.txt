@@ -1,0 +1,361 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\Vishal\Downloads\Likshora\Likshora\backend
+plugins: anyio-4.10.0
+collected 21 items
+run-last-failure: rerun previous 21 failures (skipped 15 files)
+
+tests\test_cod.py F                                                      [  4%]
+tests\test_payments.py FFFFFFFFFFF                                       [ 57%]
+tests\test_security.py F                                                 [ 61%]
+tests\test_shipments.py FFFFF                                            [ 85%]
+tests\test_shiprocket_integration.py FFF                                 [100%]
+
+================================== FAILURES ===================================
+___________________ test_online_payment_flow_remains_intact ___________________
+tests\test_cod.py:216: in test_online_payment_flow_remains_intact
+    assert res_rzp.status_code == 200
+E   assert 500 == 200
+E    +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:52] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:52] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:52] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:52] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+_______________ test_webhook_1_valid_signature_event_processed ________________
+tests\test_payments.py:148: in test_webhook_1_valid_signature_event_processed
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:53] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:53] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:53] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:53] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+__________________ test_webhook_2_invalid_signature_rejected __________________
+tests\test_payments.py:174: in test_webhook_2_invalid_signature_rejected
+    assert response.status_code == 400
+E   assert 200 == 400
+E    +  where 200 = <WrapperTestResponse streamed [200 OK]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:53] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:53] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:53] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+________________ test_webhook_4_duplicate_event_id_idempotency ________________
+tests\test_payments.py:196: in test_webhook_4_duplicate_event_id_idempotency
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:53] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:53] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:53] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:53] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+__________ test_webhook_5_payment_captured_updates_payment_and_order __________
+tests\test_payments.py:223: in test_webhook_5_payment_captured_updates_payment_and_order
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:53] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:53] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:53] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:53] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+___________ test_webhook_6_payment_failed_updates_payment_and_order ___________
+tests\test_payments.py:251: in test_webhook_6_payment_failed_updates_payment_and_order
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:53] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:53] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:53] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:53] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+__________ test_webhook_7_order_paid_synchronizes_payment_and_order ___________
+tests\test_payments.py:277: in test_webhook_7_order_paid_synchronizes_payment_and_order
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:53] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:53] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:53] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:53] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+________ test_webhook_10_late_event_cannot_downgrade_captured_payment _________
+tests\test_payments.py:335: in test_webhook_10_late_event_cannot_downgrade_captured_payment
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:53] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:53] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:53] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:53] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+__________________ test_verify_customer_ownership_protection __________________
+tests\test_payments.py:377: in test_verify_customer_ownership_protection
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:53] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:53] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:53] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:53] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+___________________ test_verify_order_id_mismatch_rejected ____________________
+tests\test_payments.py:404: in test_verify_order_id_mismatch_rejected
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:53] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:53] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:53] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:54] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+____________________ test_verify_amount_mismatch_rejected _____________________
+tests\test_payments.py:427: in test_verify_amount_mismatch_rejected
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:54] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:54] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:54] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:54] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+__________________ test_verify_duplicate_request_idempotency __________________
+tests\test_payments.py:458: in test_verify_duplicate_request_idempotency
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:54] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:54] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:54] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:54] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+_________________ test_18_invalid_razorpay_signature_rejected _________________
+tests\test_security.py:298: in test_18_invalid_razorpay_signature_rejected
+    rzp_order_id = res_create.get_json()["data"]["razorpay_order_id"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:54] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:54] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:54] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:54] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+_________________ test_admin_create_shipment_prepaid_success __________________
+tests\test_shipments.py:210: in test_admin_create_shipment_prepaid_success
+    assert response.status_code == 201
+E   assert 400 == 201
+E    +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:54] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:54] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:54] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+_____________________ test_duplicate_shipment_prevention ______________________
+tests\test_shipments.py:265: in test_duplicate_shipment_prevention
+    assert res1.status_code == 201
+E   assert 400 == 201
+E    +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:54] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:54] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:54] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+__________________ test_customer_shipment_tracking_and_idor ___________________
+tests\test_shipments.py:280: in test_customer_shipment_tracking_and_idor
+    shipment_id = res_create.get_json()["data"]["id"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:54] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:54] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:54] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+________________ test_customer_order_detail_includes_shipment _________________
+tests\test_shipments.py:318: in test_customer_order_detail_includes_shipment
+    assert shipment_info is not None
+E   assert None is not None
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:54] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:54] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:54] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+_________ test_shiprocket_webhook_token_verification_and_idempotency __________
+tests\test_shipments.py:382: in test_shiprocket_webhook_token_verification_and_idempotency
+    awb_code = res_create.get_json()["data"]["awb_code"]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'data'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:54] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:54] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:54] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+_______________________ test_shiprocket_service_methods _______________________
+tests\test_shiprocket_integration.py:108: in test_shiprocket_service_methods
+    assert serviceability["status"] == 200
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'status'
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:55] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:55] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:55] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+_____________ test_prepaid_payment_verification_auto_fulfillment ______________
+tests\test_shiprocket_integration.py:199: in test_prepaid_payment_verification_auto_fulfillment
+    assert rzp_resp.status_code == 200
+E   assert 500 == 200
+E    +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:55] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:55] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:55] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 16:26:55] [ERROR] [app]: Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+------------------------------ Captured log call ------------------------------
+ERROR    app:payments.py:92 Error creating Razorpay Order via service: mock_external_apis.<locals>.<lambda>() got an unexpected keyword argument 'amount_in_paise'
+________________________ test_admin_shiprocket_actions ________________________
+tests\test_shiprocket_integration.py:356: in test_admin_shiprocket_actions
+    assert fulfill_resp.status_code == 200
+E   assert 400 == 200
+E    +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 16:26:55] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 16:26:55] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 16:26:55] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+=========================== short test summary info ===========================
+FAILED tests/test_cod.py::test_online_payment_flow_remains_intact - assert 50...
+FAILED tests/test_payments.py::test_webhook_1_valid_signature_event_processed
+FAILED tests/test_payments.py::test_webhook_2_invalid_signature_rejected - as...
+FAILED tests/test_payments.py::test_webhook_4_duplicate_event_id_idempotency
+FAILED tests/test_payments.py::test_webhook_5_payment_captured_updates_payment_and_order
+FAILED tests/test_payments.py::test_webhook_6_payment_failed_updates_payment_and_order
+FAILED tests/test_payments.py::test_webhook_7_order_paid_synchronizes_payment_and_order
+FAILED tests/test_payments.py::test_webhook_10_late_event_cannot_downgrade_captured_payment
+FAILED tests/test_payments.py::test_verify_customer_ownership_protection - Ke...
+FAILED tests/test_payments.py::test_verify_order_id_mismatch_rejected - KeyEr...
+FAILED tests/test_payments.py::test_verify_amount_mismatch_rejected - KeyErro...
+FAILED tests/test_payments.py::test_verify_duplicate_request_idempotency - Ke...
+FAILED tests/test_security.py::test_18_invalid_razorpay_signature_rejected - ...
+FAILED tests/test_shipments.py::test_admin_create_shipment_prepaid_success - ...
+FAILED tests/test_shipments.py::test_duplicate_shipment_prevention - assert 4...
+FAILED tests/test_shipments.py::test_customer_shipment_tracking_and_idor - Ke...
+FAILED tests/test_shipments.py::test_customer_order_detail_includes_shipment
+FAILED tests/test_shipments.py::test_shiprocket_webhook_token_verification_and_idempotency
+FAILED tests/test_shiprocket_integration.py::test_shiprocket_service_methods
+FAILED tests/test_shiprocket_integration.py::test_prepaid_payment_verification_auto_fulfillment
+FAILED tests/test_shiprocket_integration.py::test_admin_shiprocket_actions - ...
+============================= 21 failed in 4.07s ==============================

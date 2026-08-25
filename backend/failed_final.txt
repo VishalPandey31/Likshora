@@ -1,0 +1,31 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\Vishal\Downloads\Likshora\Likshora\backend
+plugins: anyio-4.10.0
+collected 1 item
+run-last-failure: rerun previous 1 failure (skipped 19 files)
+
+tests\test_shipments.py F                                                [100%]
+
+================================== FAILURES ===================================
+_________________ test_admin_create_shipment_prepaid_success __________________
+tests\test_shipments.py:216: in test_admin_create_shipment_prepaid_success
+    assert data["awb_code"].startswith("AWB-SR-")
+E   AssertionError: assert False
+E    +  where False = <built-in method startswith of str object at 0x0000026E1FD60930>('AWB-SR-')
+E    +    where <built-in method startswith of str object at 0x0000026E1FD60930> = 'AWB-mock-123'.startswith
+---------------------------- Captured stdout setup ----------------------------
+[2026-08-25 17:03:55] [INFO] [app]: Likshora backend logger initialized cleanly.
+[2026-08-25 17:03:55] [INFO] [app]: Starting Likshora Backend in 'testing' environment.
+[2026-08-25 17:03:55] [INFO] [app]: Supabase Auth Configured: URL=True, Key=True
+----------------------------- Captured log setup ------------------------------
+INFO     app:logging_config.py:25 Likshora backend logger initialized cleanly.
+INFO     app:__init__.py:34 Starting Likshora Backend in 'testing' environment.
+INFO     app:__init__.py:35 Supabase Auth Configured: URL=True, Key=True
+---------------------------- Captured stdout call -----------------------------
+[2026-08-25 17:03:56] [INFO] [app]: Order ORD-SHIP-PAID-01 fulfilled in Shiprocket ? AWB: AWB-mock-123, Courier: Mock Courier
+------------------------------ Captured log call ------------------------------
+INFO     app:shiprocket_service.py:545 Order ORD-SHIP-PAID-01 fulfilled in Shiprocket ? AWB: AWB-mock-123, Courier: Mock Courier
+=========================== short test summary info ===========================
+FAILED tests/test_shipments.py::test_admin_create_shipment_prepaid_success - ...
+============================== 1 failed in 2.52s ==============================

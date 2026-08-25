@@ -3,7 +3,7 @@
    Credential checking, protected route guard & session termination
    ========================================================= */
 
-(function() {
+(function () {
   const ADMIN_ACCOUNT_KEY = "rv_admin_account";
   const ADMIN_SESSION_KEY = "rv_admin_session";
 
@@ -18,9 +18,11 @@
     const session = window.StorageUtils ? window.StorageUtils.readJSON(ADMIN_SESSION_KEY, null) : null;
     const path = window.location.pathname;
 
-    if (path.endsWith("admin/index.html") || path.endsWith("admin/")) {
+    // Secure all routes containing /admin, blocking unauthenticated access unconditionally
+    if (path.includes("/admin") && !path.includes("pages/login.html")) {
       if (!session) {
-        window.location.href = "pages/login.html";
+        // Enforce absolute path to avoid missing trailing-slash directory resolution issues
+        window.location.href = "/admin/pages/login.html";
       }
     }
   }
@@ -29,7 +31,7 @@
     const loginForm = document.getElementById("adminLoginForm");
     if (!loginForm) return;
 
-    loginForm.addEventListener("submit", function(e) {
+    loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
       const identity = document.getElementById("adminIdentity").value.trim();
@@ -62,21 +64,21 @@
       }
 
       if (window.Toast) window.Toast.show(`Welcome to Admin Panel, ${configuredAdmin.name}`);
-      setTimeout(function() {
+      setTimeout(function () {
         window.location.href = "../index.html";
       }, 500);
     });
   }
 
   function initAdminLogout() {
-    document.querySelectorAll(".admin-logout-trigger").forEach(function(btn) {
-      btn.addEventListener("click", function(e) {
+    document.querySelectorAll(".admin-logout-trigger").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
         e.preventDefault();
         if (window.StorageUtils) {
           window.StorageUtils.writeJSON(ADMIN_SESSION_KEY, null);
         }
         if (window.Toast) window.Toast.show("Logged out of Admin Portal.");
-        setTimeout(function() {
+        setTimeout(function () {
           window.location.href = "pages/login.html";
         }, 500);
       });
@@ -103,21 +105,21 @@
       toggleBtn.innerHTML = "<span></span><span></span><span></span>";
       headerLeft.insertBefore(toggleBtn, headerLeft.firstChild);
 
-      toggleBtn.addEventListener("click", function(e) {
+      toggleBtn.addEventListener("click", function (e) {
         e.stopPropagation();
         const isOpen = sidebar.classList.toggle("open");
         overlay.classList.toggle("open", isOpen);
         toggleBtn.classList.toggle("open", isOpen);
       });
 
-      overlay.addEventListener("click", function() {
+      overlay.addEventListener("click", function () {
         sidebar.classList.remove("open");
         overlay.classList.remove("open");
         toggleBtn.classList.remove("open");
       });
 
-      sidebar.querySelectorAll(".admin-nav-menu a, .admin-logout-trigger").forEach(function(link) {
-        link.addEventListener("click", function() {
+      sidebar.querySelectorAll(".admin-nav-menu a, .admin-logout-trigger").forEach(function (link) {
+        link.addEventListener("click", function () {
           sidebar.classList.remove("open");
           overlay.classList.remove("open");
           toggleBtn.classList.remove("open");
@@ -126,7 +128,7 @@
     }
   }
 
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     checkAdminSession();
     initAdminLogin();
     initAdminLogout();
