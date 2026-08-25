@@ -3,7 +3,7 @@
    Address selection, saved addresses, delivery option & checkout data
    ========================================================= */
 
-(function() {
+(function () {
   const CART_KEY = "rv_cart";
   const USER_KEY = "rv_current_user";
   const CHECKOUT_INFO_KEY = "rv_checkout_info";
@@ -38,21 +38,27 @@
 
   // Check for direct Buy Now item
   const buyNowItem = window.StorageUtils ? window.StorageUtils.readJSON("rv_buy_now_item", null) : null;
-  if (cart.length === 0 && buyNowItem) {
-    cart = [buyNowItem];
-  }
-
   const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get("buy_now") === "true") {
-    const buyId = urlParams.get("id");
-    const buySize = urlParams.get("size") || "M";
-    const buyQty = parseInt(urlParams.get("qty") || "1", 10);
-    const storedProducts = window.StorageUtils ? window.StorageUtils.readJSON("rv_products", DEFAULT_CATALOG) : DEFAULT_CATALOG;
-    const products = (storedProducts && storedProducts.length) ? storedProducts : DEFAULT_CATALOG;
-    const found = products.find(function(p) { return p.id === buyId; }) || products[0];
-    if (found) {
-      cart = [Object.assign({}, found, { size: buySize, qty: buyQty })];
+  const isBuyNowParam = urlParams.get("buy_now") === "true";
+  const buyId = urlParams.get("id");
+  const buySize = urlParams.get("size") || "M";
+  const buyQty = parseInt(urlParams.get("qty") || "1", 10);
+
+  if (isBuyNowParam) {
+    if (buyNowItem && String(buyNowItem.id) === String(buyId)) {
+      cart = [Object.assign({}, buyNowItem, { size: buySize, qty: buyQty })];
+    } else {
+      const storedProducts = window.StorageUtils ? window.StorageUtils.readJSON("rv_products", DEFAULT_CATALOG) : DEFAULT_CATALOG;
+      const products = (storedProducts && storedProducts.length) ? storedProducts : DEFAULT_CATALOG;
+      const found = products.find(function (p) { return String(p.id) === String(buyId); }) || products.find(function (p) { return p.id === buyId; });
+      if (found) {
+        cart = [Object.assign({}, found, { size: buySize, qty: buyQty })];
+      } else if (buyNowItem) {
+        cart = [buyNowItem];
+      }
     }
+  } else if (cart.length === 0 && buyNowItem) {
+    cart = [buyNowItem];
   }
 
   if (cart.length === 0 && (buyNowItem || urlParams.get("buy_now") === "true")) {
@@ -72,7 +78,7 @@
       return;
     }
 
-    itemsWrap.innerHTML = cart.map(function(item) {
+    itemsWrap.innerHTML = cart.map(function (item) {
       let imgPath = item.image;
       if (imgPath && !imgPath.startsWith("http") && !imgPath.startsWith("../")) {
         imgPath = "../../" + imgPath;
@@ -91,7 +97,7 @@
       `;
     }).join("");
 
-    const subtotal = cart.reduce(function(sum, item) { return sum + item.price * item.qty; }, 0);
+    const subtotal = cart.reduce(function (sum, item) { return sum + item.price * item.qty; }, 0);
     const grandTotal = subtotal + selectedShippingFee;
 
     subtotalEl.textContent = window.Formatters.formatINR(subtotal);
@@ -105,7 +111,7 @@
     const wrap = document.getElementById("addressCardsWrap");
     if (!wrap) return;
 
-    wrap.innerHTML = addresses.map(function(addr) {
+    wrap.innerHTML = addresses.map(function (addr) {
       const isSelected = addr.id === selectedAddressId;
       return `
         <label class="address-card ${isSelected ? 'selected' : ''}" data-addr-id="${addr.id}">
@@ -119,8 +125,8 @@
       `;
     }).join("");
 
-    wrap.querySelectorAll('input[name="addressSelection"]').forEach(function(radio) {
-      radio.addEventListener("change", function() {
+    wrap.querySelectorAll('input[name="addressSelection"]').forEach(function (radio) {
+      radio.addEventListener("change", function () {
         selectedAddressId = radio.value;
         renderAddresses();
       });
@@ -128,7 +134,7 @@
   }
 
   function saveCheckoutInfoAndProceed() {
-    const selectedAddr = addresses.find(function(a) { return a.id === selectedAddressId; });
+    const selectedAddr = addresses.find(function (a) { return a.id === selectedAddressId; });
     const emailInput = document.getElementById("contactEmail");
     const nameInput = document.getElementById("contactName");
     const phoneInput = document.getElementById("contactPhone");
@@ -142,7 +148,7 @@
       return;
     }
 
-    const subtotal = cart.reduce(function(sum, item) { return sum + item.price * item.qty; }, 0);
+    const subtotal = cart.reduce(function (sum, item) { return sum + item.price * item.qty; }, 0);
     const grandTotal = subtotal + selectedShippingFee;
 
     const checkoutInfo = {
@@ -165,7 +171,7 @@
     window.location.href = "payment.html";
   }
 
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     if (!currentUser) {
       window.location.href = "../auth/login.html";
       return;
@@ -190,7 +196,7 @@
     const toggleBtn = document.getElementById("toggleAddAddressBtn");
     const newAddressBox = document.getElementById("newAddressBox");
     if (toggleBtn && newAddressBox) {
-      toggleBtn.addEventListener("click", function() {
+      toggleBtn.addEventListener("click", function () {
         newAddressBox.classList.toggle("hidden");
       });
     }
@@ -198,7 +204,7 @@
     // Save New Address Form submit
     const saveAddrBtn = document.getElementById("saveNewAddressBtn");
     if (saveAddrBtn) {
-      saveAddrBtn.addEventListener("click", function(e) {
+      saveAddrBtn.addEventListener("click", function (e) {
         e.preventDefault();
         const street = document.getElementById("newStreet").value.trim();
         const city = document.getElementById("newCity").value.trim();
@@ -231,8 +237,8 @@
     }
 
     // Shipping options selection
-    document.querySelectorAll('input[name="deliveryOption"]').forEach(function(radio) {
-      radio.addEventListener("change", function() {
+    document.querySelectorAll('input[name="deliveryOption"]').forEach(function (radio) {
+      radio.addEventListener("change", function () {
         selectedShippingFee = radio.value === "express" ? 150 : 0;
         renderOrderItemsSummary();
       });
