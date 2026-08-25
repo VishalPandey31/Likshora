@@ -23,6 +23,8 @@
     DEFAULT_EXTENDED_PRODUCTS
   ) : DEFAULT_EXTENDED_PRODUCTS;
 
+  let globalFetchedProducts = PRODUCTS;
+
   let wishlistState = {};
   let currentPage = 1;
   const itemsPerPage = 8;
@@ -123,16 +125,17 @@
     const categoryFilter = document.getElementById("categoryFilter") ? document.getElementById("categoryFilter").value : "all";
     const sortValue = document.getElementById("sortSelect") ? document.getElementById("sortSelect").value : "featured";
 
-    let fetchedProducts = PRODUCTS;
+    let fetchedProducts = globalFetchedProducts;
     if (window.ProductAPI && window.ProductAPI.getProducts) {
       try {
         const res = await window.ProductAPI.getProducts({ category: categoryFilter, sort: sortValue });
         if (res.success && res.data) {
           if (Array.isArray(res.data)) {
-            fetchedProducts = res.data;
+            globalFetchedProducts = res.data;
           } else if (Array.isArray(res.data.products)) {
-            fetchedProducts = res.data.products;
+            globalFetchedProducts = res.data.products;
           }
+          fetchedProducts = globalFetchedProducts;
         }
       } catch (err) {
         console.warn("Could not fetch products from REST API, using fallback:", err);
@@ -181,6 +184,10 @@
   function findProductById(id) {
     if (!id) return null;
     const strId = String(id).trim();
+    if (Array.isArray(globalFetchedProducts)) {
+      const found = globalFetchedProducts.find(function (p) { return String(p.id).trim() === strId; });
+      if (found) return found;
+    }
     if (Array.isArray(PRODUCTS)) {
       const found = PRODUCTS.find(function (p) { return String(p.id).trim() === strId; });
       if (found) return found;
@@ -243,7 +250,7 @@
   }
 
   function buyNow(id) {
-    const product = PRODUCTS.find(function (p) { return p.id === id; });
+    const product = findProductById(id);
     if (!product) return;
 
     const checkoutContext = Object.assign({}, product, { qty: 1, size: 'M' });
@@ -265,7 +272,7 @@
   }
 
   function toggleWishlist(id) {
-    const product = PRODUCTS.find(function (p) { return p.id === id; });
+    const product = findProductById(id);
     if (!product) return;
 
     if (wishlistState[id]) {
