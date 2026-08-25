@@ -221,12 +221,13 @@ def create_order():
             # Create a new address from inline payload
             address = Address(
                 user_id=g.current_user.id,
-                full_name=shipping_address.get("recipient") or shipping_address.get("name", "Customer"),
+                recipient=shipping_address.get("recipient") or shipping_address.get("name", "Customer"),
                 phone=shipping_address.get("phone", ""),
-                address_line1=shipping_address.get("street", ""),
+                flat="",
+                street=shipping_address.get("street", ""),
                 city=shipping_address.get("city", ""),
                 state=shipping_address.get("state", ""),
-                postal_code=shipping_address.get("pincode", ""),
+                pincode=shipping_address.get("pincode", ""),
                 country=shipping_address.get("country", "India"),
                 is_default=False
             )
