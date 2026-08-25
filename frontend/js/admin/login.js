@@ -22,7 +22,7 @@
     // Secure all routes containing /admin, blocking unauthenticated access unconditionally
     if (path.includes("/admin") && !path.includes("login")) {
       if (!session || !token) {
-        window.location.replace("/admin/pages/login");
+        window.location.replace("/admin/pages/login.html");
         return;
       }
 
@@ -37,7 +37,7 @@
             window.StorageUtils.writeJSON(ADMIN_SESSION_KEY, null);
             window.StorageUtils.writeJSON("rv_access_token", null);
           }
-          window.location.replace("/admin/pages/login");
+          window.location.replace("/admin/pages/login.html");
         }
       } catch (err) {
         // Safe fallback for network error
@@ -127,7 +127,7 @@
         if (window.Toast) window.Toast.show("Logged out of Admin Portal.");
         setTimeout(function () {
           // Absolute path prevents nested 404 cascades (e.g. /admin/pages/pages/login.html)
-          window.location.href = "/admin/pages/login";
+          window.location.href = "/admin/pages/login.html";
         }, 500);
       });
     });
