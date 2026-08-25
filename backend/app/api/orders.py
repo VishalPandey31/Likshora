@@ -191,6 +191,22 @@ def create_order():
         .filter(CartItem.user_id == g.current_user.id)
         .all()
     )
+
+    if not cart_items and data.get("items"):
+        # Fallback to inline items from frontend (Buy Now bypass)
+        cart_items_list = list(cart_items)
+        for inline_item in data.get("items"):
+            prod_id = inline_item.get("product_id")
+            if prod_id:
+                fake_item = CartItem(
+                    product_id=prod_id,
+                    quantity=inline_item.get("quantity", 1),
+                    user_id=g.current_user.id
+                )
+                fake_item.product = db.session.get(Product, prod_id)
+                cart_items_list.append(fake_item)
+        cart_items = cart_items_list
+
     if not cart_items:
         raise APIException("Cannot checkout with an empty cart", status_code=400, code="EMPTY_CART")
 
