@@ -1,45 +1,28 @@
+from app import create_app
+from app.services.shiprocket_service import ShiprocketService
 import requests
 
-email = "karanraj7769958707@gmail.com"
-password = "sVim8OiyzbXGRF$g8L*6d8FbE3o!9IFR"
+app = create_app()
+with app.app_context():
+    headers = ShiprocketService._headers()
+    base_url = ShiprocketService._get_base_url()
 
-# Login
-login_res = requests.post("https://apiv2.shiprocket.in/v1/external/auth/login", json={"email": email, "password": password})
-token = login_res.json().get("token")
+    print("--- 1. Fetching Channels ---")
+    res_ch = requests.get(f"{base_url}/channels", headers=headers)
+    print("Channels Status:", res_ch.status_code)
+    try:
+        channels_data = res_ch.json()
+        print("Channels returned:")
+        for ch in channels_data.get('data', []):
+            print(f" -> ID: {ch.get('id')}, Name: {ch.get('name')}, Source: {ch.get('base_channel_code')}")
+    except Exception as e:
+        print("Channels Error:", e)
 
-# Create Order
-sr_payload = {
-    "order_id": "TEST-ORDER-12345",
-    "order_date": "2026-08-25 12:00",
-    "pickup_location": "Primary",
-    "billing_customer_name": "Test User",
-    "billing_last_name": "Smith",
-    "billing_address": "House 123, Sector 45, ABC Colony",
-    "billing_address_2": "",
-    "billing_city": "Gurugram",
-    "billing_pincode": "122002",
-    "billing_state": "Haryana",
-    "billing_country": "India",
-    "billing_email": "test@example.com",
-    "billing_phone": "9876543210",
-    "shipping_is_billing": True,
-    "order_items": [
-        {"name": "Test Product", "sku": "SKU-999", "units": 1, "selling_price": 100.0, "discount": 0, "tax": 0}
-    ],
-    "payment_method": "Prepaid",
-    "shipping_charges": 0,
-    "discount": 0,
-    "sub_total": 100.0,
-    "length": 10,
-    "breadth": 10,
-    "height": 10,
-    "weight": 0.5,
-}
+    print("\n--- 2. Fetching Company Details ---")
+    res_comp = requests.get(f"{base_url}/settings/company/export", headers=headers)
+    print("Company Status:", res_comp.status_code)
+    try:
+        print(res_comp.json())
+    except:
+        pass
 
-res = requests.post(
-    "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
-    json=sr_payload,
-    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-)
-print("STATUS:", res.status_code)
-print("BODY:", res.text)

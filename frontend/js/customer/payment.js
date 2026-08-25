@@ -161,7 +161,12 @@ window.PaymentProviderSimulation = (function () {
     }
 
     if (!orderRes || !orderRes.success) {
-      const errorMsg = (orderRes && (orderRes.error || orderRes.message)) || "Failed to create order on server. Please try again.";
+      let errorMsg = "Failed to create order on server. Please try again.";
+      if (orderRes) {
+        if (orderRes.error && orderRes.error.message) errorMsg = orderRes.error.message;
+        else if (orderRes.message) errorMsg = orderRes.message;
+        else if (typeof orderRes.error === "string") errorMsg = orderRes.error;
+      }
       if (window.Toast) {
         window.Toast.show("Order Failed: " + errorMsg, "error");
       } else {
@@ -209,7 +214,12 @@ window.PaymentProviderSimulation = (function () {
       try {
         let rzpOrderRes = await window.PaymentAPI.createRazorpayOrder(orderId);
         if (!rzpOrderRes || !rzpOrderRes.success || !rzpOrderRes.data) {
-          const errorMsg = (rzpOrderRes && (rzpOrderRes.error || rzpOrderRes.message)) || "Failed to create Razorpay Order on server";
+          let errorMsg = "Failed to create Razorpay Order on server";
+          if (rzpOrderRes) {
+            if (rzpOrderRes.error && rzpOrderRes.error.message) errorMsg = rzpOrderRes.error.message;
+            else if (rzpOrderRes.message) errorMsg = rzpOrderRes.message;
+            else if (typeof rzpOrderRes.error === "string") errorMsg = rzpOrderRes.error;
+          }
           if (window.Toast) {
             window.Toast.show("Payment Initialization Failed: " + errorMsg, "error");
           } else {
