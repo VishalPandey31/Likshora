@@ -5,13 +5,13 @@
    ========================================================= */
 
 // Cleanly isolated Payment Simulation Provider Layer
-window.PaymentProviderSimulation = (function() {
+window.PaymentProviderSimulation = (function () {
   return {
-    processPayment: function(paymentDetails, callback) {
+    processPayment: function (paymentDetails, callback) {
       console.log("[PaymentProviderSimulation] Processing frontend simulation payment:", paymentDetails);
 
       // Simulate network response latency
-      setTimeout(function() {
+      setTimeout(function () {
         callback({
           success: true,
           transactionId: "TXN_" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 6).toUpperCase(),
@@ -24,7 +24,7 @@ window.PaymentProviderSimulation = (function() {
   };
 })();
 
-(function() {
+(function () {
   const CHECKOUT_INFO_KEY = "rv_checkout_info";
   const CART_KEY = "rv_cart";
   const LAST_ORDER_KEY = "rv_last_order";
@@ -57,7 +57,7 @@ window.PaymentProviderSimulation = (function() {
           const buyQty = parseInt(urlParams.get("qty") || "1", 10);
           const storedProducts = window.StorageUtils ? window.StorageUtils.readJSON("rv_products", DEFAULT_CATALOG) : DEFAULT_CATALOG;
           const products = (storedProducts && storedProducts.length) ? storedProducts : DEFAULT_CATALOG;
-          const found = products.find(function(p) { return p.id === buyId; }) || DEFAULT_CATALOG[0];
+          const found = products.find(function (p) { return p.id === buyId; }) || DEFAULT_CATALOG[0];
           if (found) {
             const item = Object.assign({}, found, { size: buySize, qty: buyQty });
             checkoutInfo = {
@@ -103,12 +103,12 @@ window.PaymentProviderSimulation = (function() {
     const previewExpiry = document.getElementById("previewExpiry");
 
     if (cardNumberInput) {
-      cardNumberInput.addEventListener("input", function() {
+      cardNumberInput.addEventListener("input", function () {
         const digits = cardNumberInput.value.replace(/\D/g, "").slice(0, 16);
         cardNumberInput.value = digits.replace(/(.{4})/g, "$1 ").trim();
 
         const groups = digits.match(/.{1,4}/g) || [];
-        const previewGroups = [0, 1, 2, 3].map(function(i) {
+        const previewGroups = [0, 1, 2, 3].map(function (i) {
           return groups[i] ? groups[i].padEnd(4, "•") : "••••";
         });
         if (previewNumber) previewNumber.textContent = previewGroups.join(" ");
@@ -116,13 +116,13 @@ window.PaymentProviderSimulation = (function() {
     }
 
     if (cardNameInput) {
-      cardNameInput.addEventListener("input", function() {
+      cardNameInput.addEventListener("input", function () {
         if (previewName) previewName.textContent = cardNameInput.value.trim().toUpperCase() || "YOUR NAME";
       });
     }
 
     if (cardExpiryInput) {
-      cardExpiryInput.addEventListener("input", function() {
+      cardExpiryInput.addEventListener("input", function () {
         let digits = cardExpiryInput.value.replace(/\D/g, "").slice(0, 4);
         if (digits.length >= 3) digits = digits.slice(0, 2) + "/" + digits.slice(2);
         cardExpiryInput.value = digits;
@@ -140,8 +140,9 @@ window.PaymentProviderSimulation = (function() {
 
     // 1. Create order on backend REST API
     const orderPayload = {
-      payment_method: selectedMethod,
+      payment_method: selectedMethod === "razorpay" ? "online" : selectedMethod,
       shipping_address: checkoutInfo ? checkoutInfo.address : null,
+      address_id: checkoutInfo && checkoutInfo.address ? checkoutInfo.address.id : null,
       shipping_address_id: checkoutInfo && checkoutInfo.address ? checkoutInfo.address.id : null,
       items: checkoutInfo && checkoutInfo.items ? checkoutInfo.items.map(i => ({
         product_id: i.product_id || i.id,
@@ -156,12 +157,19 @@ window.PaymentProviderSimulation = (function() {
         orderRes = await window.OrderAPI.createOrder(orderPayload);
       }
     } catch (e) {
-      console.warn("Backend order creation error:", e);
+      console.warn("Backend order creation exception:", e);
     }
 
-    const orderData = (orderRes && orderRes.success && orderRes.data) ? orderRes.data : null;
-    const orderId = orderData ? (orderData.id || orderData.order_id || orderData.order_number || orderData.orderNumber) : ("ORD_" + Date.now());
-    const payableAmount = orderData ? (orderData.payable_amount || orderData.grand_total || (checkoutInfo ? checkoutInfo.grandTotal : 0)) : (checkoutInfo ? checkoutInfo.grandTotal : 0);
+    if (!orderRes || !orderRes.success) {
+      const errorMsg = (orderRes && (orderRes.error || orderRes.message)) || "Failed to create order on server. Please fill all address fields or login again.";
+      alert("Order Creation Failed: " + errorMsg);
+      if (payBtn) { payBtn.disabled = false; payBtn.textContent = "Pay & Complete Order →"; }
+      return; // HALT CHECKOUT
+    }
+
+    const orderData = orderRes.data;
+    const orderId = orderData.id || orderData.order_id || orderData.order_number || orderData.orderNumber;
+    const payableAmount = orderData.payable_amount || orderData.grand_total || (checkoutInfo ? checkoutInfo.grandTotal : 0);
 
     // Save temporary order context for success page
     const lastOrderRecord = {
@@ -223,7 +231,7 @@ window.PaymentProviderSimulation = (function() {
             contact: checkoutInfo && checkoutInfo.contact ? checkoutInfo.contact.phone : "9876543210"
           },
           theme: { color: "#340B10" },
-          handler: async function(response) {
+          handler: async function (response) {
             // Show verification screen
             const verifyOverlay = document.getElementById("paymentVerifyOverlay");
             const verifyState = document.getElementById("paymentVerifyingState");
@@ -245,7 +253,7 @@ window.PaymentProviderSimulation = (function() {
               }
               if (window.NavbarComponent) window.NavbarComponent.updateCartBadge(0);
 
-              setTimeout(function() {
+              setTimeout(function () {
                 window.location.href = "order-success.html";
               }, 1000);
             } else {
@@ -255,7 +263,7 @@ window.PaymentProviderSimulation = (function() {
             }
           },
           modal: {
-            ondismiss: function() {
+            ondismiss: function () {
               if (payBtn) { payBtn.disabled = false; payBtn.textContent = "Pay & Complete Order →"; }
             }
           }
@@ -278,7 +286,7 @@ window.PaymentProviderSimulation = (function() {
     }
   }
 
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     if (window.NavbarComponent) window.NavbarComponent.init();
     if (window.FooterComponent) window.FooterComponent.init();
 
@@ -286,13 +294,13 @@ window.PaymentProviderSimulation = (function() {
     initCardPreview();
 
     // Payment method selector change
-    document.querySelectorAll('input[name="paymentMethod"]').forEach(function(radio) {
-      radio.addEventListener("change", function() {
+    document.querySelectorAll('input[name="paymentMethod"]').forEach(function (radio) {
+      radio.addEventListener("change", function () {
         selectedMethod = radio.value;
-        document.querySelectorAll(".payment-option-fields").forEach(function(panel) {
+        document.querySelectorAll(".payment-option-fields").forEach(function (panel) {
           panel.hidden = panel.dataset.for !== selectedMethod;
         });
-        document.querySelectorAll(".payment-option").forEach(function(opt) {
+        document.querySelectorAll(".payment-option").forEach(function (opt) {
           opt.classList.remove("is-selected");
         });
         radio.closest(".payment-option").classList.add("is-selected");
