@@ -1,269 +1,299 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIKSHORA — Order Confirmation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<!-- Modular Relative CSS Resources -->
-<link rel="stylesheet" href="../../css/variables.css">
-<link rel="stylesheet" href="../../css/global.css">
-<link rel="stylesheet" href="../../css/navbar.css">
-<link rel="stylesheet" href="../../css/footer.css">
-<link rel="stylesheet" href="../../css/responsive.css">
-<link rel="stylesheet" href="../../css/cart.css">
-<link rel="stylesheet" href="../../css/checkout.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIKSHORA — Order Confirmation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Modular Relative CSS Resources -->
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/footer.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/cart.css">
+  <link rel="stylesheet" href="../../css/checkout.css">
 </head>
+
 <body>
 
-<!-- ============ ANNOUNCEMENT BAR ============ -->
-<div class="announce-bar">
-  <p>Complimentary shipping on prepaid orders, across India</p>
-</div>
-
-<!-- ============ HEADER / NAVBAR ============ -->
-<header class="site-header" id="siteHeader">
-  <div class="header-inner">
-
-    <div class="header-left">
-      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-
-      <div class="logo-corner" id="logoCorner">
-        <img src="../../assets/images/website/logo-icon.png" alt="Likshora Logo Icon" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(52,11,16,0.25);">
-      </div>
-      
-      <nav class="main-nav" id="mainNav">
-        <a href="../../index.html">Home</a>
-        <a href="categories.html">Categories</a>
-        <a href="products.html">Shop</a>
-        <a href="../../index.html#contact">Contact</a>
-        <button type="button" class="nav-link-btn" id="navAboutBtn">About</button>
-      </nav>
-    </div>
-
-    <!-- LOGO — EXACT CENTRE OF THE HEADER -->
-    <a href="../../index.html" class="logo" id="logoSlot" title="LIKSHORA">
-      <img src="../../assets/images/website/logo-title.png" alt="LIKSHORA — Where Identity Meets Aura" style="height: 54px; max-width: 340px; width: auto; object-fit: contain;">
-    </a>
-
-    <div class="header-actions">
-      <button class="icon-btn" id="searchToggle" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
-
-      <button class="icon-btn account-toggle-btn" id="accountToggle" aria-label="Account">
-        <svg class="account-icon" viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.6"></circle><path d="M4.5 20.2c1.4-3.6 4.3-5.5 7.5-5.5s6.1 1.9 7.5 5.5"></path></svg>
-        <span class="user-avatar hidden" id="userAvatar" aria-hidden="true"></span>
-      </button>
-
-      <button class="icon-btn" id="wishToggle" aria-label="Wishlist">
-        <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.2C.4 8.1 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.5C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4.1 3.6 7.8C19.5 16.4 12 21 12 21z"></path></svg>
-      </button>
-      <button class="icon-btn cart-btn" id="cartToggle" aria-label="Cart">
-        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
-    </div>
+  <!-- ============ ANNOUNCEMENT BAR ============ -->
+  <div class="announce-bar">
+    <p>Complimentary shipping on prepaid orders, across India</p>
   </div>
 
-  <div class="search-panel" id="searchPanel">
-    <input type="text" placeholder="Search" id="searchInput">
-    <button class="icon-btn" id="searchClose">&times;</button>
-    <div class="search-results" id="searchResults"></div>
-  </div>
-</header>
+  <!-- ============ HEADER / NAVBAR ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
 
-<main id="top">
+      <div class="header-left">
+        <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
 
-  <!-- ============ PROGRESS STEPPER ============ -->
-  <div class="stepper-bar">
-    <div class="stepper-step completed">
-      <div class="step-number">✓</div>
-      <span class="step-title">Address &amp; Shipping</span>
-    </div>
-    <div class="stepper-step completed">
-      <div class="step-number">✓</div>
-      <span class="step-title">Payment Method</span>
-    </div>
-    <div class="stepper-step active">
-      <div class="step-number">3</div>
-      <span class="step-title">Confirmation</span>
-    </div>
-  </div>
-
-  <!-- ============ SUCCESS HERO SECTION ============ -->
-  <div class="success-hero">
-    <div class="success-icon-badge">✓</div>
-    <p class="eyebrow">Order Placed Successfully</p>
-    <h1 style="font-size:clamp(2rem, 4vw, 2.8rem); margin-bottom:.3em;">Thank you for your order!</h1>
-    <div class="order-number-tag" id="orderNumberTag">Order #---</div>
-    <p style="color:var(--ink-soft); font-size:1rem; margin-bottom:1.5em;">We have received your order and are hand-preparing your kurtas for dispatch. A confirmation message has been logged for your account.</p>
-
-    <!-- Email Confirmation Screen Card -->
-    <div style="background:rgba(200,155,60,.08); border:1px solid var(--gold); border-radius:var(--radius-md); padding:1em 1.5em; margin-bottom:2em; text-align:center;">
-      <p style="margin:0; font-size:.9rem; color:var(--ink); font-weight:600;">📧 Email Confirmation Screen</p>
-      <p style="margin:.3em 0 0; font-size:.82rem; color:var(--ink-soft);" id="emailConfirmationNotice">Order receipt and tracking confirmation sent to your registered email address.</p>
-    </div>
-
-    <!-- Receipt Card -->
-    <div class="success-receipt">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sand-deep); padding-bottom:1em; margin-bottom:1em;">
-        <div>
-          <h3 style="margin:0; font-size:1.1rem;">Order Summary</h3>
-          <span style="font-size:.78rem; color:var(--ink-soft);" id="orderDateStamp">Date: Today</span>
+        <div class="logo-corner" id="logoCorner">
+          <img src="../../assets/images/website/logo-icon.png" alt="Likshora Logo Icon"
+            style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(52,11,16,0.25);">
         </div>
-        <span style="background:rgba(60,122,75,.12); color:var(--success); font-weight:600; font-size:.78rem; padding:.4em .8em; border-radius:999px;" id="orderPaymentStatus">Paid &amp; Confirmed</span>
+
+        <nav class="main-nav" id="mainNav">
+          <a href="../../index.html">Home</a>
+          <a href="categories.html">Categories</a>
+          <a href="products.html">Shop</a>
+          <a href="../../index.html#contact">Contact</a>
+          <button type="button" class="nav-link-btn" id="navAboutBtn">About</button>
+        </nav>
       </div>
 
-      <!-- Items List -->
-      <table class="receipt-table">
-        <tbody id="receiptItemsBody">
-          <!-- Injected dynamically by inline script -->
-        </tbody>
-      </table>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5em; border-top:1px solid var(--sand-deep); padding-top:1em; margin-top:1em; font-size:.86rem;">
-        <div>
-          <h4 style="margin:0 0 .4em; font-size:.9rem; color:var(--gold);">Delivery Address</h4>
-          <p style="margin:0; color:var(--ink-soft); line-height:1.45;" id="receiptAddress">Flat 402, Lotus Apartments, Bengaluru - 560001</p>
-        </div>
-        <div>
-          <h4 style="margin:0 0 .4em; font-size:.9rem; color:var(--gold);">Payment Info</h4>
-          <p style="margin:0; color:var(--ink-soft); line-height:1.45;" id="receiptPaymentInfo">Credit or Debit Card</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- CTA Buttons -->
-    <div style="display:flex; gap:1em; justify-content:center; flex-wrap:wrap;">
-      <a href="products.html" class="btn btn-primary" style="padding:.9em 2em;">Continue Shopping</a>
-      <button type="button" class="btn btn-outline" id="trackOrderBtn" style="padding:.9em 2em;">Track Order Status</button>
-    </div>
-  </div>
-
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer class="site-footer" id="contact">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a href="../../index.html" class="logo">
-        <span class="logo-mark" aria-hidden="true"></span>
-        <span class="logo-word"></span>
+      <!-- LOGO — EXACT CENTRE OF THE HEADER -->
+      <a href="../../index.html" class="logo" id="logoSlot" title="LIKSHORA">
+        <img src="../../assets/images/website/logo-title.png" alt="LIKSHORA — Where Identity Meets Aura"
+          style="height: 54px; max-width: 340px; width: auto; object-fit: contain;">
       </a>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="searchToggle" aria-label="Search"><svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg></button>
+
+        <button class="icon-btn account-toggle-btn" id="accountToggle" aria-label="Account">
+          <svg class="account-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="8.2" r="3.6"></circle>
+            <path d="M4.5 20.2c1.4-3.6 4.3-5.5 7.5-5.5s6.1 1.9 7.5 5.5"></path>
+          </svg>
+          <span class="user-avatar hidden" id="userAvatar" aria-hidden="true"></span>
+        </button>
+
+        <button class="icon-btn" id="wishToggle" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 21s-7.5-4.6-10-9.2C.4 8.1 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.5C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4.1 3.6 7.8C19.5 16.4 12 21 12 21z">
+            </path>
+          </svg>
+        </button>
+        <button class="icon-btn cart-btn" id="cartToggle" aria-label="Cart">
+          <svg viewBox="0 0 24 24">
+            <path d="M6 8h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"></path>
+            <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
     </div>
 
-    <div class="footer-col">
-      <h4>Shop</h4>
-      <a href="products.html">New Arrivals</a>
-      <a href="categories.html">Categories</a>
+    <div class="search-panel" id="searchPanel">
+      <input type="text" placeholder="Search" id="searchInput">
+      <button class="icon-btn" id="searchClose">&times;</button>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ PROGRESS STEPPER ============ -->
+    <div class="stepper-bar">
+      <div class="stepper-step completed">
+        <div class="step-number">✓</div>
+        <span class="step-title">Address &amp; Shipping</span>
+      </div>
+      <div class="stepper-step completed">
+        <div class="step-number">✓</div>
+        <span class="step-title">Payment Method</span>
+      </div>
+      <div class="stepper-step active">
+        <div class="step-number">3</div>
+        <span class="step-title">Confirmation</span>
+      </div>
     </div>
 
-    <div class="footer-col">
-      <h4>Company</h4>
-      <button type="button" class="footer-link-btn" id="navAboutBtnFooter">About Us</button>
-      <a href="#">Our Story</a>
-      <a href="#">Sustainability</a>
-      <a href="#">Careers</a>
+    <!-- ============ SUCCESS HERO SECTION ============ -->
+    <div class="success-hero">
+      <div class="success-icon-badge">✓</div>
+      <p class="eyebrow">Order Placed Successfully</p>
+      <h1 style="font-size:clamp(2rem, 4vw, 2.8rem); margin-bottom:.3em;">Thank you for your order!</h1>
+      <div class="order-number-tag" id="orderNumberTag">Order #---</div>
+      <p style="color:var(--ink-soft); font-size:1rem; margin-bottom:1.5em;">We have received your order and are
+        hand-preparing your kurtas for dispatch. A confirmation message has been logged for your account.</p>
+
+      <!-- Email Confirmation Screen Card -->
+      <div
+        style="background:rgba(200,155,60,.08); border:1px solid var(--gold); border-radius:var(--radius-md); padding:1em 1.5em; margin-bottom:2em; text-align:center;">
+        <p style="margin:0; font-size:.9rem; color:var(--ink); font-weight:600;">📧 Email Confirmation Screen</p>
+        <p style="margin:.3em 0 0; font-size:.82rem; color:var(--ink-soft);" id="emailConfirmationNotice">Order receipt
+          and tracking confirmation sent to your registered email address.</p>
+      </div>
+
+      <!-- Receipt Card -->
+      <div class="success-receipt">
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sand-deep); padding-bottom:1em; margin-bottom:1em;">
+          <div>
+            <h3 style="margin:0; font-size:1.1rem;">Order Summary</h3>
+            <span style="font-size:.78rem; color:var(--ink-soft);" id="orderDateStamp">Date: Today</span>
+          </div>
+          <span
+            style="background:rgba(60,122,75,.12); color:var(--success); font-weight:600; font-size:.78rem; padding:.4em .8em; border-radius:999px;"
+            id="orderPaymentStatus">Paid &amp; Confirmed</span>
+        </div>
+
+        <!-- Items List -->
+        <table class="receipt-table">
+          <tbody id="receiptItemsBody">
+            <!-- Injected dynamically by inline script -->
+          </tbody>
+        </table>
+
+        <div
+          style="display:grid; grid-template-columns:1fr 1fr; gap:1.5em; border-top:1px solid var(--sand-deep); padding-top:1em; margin-top:1em; font-size:.86rem;">
+          <div>
+            <h4 style="margin:0 0 .4em; font-size:.9rem; color:var(--gold);">Delivery Address</h4>
+            <p style="margin:0; color:var(--ink-soft); line-height:1.45;" id="receiptAddress">Flat 402, Lotus
+              Apartments, Bengaluru - 560001</p>
+          </div>
+          <div>
+            <h4 style="margin:0 0 .4em; font-size:.9rem; color:var(--gold);">Payment Info</h4>
+            <p style="margin:0; color:var(--ink-soft); line-height:1.45;" id="receiptPaymentInfo">Credit or Debit Card
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div style="display:flex; gap:1em; justify-content:center; flex-wrap:wrap;">
+        <a href="products.html" class="btn btn-primary" style="padding:.9em 2em;">Continue Shopping</a>
+        <button type="button" class="btn btn-outline" id="trackOrderBtn" style="padding:.9em 2em;">Track Order
+          Status</button>
+      </div>
     </div>
 
-    <div class="footer-col">
-      <h4>Support</h4>
-      <a href="../../index.html#shipping-returns">Shipping &amp; returns</a>
-      <a href="#size-guide" class="size-guide-trigger">Size guide</a>
-      <a href="contact.html">Contact us</a>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer" id="contact">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../../index.html" class="logo">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="logo-word"></span>
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="products.html">New Arrivals</a>
+        <a href="categories.html">Categories</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <button type="button" class="footer-link-btn" id="navAboutBtnFooter">About Us</button>
+        <a href="#">Our Story</a>
+        <a href="#">Sustainability</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="../../index.html#shipping-returns">Shipping &amp; returns</a>
+        <a href="#size-guide" class="size-guide-trigger">Size guide</a>
+        <a href="contact.html">Contact us</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <a href="https://www.instagram.com/likshora?igsi=MXdmY21hYXExOWZncg==" target="_blank" rel="noopener noreferrer"
+          title="Follow Likshora on Instagram for the latest product launches, updates, offers, and exclusive content">Instagram</a>
+        <a href="javascript:void(0);" title="Facebook Page (Add Facebook URL here)">Facebook</a>
+        <a href="https://wa.me/918446664361" target="_blank" rel="noopener noreferrer"
+          title="Contact us on WhatsApp (+91 8446664361) for product inquiries, order assistance, and customer support">WhatsApp</a>
+      </div>
     </div>
 
-    <div class="footer-col">
-      <h4>Follow</h4>
-      <a href="https://www.instagram.com/likshora?igsi=MXdmY21hYXExOWZncg==" target="_blank" rel="noopener noreferrer" title="Follow Likshora on Instagram for the latest product launches, updates, offers, and exclusive content">Instagram</a>
-      <a href="javascript:void(0);" title="Facebook Page (Add Facebook URL here)">Facebook</a>
-      <a href="https://wa.me/918446664361" target="_blank" rel="noopener noreferrer" title="Contact us on WhatsApp (+91 8446664361) for product inquiries, order assistance, and customer support">WhatsApp</a>
+    <div class="trust-strip">
+      <p>Designed by Likshora | &copy; Likshora 2026</p>
     </div>
-  </div>
 
-  <div class="trust-strip">
-    <p>Designed by Likshora | &copy; Likshora 2026</p>
-  </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Likshora. All rights reserved.</p>
+    </div>
+  </footer>
 
-  <div class="footer-bottom">
-    <p>&copy; <span id="year"></span> Likshora. All rights reserved.</p>
-  </div>
-</footer>
+  <!-- Modular Relative JavaScript Resources -->
+  <script src="../../js/config.js"></script>
+  <script src="../../js/utils/storage.js"></script>
+  <script src="../../js/utils/formatters.js"></script>
+  <script src="../../js/utils/validation.js"></script>
+  <script src="../../js/utils/helpers.js"></script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/modal.js"></script>
+  <script src="../../js/components/loader.js"></script>
+  <script src="../../js/components/navbar.js"></script>
+  <script src="../../js/components/footer.js"></script>
 
-<!-- Modular Relative JavaScript Resources -->
-<script src="../../js/config.js"></script>
-<script src="../../js/utils/storage.js"></script>
-<script src="../../js/utils/formatters.js"></script>
-<script src="../../js/utils/validation.js"></script>
-<script src="../../js/utils/helpers.js"></script>
-<script src="../../js/components/toast.js"></script>
-<script src="../../js/components/modal.js"></script>
-<script src="../../js/components/loader.js"></script>
-<script src="../../js/components/navbar.js"></script>
-<script src="../../js/components/footer.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.NavbarComponent) window.NavbarComponent.init();
+      if (window.FooterComponent) window.FooterComponent.init();
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  if (window.NavbarComponent) window.NavbarComponent.init();
-  if (window.FooterComponent) window.FooterComponent.init();
+      const lastOrder = window.StorageUtils ? window.StorageUtils.readJSON("rv_last_order", null) : null;
 
-  const lastOrder = window.StorageUtils ? window.StorageUtils.readJSON("rv_last_order", null) : null;
+      if (lastOrder) {
+        const numTag = document.getElementById("orderNumberTag");
+        const dateTag = document.getElementById("orderDateStamp");
+        const statusTag = document.getElementById("orderPaymentStatus");
+        const receiptBody = document.getElementById("receiptItemsBody");
+        const receiptAddress = document.getElementById("receiptAddress");
+        const receiptPaymentInfo = document.getElementById("receiptPaymentInfo");
 
-  if (lastOrder) {
-    const numTag = document.getElementById("orderNumberTag");
-    const dateTag = document.getElementById("orderDateStamp");
-    const statusTag = document.getElementById("orderPaymentStatus");
-    const receiptBody = document.getElementById("receiptItemsBody");
-    const receiptAddress = document.getElementById("receiptAddress");
-    const receiptPaymentInfo = document.getElementById("receiptPaymentInfo");
+        if (numTag) numTag.textContent = "Order #" + lastOrder.orderNumber;
+        if (dateTag) dateTag.textContent = "Date: " + lastOrder.date;
+        if (statusTag) statusTag.textContent = lastOrder.status || "Paid & Confirmed";
 
-    if (numTag) numTag.textContent = "Order #" + lastOrder.orderNumber;
-    if (dateTag) dateTag.textContent = "Date: " + lastOrder.date;
-    if (statusTag) statusTag.textContent = lastOrder.status || "Paid & Confirmed";
-
-    if (receiptBody && lastOrder.items) {
-      let itemsHTML = lastOrder.items.map(function(item) {
-        return `
+        if (receiptBody && lastOrder.items) {
+          let itemsHTML = lastOrder.items.map(function (item) {
+            return `
           <tr>
             <td style="font-weight:600;">${window.Formatters.escapeHTML(item.name)}</td>
             <td style="text-align:right; font-weight:600;">${window.Formatters.formatINR(item.price * (item.qty || 1))}</td>
           </tr>
         `;
-      }).join("");
+          }).join("");
 
-      itemsHTML += `
+          itemsHTML += `
         <tr style="border-top:1.5px solid var(--stone); font-size:1rem; font-weight:700;">
           <td style="padding-top:1em;">Grand Total Paid</td>
           <td style="text-align:right; padding-top:1em; color:var(--gold);">${window.Formatters.formatINR(lastOrder.grandTotal)}</td>
         </tr>
       `;
-      receiptBody.innerHTML = itemsHTML;
-    }
+          receiptBody.innerHTML = itemsHTML;
+        }
 
-    if (receiptAddress && lastOrder.address) {
-      const a = lastOrder.address;
-      receiptAddress.innerHTML = `<strong>${window.Formatters.escapeHTML(a.recipient)}</strong><br>${window.Formatters.escapeHTML(a.street)}, ${window.Formatters.escapeHTML(a.city)}, ${window.Formatters.escapeHTML(a.state)} - ${window.Formatters.escapeHTML(a.pincode)}`;
-    }
+        if (receiptAddress && lastOrder.address) {
+          const a = lastOrder.address;
+          receiptAddress.innerHTML = `<strong>${window.Formatters.escapeHTML(a.recipient)}</strong><br>${window.Formatters.escapeHTML(a.street)}, ${window.Formatters.escapeHTML(a.city)}, ${window.Formatters.escapeHTML(a.state)} - ${window.Formatters.escapeHTML(a.pincode)}`;
+        }
 
-    if (receiptPaymentInfo) {
-      receiptPaymentInfo.innerHTML = `<strong>Method:</strong> ${window.Formatters.escapeHTML(lastOrder.paymentMethod)}<br><span style="font-size:.76rem;">TXN ID: ${window.Formatters.escapeHTML(lastOrder.transactionId || 'N/A')}</span>`;
-    }
-  }
+        if (receiptPaymentInfo) {
+          receiptPaymentInfo.innerHTML = `<strong>Method:</strong> ${window.Formatters.escapeHTML(lastOrder.paymentMethod)}<br><span style="font-size:.76rem;">TXN ID: ${window.Formatters.escapeHTML(lastOrder.transactionId || 'N/A')}</span>`;
+        }
+      }
 
-  const trackBtn = document.getElementById("trackOrderBtn");
-  if (trackBtn) {
-    trackBtn.addEventListener("click", function() {
-      if (window.Toast) window.Toast.show("Order status: Processing for dispatch");
+      const trackBtn = document.getElementById("trackOrderBtn");
+      if (trackBtn) {
+        trackBtn.addEventListener("click", function () {
+          const orderNum = lastOrder ? lastOrder.orderNumber : "";
+          window.location.href = "tracking.html?order=" + orderNum;
+        });
+      }
     });
-  }
-});
-</script>
+  </script>
 </body>
+
 </html>
-
-
-

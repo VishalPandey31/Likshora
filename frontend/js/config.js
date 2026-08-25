@@ -10,9 +10,9 @@ window.RV_CONFIG = {
   //   • Production  → https://api.likshora.com (custom domain on Render)
   //                    OR https://likshora-api.onrender.com (Render default)
   // ──────────────────────────────────────────────────────────
-  API_BASE_URL: (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "")
+  API_BASE_URL: (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     ? "http://127.0.0.1:5000"
-    : "https://likshora-api.onrender.com",  // ← Will update after Render deploy
+    : "https://likshora-api.onrender.com",
 
   // ──────────────────────────────────────────────────────────
   // Razorpay Publishable Key (safe to expose in frontend)

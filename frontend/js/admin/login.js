@@ -8,10 +8,10 @@
   const ADMIN_SESSION_KEY = "rv_admin_session";
 
   const DEFAULT_FALLBACK_ADMIN = {
-    name: "System Administrator",
+    name: "Admin Karan",
     adminId: "ADM_001",
-    email: "admin@rangvastra.com",
-    password: "admin123"
+    email: "karanrajput.officials@gmail.com",
+    password: "Karan@2026"
   };
 
   function checkAdminSession() {

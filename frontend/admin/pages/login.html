@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIKSHORA — Admin Login</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<!-- Modular Relative CSS Resources -->
-<link rel="stylesheet" href="../../css/variables.css">
-<link rel="stylesheet" href="../../css/global.css">
-<link rel="stylesheet" href="../../css/responsive.css">
-<link rel="stylesheet" href="../../css/authentication.css">
-<link rel="stylesheet" href="../../css/admin.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIKSHORA — Admin Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Modular Relative CSS Resources -->
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/authentication.css">
+  <link rel="stylesheet" href="../../css/admin.css">
 
   <!-- Anti-FOUC Blocking Auth Guard -->
   <script>
@@ -25,52 +28,60 @@
     }
   </script>
 </head>
+
 <body class="auth-page-body">
 
-<div class="auth-page-shell" style="grid-template-columns: 1fr; max-width: 520px; margin: 2em auto;">
+  <div class="auth-page-shell" style="grid-template-columns: 1fr; max-width: 520px; margin: 2em auto;">
 
-  <div class="auth-form-side" style="max-width:500px; margin:0 auto; padding:3em 2em;">
-    <div class="auth-header" style="text-align:center;">
-      <div style="width:48px; height:48px; border-radius:12px; background:var(--gold); color:var(--ink); font-family:var(--font-display); font-weight:700; font-size:1.4rem; display:flex; align-items:center; justify-content:center; margin:0 auto .8em;">RV</div>
-      <p class="eyebrow" style="color:var(--gold);">Restricted Access</p>
-      <h1>Admin Portal Login</h1>
-      <p>Sign in to manage catalog, orders, and customer records.</p>
-    </div>
-
-    <form id="adminLoginForm">
-      <div class="auth-form-group">
-        <label class="auth-label">Admin ID or Email
-          <input type="text" id="adminIdentity" class="auth-input" required placeholder="ADM_001 or admin@LIKSHORA.com">
-        </label>
-
-        <label class="auth-label">Password
-          <div class="password-field-wrap">
-            <input type="password" id="adminPassword" class="auth-input" required placeholder="Enter admin password">
-            <button type="button" class="eye-toggle-btn" aria-label="Toggle password visibility">👁️</button>
-          </div>
-        </label>
+    <div class="auth-form-side" style="max-width:500px; margin:0 auto; padding:3em 2em;">
+      <div class="auth-header" style="text-align:center;">
+        <div
+          style="width:48px; height:48px; border-radius:12px; background:var(--gold); color:var(--ink); font-family:var(--font-display); font-weight:700; font-size:1.4rem; display:flex; align-items:center; justify-content:center; margin:0 auto .8em;">
+          RV</div>
+        <p class="eyebrow" style="color:var(--gold);">Restricted Access</p>
+        <h1>Admin Portal Login</h1>
+        <p>Sign in to manage catalog, orders, and customer records.</p>
       </div>
 
-      <button type="submit" class="btn-admin-primary" style="width:100%; height:48px; font-size:.9rem; margin-top:1em;">Sign In to Dashboard &rarr;</button>
+      <form id="adminLoginForm">
+        <div class="auth-form-group">
+          <label class="auth-label">Admin ID or Email
+            <input type="text" id="adminIdentity" class="auth-input" required
+              placeholder="ADM_001 or admin@LIKSHORA.com">
+          </label>
 
-      <p style="text-align:center; font-size:.82rem; color:var(--admin-ink-soft); margin-top:1.8em;">
-        Default Credentials: <code>ADM_001</code> / <code>admin123</code><br>
-        <a href="setup.html" style="color:var(--gold); text-decoration:underline;">First time? Run Admin Setup &rarr;</a>
-      </p>
-    </form>
+          <label class="auth-label">Password
+            <div class="password-field-wrap">
+              <input type="password" id="adminPassword" class="auth-input" required placeholder="Enter admin password">
+              <button type="button" class="eye-toggle-btn" aria-label="Toggle password visibility">👁️</button>
+            </div>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-admin-primary"
+          style="width:100%; height:48px; font-size:.9rem; margin-top:1em;">Sign In to Dashboard &rarr;</button>
+
+        <p style="margin-top:2em; font-size:.84rem; color:var(--admin-ink-soft); text-align:center;">
+          Default Admin: karanrajput.officials@gmail.com
+          <a href="setup.html"
+            style="display:block; margin-top:.4em; color:var(--admin-gold); text-decoration:underline;">First time? Run
+            Admin Setup &rarr;</a>
+        </p>
+      </form>
+    </div>
+
   </div>
 
-</div>
+  <!-- Modular Relative JavaScript Resources -->
+  <script src="../../js/config.js"></script>
+  <script src="../../js/utils/storage.js"></script>
+  <script src="../../js/utils/formatters.js"></script>
+  <script src="../../js/utils/validation.js"></script>
+  <script src="../../js/utils/helpers.js"></script>
+  <script src="../../js/components/toast.js"></script>
 
-<!-- Modular Relative JavaScript Resources -->
-<script src="../../js/config.js"></script>
-<script src="../../js/utils/storage.js"></script>
-<script src="../../js/utils/formatters.js"></script>
-<script src="../../js/utils/validation.js"></script>
-<script src="../../js/utils/helpers.js"></script>
-<script src="../../js/components/toast.js"></script>
-
-<!-- Admin Login Controller -->
-<script src="../../js/admin/login.js"></script>
+  <!-- Admin Login Controller -->
+  <script src="../../js/admin/login.js"></script>
 </body>
+
 </html>
