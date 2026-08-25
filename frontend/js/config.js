@@ -19,7 +19,7 @@ window.RV_CONFIG = {
   //   • Test mode → rzp_test_XXXXXXXXXX
   //   • Live mode → rzp_live_XXXXXXXXXX (switch after KYC)
   // ──────────────────────────────────────────────────────────
-  RAZORPAY_KEY_ID: "rzp_test_TTBpNyeq3F4cfi",  // ← CHANGE to rzp_live_... after Razorpay Live mode
+  RAZORPAY_KEY_ID: "rzp_live_TTvXp1d8jFn8Pk",
 
   // Shared LocalStorage keys (syncs storefront & admin panel)
   STORAGE_KEYS: {

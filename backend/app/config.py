@@ -63,16 +63,16 @@ class Config:
     CORS_ORIGINS = parse_cors_origins(os.environ.get("CORS_ORIGINS"))
 
     # Razorpay Payment Gateway Credentials
-    RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID", "rzp_test_mock_key_id")
-    RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET", "mock_razorpay_secret_key")
-    RAZORPAY_WEBHOOK_SECRET = os.environ.get("RAZORPAY_WEBHOOK_SECRET", "mock_razorpay_webhook_secret")
+    RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID", "")
+    RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET", "")
+    RAZORPAY_WEBHOOK_SECRET = os.environ.get("RAZORPAY_WEBHOOK_SECRET", "")
     RAZORPAY_CURRENCY = os.environ.get("RAZORPAY_CURRENCY", "INR")
 
     # Shiprocket Shipping Integration Credentials
-    SHIPROCKET_EMAIL = os.environ.get("SHIPROCKET_EMAIL", "mock_shiprocket_email@example.com")
-    SHIPROCKET_PASSWORD = os.environ.get("SHIPROCKET_PASSWORD", "mock_shiprocket_password")
+    SHIPROCKET_EMAIL = os.environ.get("SHIPROCKET_EMAIL", "")
+    SHIPROCKET_PASSWORD = os.environ.get("SHIPROCKET_PASSWORD", "")
     SHIPROCKET_BASE_URL = os.environ.get("SHIPROCKET_BASE_URL", "https://apiv2.shiprocket.in/v1/external").rstrip("/")
-    SHIPROCKET_WEBHOOK_TOKEN = os.environ.get("SHIPROCKET_WEBHOOK_TOKEN", "mock_shiprocket_webhook_token")
+    SHIPROCKET_WEBHOOK_TOKEN = os.environ.get("SHIPROCKET_WEBHOOK_TOKEN", "")
     SHIPROCKET_PICKUP_LOCATION = os.environ.get("SHIPROCKET_PICKUP_LOCATION", "Primary")
     SHIPROCKET_DEFAULT_LENGTH = float(os.environ.get("SHIPROCKET_DEFAULT_LENGTH", 10))
     SHIPROCKET_DEFAULT_BREADTH = float(os.environ.get("SHIPROCKET_DEFAULT_BREADTH", 10))

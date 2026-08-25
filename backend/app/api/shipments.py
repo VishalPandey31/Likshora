@@ -258,7 +258,7 @@ def shiprocket_webhook():
         or request.args.get("token")
         or request.environ.get("HTTP_X_API_KEY")
     )
-    expected_token = current_app.config.get("SHIPROCKET_WEBHOOK_TOKEN", "mock_shiprocket_webhook_token")
+    expected_token = current_app.config.get("SHIPROCKET_WEBHOOK_TOKEN", "")
 
     if not provided_token or provided_token.strip() != expected_token.strip():
         current_app.logger.warning(f"Shiprocket webhook token verification failed. Provided: '{provided_token}', Expected: '{expected_token}'")

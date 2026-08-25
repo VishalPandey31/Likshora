@@ -76,7 +76,7 @@ def create_razorpay_order():
     total_dec = Decimal(str(order.total_amount))
     amount_in_paise = int(total_dec * Decimal("100"))
 
-    key_id = current_app.config.get("RAZORPAY_KEY_ID", "rzp_test_mock_key_id")
+    key_id = current_app.config.get("RAZORPAY_KEY_ID", "")
     currency = current_app.config.get("RAZORPAY_CURRENCY", "INR")
 
     # 4. Create Razorpay Order via central RazorpayService
@@ -205,9 +205,10 @@ def verify_razorpay_payment():
 
         # Manual Capture if status is authorized
         if rzp_status == "authorized":
-            captured_resp = RazorpayService.capture_payment(rzp_payment_id, expected_paise, payment.currency)
-            if not captured_resp:
-                current_app.logger.warning(f"Payment capture attempt for {rzp_payment_id} was unsuccessful")
+            try:
+                RazorpayService.capture_payment(rzp_payment_id, expected_paise, payment.currency)
+            except Exception as e_cap:
+                current_app.logger.warning(f"Payment capture attempt for {rzp_payment_id} was unsuccessful: {e_cap}")
 
     # 6. Update Payment and Order statuses cleanly
     payment.status = "captured"
