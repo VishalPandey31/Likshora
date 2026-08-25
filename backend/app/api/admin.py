@@ -40,11 +40,13 @@ def get_admin_dashboard():
     # 1. Total Orders count
     total_orders = db.session.query(func.count(Order.id)).scalar() or 0
 
-    # 2. Total Revenue (sum of grand_total for non-cancelled valid orders)
+    # 2. Total Revenue (sum of grand_total for paid non-cancelled valid orders)
     revenue_sum = (
         db.session.query(func.coalesce(func.sum(Order.grand_total), 0))
+        .join(Payment, Order.id == Payment.order_id)
         .filter(
             Order.status.in_(["confirmed", "processing", "shipped", "delivered"]),
+            Payment.status == "captured"
         )
         .scalar()
     )
@@ -130,7 +132,7 @@ def get_admin_orders():
         query = query.join(User, Order.user_id == User.id, isouter=True).filter(
             or_(
                 Order.order_number.ilike(pattern),
-                Order.shipping_full_name.ilike(pattern),
+                Order.shipping_address_snapshot.ilike(pattern),
                 User.name.ilike(pattern),
                 User.email.ilike(pattern),
             )
@@ -628,7 +630,7 @@ def get_admin_customer_login_logs(customer_id):
 
     logs = (
         CustomerLoginLog.query.filter_by(user_id=customer_id)
-        .order_by(CustomerLoginLog.login_at.desc())
+        .order_by(CustomerLoginLog.timestamp.desc())
         .limit(100)
         .all()
     )

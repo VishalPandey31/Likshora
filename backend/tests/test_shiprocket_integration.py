@@ -348,6 +348,8 @@ def test_admin_shiprocket_actions(client, admin_user, test_user, setup_catalog_a
             subtotal=2500.00,
         )
         db.session.add(item)
+        pay_admin = Payment(order_id=order.id, payment_method="online", provider="razorpay", amount=2500.00, status="captured")
+        db.session.add(pay_admin)
         db.session.commit()
         order_id = order.id
 

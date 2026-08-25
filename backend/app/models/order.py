@@ -43,6 +43,13 @@ class Order(db.Model, TimestampMixin):
     contact_email = db.Column(db.String(255), nullable=True)
     contact_phone = db.Column(db.String(20), nullable=True)
     shipping_address_snapshot = db.Column(db.Text, nullable=True)
+    notes = db.Column(db.Text, nullable=True)
+    coupon_id = db.Column(
+        db.Integer,
+        db.ForeignKey("coupons.id", ondelete="SET NULL"),
+        index=True,
+        nullable=True,
+    )
 
     # Properties for backward compatibility with existing API queries
     @property
@@ -81,7 +88,8 @@ class Order(db.Model, TimestampMixin):
         if hasattr(self, "_payment_status_val") and self._payment_status_val is not None:
             return self._payment_status_val
         if self.payments and len(self.payments) > 0:
-            return self.payments[0].status
+            st = self.payments[0].status
+            return "paid" if st == "captured" else st
         return "pending" if self.status != "cancelled" else "failed"
 
     @payment_status.setter
@@ -119,6 +127,14 @@ class Order(db.Model, TimestampMixin):
     @shipping_address_line1.setter
     def shipping_address_line1(self, value):
         self._update_snapshot_dict("address_line1", value)
+
+    @property
+    def shipping_address_line2(self):
+        return self._get_snapshot_dict().get("address_line2", "")
+
+    @shipping_address_line2.setter
+    def shipping_address_line2(self, value):
+        self._update_snapshot_dict("address_line2", value)
 
     @property
     def shipping_city(self):

@@ -154,7 +154,7 @@ def admin_test_data(app, customer_user):
         item3 = OrderItem(order_id=o3.id, product_id=p_out.id, product_name=p_out.name, sku=p_out.sku, quantity=1, unit_price=500.00, subtotal=500.00)
         db.session.add_all([item1, item2, item3])
 
-        pay1 = Payment(order_id=o1.id, payment_method="cod", provider="cod", amount=2500.00, currency="INR", status="pending")
+        pay1 = Payment(order_id=o1.id, payment_method="cod", provider="cod", amount=2500.00, currency="INR", status="captured")
         db.session.add(pay1)
         db.session.commit()
 

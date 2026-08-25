@@ -173,9 +173,10 @@ def shipment_setup(app, customer_user_a):
         item4 = OrderItem(order_id=order_cancelled.id, product_id=p1.id, product_name=p1.name, sku=p1.sku, quantity=1, unit_price=p1.price, subtotal=p1.price)
         db.session.add_all([item1, item2, item3, item4])
 
-        # Add COD payment record for COD order
+        # Add payment records
         pay_cod = Payment(order_id=order_cod.id, payment_method="cod", provider="cod", amount=2400.00, status="pending")
-        db.session.add(pay_cod)
+        pay_paid = Payment(order_id=order_paid.id, payment_method="online", provider="razorpay", amount=1200.00, status="captured")
+        db.session.add_all([pay_cod, pay_paid])
         db.session.commit()
 
         return {
