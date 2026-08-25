@@ -246,6 +246,7 @@ def sync_admin_shipment_tracking(shipment_id):
 
 @api_v1.route("/shipments/shiprocket/webhook", methods=["POST"])
 @api_v1.route("/webhooks/shiprocket", methods=["POST"])
+@api_v1.route("/webhooks/shipping_updates", methods=["POST"])  # Shiprocket UI prevents URLs with 'shiprocket' or 'sr'
 def shiprocket_webhook():
     """Public Server-to-Server Webhook handler for Shiprocket shipment status updates."""
     # 1. Header authentication verification
