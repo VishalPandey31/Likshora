@@ -31,7 +31,7 @@
     const loginForm = document.getElementById("adminLoginForm");
     if (!loginForm) return;
 
-    loginForm.addEventListener("submit", function (e) {
+    loginForm.addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const identity = document.getElementById("adminIdentity").value.trim();
@@ -42,32 +42,47 @@
         return;
       }
 
-      const configuredAdmin = window.StorageUtils ? window.StorageUtils.readJSON(ADMIN_ACCOUNT_KEY, DEFAULT_FALLBACK_ADMIN) : DEFAULT_FALLBACK_ADMIN;
+      try {
+        const response = await fetch((window.RV_CONFIG.API_BASE_URL || "") + "/api/v1/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: identity, password: pwd })
+        });
 
-      const matchesIdentity = (identity.toUpperCase() === configuredAdmin.adminId.toUpperCase()) || (identity.toLowerCase() === configuredAdmin.email.toLowerCase());
-      const matchesPassword = pwd === configuredAdmin.password;
+        const resData = await response.json();
 
-      if (!matchesIdentity || !matchesPassword) {
-        if (window.Toast) window.Toast.show("Invalid Admin ID, Email, or password.");
-        return;
+        if (!response.ok || !resData.success) {
+          if (window.Toast) window.Toast.show(resData.message || "Invalid Admin ID, Email, or password.");
+          return;
+        }
+
+        const user = resData.data.user;
+        if (user.role !== "admin") {
+          if (window.Toast) window.Toast.show("Access Denied: You do not have administrator permissions.");
+          return;
+        }
+
+        const adminSession = {
+          adminId: user.id,
+          name: user.name,
+          email: user.email,
+          loggedInAt: new Date().toISOString()
+        };
+
+        if (window.StorageUtils) {
+          window.StorageUtils.writeJSON(ADMIN_SESSION_KEY, adminSession);
+          window.StorageUtils.writeJSON("rv_access_token", resData.data.access_token);
+        }
+
+        if (window.Toast) window.Toast.show(`Welcome to Admin Panel, ${user.name}`);
+        setTimeout(function () {
+          // Enforce absolute path to always hit the root dashboard regardless of caller depth
+          window.location.href = "/admin/index.html";
+        }, 500);
+      } catch (err) {
+        console.error("Login Error:", err);
+        if (window.Toast) window.Toast.show("Network Error. Cannot connect to API.");
       }
-
-      const adminSession = {
-        adminId: configuredAdmin.adminId,
-        name: configuredAdmin.name,
-        email: configuredAdmin.email,
-        loggedInAt: new Date().toISOString()
-      };
-
-      if (window.StorageUtils) {
-        window.StorageUtils.writeJSON(ADMIN_SESSION_KEY, adminSession);
-      }
-
-      if (window.Toast) window.Toast.show(`Welcome to Admin Panel, ${configuredAdmin.name}`);
-      setTimeout(function () {
-        // Enforce absolute path to always hit the root dashboard regardless of caller depth
-        window.location.href = "/admin/index.html";
-      }, 500);
     });
   }
 
