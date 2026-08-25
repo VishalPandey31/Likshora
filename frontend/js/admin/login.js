@@ -14,15 +14,46 @@
     password: "Karan@2026"
   };
 
-  function checkAdminSession() {
+  async function checkAdminSession() {
     const session = window.StorageUtils ? window.StorageUtils.readJSON(ADMIN_SESSION_KEY, null) : null;
+    const token = window.StorageUtils ? window.StorageUtils.readJSON("rv_access_token", null) : null;
     const path = window.location.pathname;
 
     // Secure all routes containing /admin, blocking unauthenticated access unconditionally
     if (path.includes("/admin") && !path.includes("login")) {
-      if (!session) {
-        // Enforce absolute path to avoid missing trailing-slash directory resolution issues
-        window.location.href = "/admin/pages/login";
+      if (!session || !token) {
+        window.location.replace("/admin/pages/login");
+        return;
+      }
+
+      try {
+        const response = await fetch((window.RV_CONFIG.API_BASE_URL || "") + "/api/v1/auth/me", {
+          headers: { "Authorization": "Bearer " + token }
+        });
+
+        if (!response.ok) {
+          // Token invalid or expired, force logout
+          if (window.StorageUtils) {
+            window.StorageUtils.writeJSON(ADMIN_SESSION_KEY, null);
+            window.StorageUtils.writeJSON("rv_access_token", null);
+          }
+          window.location.replace("/admin/pages/login");
+        }
+      } catch (err) {
+        // Safe fallback for network error
+        console.error("Auth Guard Error:", err);
+      }
+    } else if (path.includes("/admin/pages/login")) {
+      // If user hits login page and IS authenticated, send to dashboard
+      if (session && token) {
+        try {
+          const response = await fetch((window.RV_CONFIG.API_BASE_URL || "") + "/api/v1/auth/me", {
+            headers: { "Authorization": "Bearer " + token }
+          });
+          if (response.ok) {
+            window.location.replace("/admin/pages/dashboard.html");
+          }
+        } catch (e) { }
       }
     }
   }
