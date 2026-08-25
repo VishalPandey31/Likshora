@@ -179,8 +179,8 @@ def create_order():
     address_id = data.get("address_id")
     payment_method = (data.get("payment_method") or "").strip().lower()
 
-    if not address_id:
-        raise APIException("address_id is required", status_code=400, code="VALIDATION_ERROR")
+    if not address_id and not data.get("shipping_address"):
+        raise APIException("address_id or shipping_address is required", status_code=400, code="VALIDATION_ERROR")
 
     if payment_method not in ["cod", "online"]:
         raise APIException("payment_method must be 'cod' or 'online'", status_code=400, code="VALIDATION_ERROR")
@@ -194,10 +194,31 @@ def create_order():
     if not cart_items:
         raise APIException("Cannot checkout with an empty cart", status_code=400, code="EMPTY_CART")
 
-    # 2. Validate delivery address ownership
-    address = Address.query.filter_by(id=address_id, user_id=g.current_user.id).first()
+    # 2. Validate or Create Delivery Address
+    address = None
+    if address_id and str(address_id).isdigit():
+        address = Address.query.filter_by(id=int(address_id), user_id=g.current_user.id).first()
+    
     if not address:
-        raise APIException("Delivery address not found", status_code=400, code="INVALID_ADDRESS")
+        shipping_address = data.get("shipping_address")
+        if shipping_address and isinstance(shipping_address, dict):
+            # Create a new address from inline payload
+            address = Address(
+                user_id=g.current_user.id,
+                full_name=shipping_address.get("recipient") or shipping_address.get("name", "Customer"),
+                phone=shipping_address.get("phone", ""),
+                address_line1=shipping_address.get("street", ""),
+                city=shipping_address.get("city", ""),
+                state=shipping_address.get("state", ""),
+                postal_code=shipping_address.get("pincode", ""),
+                country=shipping_address.get("country", "India"),
+                is_default=False
+            )
+            db.session.add(address)
+            db.session.flush()
+
+    if not address:
+        raise APIException("Delivery address not found or invalid", status_code=400, code="INVALID_ADDRESS")
 
     # 3. Validate products and stock availability
     subtotal_dec = Decimal("0.00")
