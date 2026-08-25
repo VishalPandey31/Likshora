@@ -182,7 +182,7 @@ class ShiprocketService:
 
     # ---------------------------------------------------------- generate AWB
     @classmethod
-    def generate_awb(cls, shipment_id: int | str, courier_id: int = None) -> dict:
+    def generate_awb(cls, shipment_id, courier_id=None) -> dict:
         """Assign courier and generate AWB code in Shiprocket."""
         try:
             url = f"{cls._get_base_url()}/courier/assign/awb"
@@ -305,7 +305,7 @@ class ShiprocketService:
 
     # ---------------------------------------------------------- get order details
     @classmethod
-    def get_order_details(cls, shiprocket_order_id: int | str) -> dict:
+    def get_order_details(cls, shiprocket_order_id) -> dict:
         """Retrieve order details from Shiprocket."""
         try:
             url = f"{cls._get_base_url()}/orders/show/{shiprocket_order_id}"
