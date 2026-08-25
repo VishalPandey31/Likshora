@@ -12,7 +12,16 @@ window.APIClient = (function () {
 
   function getAuthHeader() {
     const tokenKey = (window.RV_CONFIG && window.RV_CONFIG.STORAGE_KEYS && window.RV_CONFIG.STORAGE_KEYS.TOKEN) || "rv_access_token";
-    const token = localStorage.getItem(tokenKey);
+    let token = null;
+    try {
+      // Token is stored via StorageUtils.writeJSON which JSON.stringify's the value.
+      // We must JSON.parse it back to get the raw token string.
+      const raw = localStorage.getItem(tokenKey);
+      if (raw) token = JSON.parse(raw);
+    } catch (e) {
+      // Fallback: use raw value if it's not valid JSON
+      token = localStorage.getItem(tokenKey);
+    }
     return token ? { "Authorization": `Bearer ${token}` } : {};
   }
 
@@ -63,10 +72,15 @@ window.APIClient = (function () {
           } else {
             alert("Your session has securely expired. Please log in again to continue.");
           }
-          // Redirect gracefully
+          // Redirect gracefully — use absolute paths to avoid Vercel 404s
           setTimeout(() => {
-            if (!window.location.pathname.includes("login.html")) {
-              window.location.href = "../auth/login.html?session_expired=true";
+            if (!window.location.pathname.includes("login")) {
+              // Detect admin vs customer context and redirect accordingly
+              if (window.location.pathname.includes("/admin")) {
+                window.location.href = "/admin/pages/login.html?session_expired=true";
+              } else {
+                window.location.href = "/pages/auth/login.html?session_expired=true";
+              }
             }
           }, 2500);
         }

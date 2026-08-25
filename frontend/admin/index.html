@@ -4,14 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIKSHORA — Admin Portal Redirect</title>
+  <title>LIKSHORA — Admin Portal</title>
   <script>
-    // Force redirect to the actual dashboard page where the Live Auth middleware runs
-    window.location.replace("/admin/pages/dashboard.html");
+    // Auth Guard: check if user has a valid session, otherwise redirect to login
+    var session = localStorage.getItem("rv_admin_session");
+    var token = localStorage.getItem("rv_access_token");
+    if (!session || session === "null" || !token || token === "null") {
+      window.location.replace("/admin/pages/login.html");
+    } else {
+      window.location.replace("/admin/pages/dashboard.html");
+    }
   </script>
 </head>
 
 <body>
+  <p style="text-align:center; margin-top:40vh; font-family:sans-serif; color:#888;">Redirecting...</p>
 </body>
 
 </html>
