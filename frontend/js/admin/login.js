@@ -107,8 +107,8 @@
 
         if (window.Toast) window.Toast.show(`Welcome to Admin Panel, ${user.name}`);
         setTimeout(function () {
-          // Enforce absolute path to always hit the root dashboard regardless of caller depth
-          window.location.href = "/admin/index.html";
+          // Send user straight to the dashboard to bypass Vercel index routing issues
+          window.location.href = "/admin/pages/dashboard.html";
         }, 500);
       } catch (err) {
         console.error("Login Error:", err);
