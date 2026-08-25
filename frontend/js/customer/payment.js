@@ -161,8 +161,12 @@ window.PaymentProviderSimulation = (function () {
     }
 
     if (!orderRes || !orderRes.success) {
-      const errorMsg = (orderRes && (orderRes.error || orderRes.message)) || "Failed to create order on server. Please fill all address fields or login again.";
-      alert("Order Creation Failed: " + errorMsg);
+      const errorMsg = (orderRes && (orderRes.error || orderRes.message)) || "Failed to create order on server. Please try again.";
+      if (window.Toast) {
+        window.Toast.show("Order Failed: " + errorMsg, "error");
+      } else {
+        alert("Order Failed: " + errorMsg);
+      }
       if (payBtn) { payBtn.disabled = false; payBtn.textContent = "Pay & Complete Order →"; }
       return; // HALT CHECKOUT
     }
@@ -206,7 +210,11 @@ window.PaymentProviderSimulation = (function () {
         let rzpOrderRes = await window.PaymentAPI.createRazorpayOrder(orderId);
         if (!rzpOrderRes || !rzpOrderRes.success || !rzpOrderRes.data) {
           const errorMsg = (rzpOrderRes && (rzpOrderRes.error || rzpOrderRes.message)) || "Failed to create Razorpay Order on server";
-          alert("Payment Initialization Failed: " + errorMsg);
+          if (window.Toast) {
+            window.Toast.show("Payment Initialization Failed: " + errorMsg, "error");
+          } else {
+            alert("Payment Initialization Failed: " + errorMsg);
+          }
           if (payBtn) { payBtn.disabled = false; payBtn.textContent = "Pay & Complete Order →"; }
           return;
         }

@@ -4,7 +4,7 @@
    Designed for seamless future backend/Flask/Supabase integration
    ========================================================= */
 
-window.APIClient = (function() {
+window.APIClient = (function () {
   function getBaseURL() {
     const configBase = window.RV_CONFIG && window.RV_CONFIG.API_BASE_URL ? window.RV_CONFIG.API_BASE_URL : "";
     return configBase.replace(/\/+$/, "") + "/api/v1";
@@ -56,6 +56,19 @@ window.APIClient = (function() {
         const errMsg = normalizeFn ? normalizeFn(rawErr, `Request failed with status ${res.status}`) : `Request failed with status ${res.status}`;
         if (res.status === 401) {
           console.warn("APIClient: 401 Unauthorized encountered.");
+
+          // Production-grade Session expiry management
+          if (window.Toast) {
+            window.Toast.show("Your session has securely expired. Please log in again to continue.", "error");
+          } else {
+            alert("Your session has securely expired. Please log in again to continue.");
+          }
+          // Redirect gracefully
+          setTimeout(() => {
+            if (!window.location.pathname.includes("login.html")) {
+              window.location.href = "../auth/login.html?session_expired=true";
+            }
+          }, 2500);
         }
         return createResponse(false, resData, errMsg, res.status);
       }
@@ -82,7 +95,7 @@ window.APIClient = (function() {
     getBaseURL: getBaseURL,
     response: createResponse,
     request: request,
-    get: function(endpoint, params = {}) {
+    get: function (endpoint, params = {}) {
       let queryString = "";
       if (params && Object.keys(params).length > 0) {
         const queryParts = [];
@@ -97,16 +110,16 @@ window.APIClient = (function() {
       }
       return request(endpoint + queryString, { method: "GET" });
     },
-    post: function(endpoint, body = {}) {
+    post: function (endpoint, body = {}) {
       return request(endpoint, { method: "POST", body: JSON.stringify(body) });
     },
-    put: function(endpoint, body = {}) {
+    put: function (endpoint, body = {}) {
       return request(endpoint, { method: "PUT", body: JSON.stringify(body) });
     },
-    patch: function(endpoint, body = {}) {
+    patch: function (endpoint, body = {}) {
       return request(endpoint, { method: "PATCH", body: JSON.stringify(body) });
     },
-    delete: function(endpoint, body = null) {
+    delete: function (endpoint, body = null) {
       const options = { method: "DELETE" };
       if (body) options.body = JSON.stringify(body);
       return request(endpoint, options);
