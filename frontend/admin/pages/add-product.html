@@ -15,6 +15,16 @@
 <link rel="stylesheet" href="../../css/authentication.css">
 <link rel="stylesheet" href="../../css/products.css">
 <link rel="stylesheet" href="../../css/admin.css">
+
+  <!-- Anti-FOUC Blocking Auth Guard -->
+  <script>
+    if (window.location.pathname.includes("/admin") && !window.location.pathname.includes("login.html")) {
+      const session = localStorage.getItem("rv_admin_session");
+      if (!session || session === "null") {
+        window.location.replace("/admin/pages/login.html");
+      }
+    }
+  </script>
 </head>
 <body>
 

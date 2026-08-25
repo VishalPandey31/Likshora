@@ -65,7 +65,8 @@
 
       if (window.Toast) window.Toast.show(`Welcome to Admin Panel, ${configuredAdmin.name}`);
       setTimeout(function () {
-        window.location.href = "../index.html";
+        // Enforce absolute path to always hit the root dashboard regardless of caller depth
+        window.location.href = "/admin/index.html";
       }, 500);
     });
   }
@@ -79,7 +80,8 @@
         }
         if (window.Toast) window.Toast.show("Logged out of Admin Portal.");
         setTimeout(function () {
-          window.location.href = "pages/login.html";
+          // Absolute path prevents nested 404 cascades (e.g. /admin/pages/pages/login.html)
+          window.location.href = "/admin/pages/login.html";
         }, 500);
       });
     });
