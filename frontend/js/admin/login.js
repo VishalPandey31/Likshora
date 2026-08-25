@@ -19,10 +19,10 @@
     const path = window.location.pathname;
 
     // Secure all routes containing /admin, blocking unauthenticated access unconditionally
-    if (path.includes("/admin") && !path.includes("pages/login.html")) {
+    if (path.includes("/admin") && !path.includes("login")) {
       if (!session) {
         // Enforce absolute path to avoid missing trailing-slash directory resolution issues
-        window.location.href = "/admin/pages/login.html";
+        window.location.href = "/admin/pages/login";
       }
     }
   }
@@ -81,7 +81,7 @@
         if (window.Toast) window.Toast.show("Logged out of Admin Portal.");
         setTimeout(function () {
           // Absolute path prevents nested 404 cascades (e.g. /admin/pages/pages/login.html)
-          window.location.href = "/admin/pages/login.html";
+          window.location.href = "/admin/pages/login";
         }, 500);
       });
     });

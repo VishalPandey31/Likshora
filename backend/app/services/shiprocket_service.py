@@ -465,7 +465,7 @@ class ShiprocketService:
             "billing_country": order.shipping_country or "India",
             "billing_email": customer_email,
             "billing_phone": order.shipping_phone or "",
-            "shipping_is_billing": True,
+            "billing_is_shipping": True,
             "order_items": sr_items,
             "payment_method": "COD" if order.payment_method == "cod" else "Prepaid",
             "shipping_charges": float(order.shipping_amount),
